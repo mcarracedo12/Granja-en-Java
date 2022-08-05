@@ -8,29 +8,31 @@ public class GranjaRunner {
 
 
 	public static void main(String[] args) {
-		Granja granja = new Granja("0", 0, 0);
+		Granja granja = new Granja(new BigDecimal(0), 0, 0);
 		LocalDate now = LocalDate.now();
+		// granja.addExpiracion(new Expiracion(1, "huevo", 21));
+		// granja.addExpiracion(new Expiracion(2, "pollito", 2000));
+
 		Scanner scanner = new Scanner(System.in);
 
+
 		System.out.println("Ingrese dinero que hay en la caja de la granja: ");
-		String dineroEnCaja = scanner.next();
-		granja.setDineroEnCaja(new BigDecimal(dineroEnCaja));
+		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
+		granja.setDineroEnCaja(dineroEnCaja);
 
 		System.out.println("Cantidad maxima de pollitos que puede tener: ");
 		int cantMaxPollitos = scanner.nextInt();
 		granja.setCantMaxPollitos(cantMaxPollitos);
 		System.out.println("Indique Precio de compra de Pollitos: ");
-		String precioCompraP = scanner.next();
+		BigDecimal precioCompraP = scanner.nextBigDecimal();
 		System.out.println("Indique Precio de Venta de Pollitos: ");
-		String precioVentaP = scanner.next();
+		BigDecimal precioVentaP = scanner.nextBigDecimal();
 		// granja.addPrecio(new Precios(1, "pollito", "100.5", "300"));
 		System.out.println(granja);
 
 
-		granja.addPollito(
-				new Pollito(1, 15, now));
-		granja.addPollito(
-				new Pollito(2, 25, now));
+		granja.addPollito(new Pollito(1, 15, now));
+		granja.addPollito(new Pollito(2, 25, now));
 
 		System.out.println(granja);
 
@@ -38,12 +40,12 @@ public class GranjaRunner {
 		int cantMaxHuevos = scanner.nextInt();
 		granja.setCantMaxHuevos(cantMaxHuevos);
 		System.out.println("Indique Precio de compra de Huevos: ");
-		String precioCompraH = scanner.next();
+		BigDecimal precioCompraH = scanner.nextBigDecimal();
 		System.out.println("Indique Precio de Venta de Huevos: ");
-		String precioVentaH = scanner.next();
+		BigDecimal precioVentaH = scanner.nextBigDecimal();
 
-		granja.addPrecio(new Precios(1, "pollito", precioCompraP, precioVentaP));
-		granja.addPrecio(new Precios(2, "huevo", precioCompraH, precioVentaH));
+		granja.addPrecio(new Precios(1, "pollito", 2000, precioCompraP, precioVentaP));
+		granja.addPrecio(new Precios(2, "huevo", 21, precioCompraH, precioVentaH));
 
 
 		granja.addHuevo(new Huevo(1, 10, now));

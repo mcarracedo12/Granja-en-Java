@@ -2,8 +2,8 @@ package com.granja;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class Granja {
 
@@ -11,14 +11,17 @@ public class Granja {
 	private BigDecimal dineroEnCaja;
 	int cantMaxPollitos;
 	int cantMaxHuevos;
-	private LinkedList<Huevo> huevos = new LinkedList<Huevo>();
-	private LinkedList<Pollito> pollitos = new LinkedList<>();
-	private LinkedList<Precios> precios = new LinkedList<>();
+	private ArrayList<Huevo> huevos = new ArrayList<Huevo>();
+	private ArrayList<Pollito> pollitos = new ArrayList<>();
+	private ArrayList<Precios> precios = new ArrayList<>();
+	// private LinkedList<Precios> precios = new LinkedList<>();
+	//	private Set<Expiracion> fechasDeExpiracion = new TreeSet<>();
+
 	private LocalDate now = LocalDate.now();
 
-	public Granja(String dineroEnCaja, int cantMaxPollitos, int cantMaxHuevos) {
+	public Granja(BigDecimal dineroEnCaja, int cantMaxPollitos, int cantMaxHuevos) {
 		super();
-		this.dineroEnCaja = new BigDecimal(dineroEnCaja);
+		this.dineroEnCaja = dineroEnCaja;
 		this.cantMaxHuevos = cantMaxHuevos;
 		this.cantMaxPollitos = cantMaxPollitos;
 	}
@@ -53,6 +56,10 @@ public class Granja {
 
 	public void setDineroEnCaja(BigDecimal dineroEnCaja) {
 		this.dineroEnCaja = dineroEnCaja;
+	}
+
+	public void addExpiracion(Expiracion expiracion) {
+		//		this.fechasDeExpiracion.add(expiracion);
 	}
 
 	public void addPollito(Pollito pollito) {
@@ -92,6 +99,7 @@ public class Granja {
 		mostrarPrecios();
 		System.out.println("DETALLE DE HUEVOS: " + huevos);
 		System.out.println("DETALLE DE POLLITOS: " + pollitos);
+		// System.out.println("DETALLE DE FECHAS DE EXPIRACION " + fechasDeExpiracion);
 	}
 
 	private void mostrarPrecios() {

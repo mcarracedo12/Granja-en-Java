@@ -39,5 +39,9 @@ public class Expiracion {
 	public int getCantDiasByAnimal(String animal) {
 		return cantDias;
 	}
+	@Override
+	public String toString() {
+		return animal + " " + cantDias;
+	}
 
 }

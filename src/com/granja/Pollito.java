@@ -2,10 +2,10 @@ package com.granja;
 
 import java.time.LocalDate;
 
-public class Pollito extends Cattle {
+public class Pollito extends Ganado {
 	static String animal = "pollito";
 	public static int diasExpiracion = 2000;
-
+	LocalDate fechaExpiracion;
 	public LocalDate nacimiento;
 
 	public Pollito(int id, int edadEnDias, LocalDate ingresoAGranja) {
@@ -13,7 +13,7 @@ public class Pollito extends Cattle {
 		this.nacimiento = now.minusDays(edadEnDias);
 
 		// this.animal = animal;
-		// this.diasExpiracion = diasExpiracion;
+		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
 
 
 
@@ -21,7 +21,7 @@ public class Pollito extends Cattle {
 
 	@Override
 	public String toString() {
-		return (super.toString() + " " + animal + " Expira el " + nacimiento.plusDays(diasExpiracion) + ".");
+		return (super.toString() + " " + animal + " Expira el " + fechaExpiracion + ".");
 	}
 
 }

@@ -3,32 +3,22 @@ package com.granja;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Cattle {
+public abstract class Ganado {
 	LocalDate now = LocalDate.now();
 	private int id;
 	private int edadEnDiasAlIngresar;
 	private LocalDate nacimiento;
 	private LocalDate ingresoAGranja;
 	private String animal;
-	// private int edadActual;
-	// private BigDecimal precioCompra = Precios.getPrecioCompraByAnimal(animal);
-	// private BigDecimal precioVenta = Precios.getPrecioVentaByAnimal(animal);
-	// private BigDecimal precioCompra;
-	// private BigDecimal precioVenta;
+
 	private int diasExpiracion;
 	private int edadActual;
 
-	public Cattle(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Ganado(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		this.id = id;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = now.minusDays(edadEnDiasAlIngresar);
 		this.ingresoAGranja = fechaIngresoAGranja;
-
-		// this.precioCompra = new BigDecimal(precioCompra);
-		// this.precioVenta = new BigDecimal(precioVenta);
-		// this.animal = animal;
-		// this.diasExpiracion = Expiracion.getCantDiasByAnimal(animal);
-		// this.precioVenta = Precios.getPrecioVentaByAnimal(animal);
 	}
 
 	public int getId() {

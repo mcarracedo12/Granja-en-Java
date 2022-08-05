@@ -8,12 +8,12 @@ public class Precios {
 	private BigDecimal precioCompra;
 	private BigDecimal precioVenta;
 
-	public Precios(int id, String animal, String precioCompra, String precioVenta) {
+	public Precios(int id, String animal, int diasExpiracion, BigDecimal precioCompra, BigDecimal precioVenta) {
 		super();
 		this.id = id;
 		this.animal = animal;
-		this.precioCompra = new BigDecimal(precioCompra);
-		this.precioVenta = new BigDecimal(precioVenta);
+		this.precioCompra = precioCompra;
+		this.precioVenta = precioVenta;
 	}
 
 	public int getId() {
