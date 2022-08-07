@@ -13,12 +13,13 @@ public abstract class Ganado {
 
 	private int diasExpiracion;
 	private int edadActual;
-
+	private LocalDate fechaExpiracion;
 	public Ganado(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		this.id = id;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = now.minusDays(edadEnDiasAlIngresar);
 		this.ingresoAGranja = fechaIngresoAGranja;
+		// this.fechaExpiracion = this.nacimiento + diasExpiracion;
 	}
 
 	public int getId() {

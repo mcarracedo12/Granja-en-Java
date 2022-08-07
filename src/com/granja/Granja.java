@@ -11,7 +11,7 @@ public class Granja {
 	// int cantMaxPollitos;
 	// int cantMaxHuevos;
 	private ArrayList<Huevo> huevos = new ArrayList<Huevo>();
-	private ArrayList<Pollito> pollitos = new ArrayList<>();
+	private ArrayList<Pollito> pollitos = new ArrayList<Pollito>();
 	private ArrayList<TiposAnimales> tiposAnimales = new ArrayList<>();
 
 	private LocalDate now = LocalDate.now();
@@ -112,17 +112,16 @@ public class Granja {
 	}
 
 
-	// Iterator<Huevo> iterator = huevos.iterator();
+	// Iterator<Ganado> iterator = huevos.iterator();
 
-	public void eliminarExpirados(ArrayList huevos) {
-		Iterator<Huevo> iterator = huevos.iterator();
+	public void eliminarExpirados(ArrayList<Pollito> ganado) {
+		Iterator<Pollito> iterator = ganado.iterator();
 		while (iterator.hasNext()) {
 			if (now.isAfter((iterator.next().fechaExpiracion))) {
-				System.out.println("ok");
 				iterator.remove();
 			}
 		}
-		System.out.println(huevos);
+		System.out.println(ganado);
 	}
 
 	public ArrayList<TiposAnimales> getTiposAnimales() {
@@ -134,9 +133,11 @@ public class Granja {
 	}
 
 	public void actualizar() {
-		System.out.println("Actualizar granja no funciona aun");
-		eliminarExpirados(huevos);
-		// System.out.println(huevos);
+		System.out.println(
+				"Actualizar granja no funciona aun Quiero que Eliminar expirados me funcione con todo el ganado");
+		// eliminarExpirados(huevos);
+		eliminarExpirados(pollitos);
+
 
 	}
 
