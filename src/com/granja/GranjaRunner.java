@@ -10,8 +10,7 @@ public class GranjaRunner {
 	public static void main(String[] args) {
 		Granja granja = new Granja(new BigDecimal(0), 0, 0);
 		LocalDate now = LocalDate.now();
-		// granja.addExpiracion(new Expiracion(1, "huevo", 21));
-		// granja.addExpiracion(new Expiracion(2, "pollito", 2000));
+
 
 		Scanner scanner = new Scanner(System.in);
 
@@ -22,14 +21,13 @@ public class GranjaRunner {
 
 		System.out.println("Cantidad maxima de pollitos que puede tener: ");
 		int cantMaxPollitos = scanner.nextInt();
-		granja.setCantMaxPollitos(cantMaxPollitos);
 		System.out.println("Indique Precio de compra de Pollitos: ");
 		BigDecimal precioCompraP = scanner.nextBigDecimal();
 		System.out.println("Indique Precio de Venta de Pollitos: ");
 		BigDecimal precioVentaP = scanner.nextBigDecimal();
-		// granja.addPrecio(new Precios(1, "pollito", "100.5", "300"));
 		System.out.println(granja);
 
+		granja.addTiposAnimales(new TiposAnimales(1, "pollito", 2000, cantMaxPollitos, precioCompraP, precioVentaP));
 
 		granja.addPollito(new Pollito(1, 15, now));
 		granja.addPollito(new Pollito(2, 25, now));
@@ -38,23 +36,22 @@ public class GranjaRunner {
 
 		System.out.println("Cantidad maxima de huevos que puede tener: ");
 		int cantMaxHuevos = scanner.nextInt();
-		granja.setCantMaxHuevos(cantMaxHuevos);
 		System.out.println("Indique Precio de compra de Huevos: ");
 		BigDecimal precioCompraH = scanner.nextBigDecimal();
 		System.out.println("Indique Precio de Venta de Huevos: ");
 		BigDecimal precioVentaH = scanner.nextBigDecimal();
 
-		granja.addPrecio(new Precios(1, "pollito", 2000, precioCompraP, precioVentaP));
-		granja.addPrecio(new Precios(2, "huevo", 21, precioCompraH, precioVentaH));
 
+		granja.addTiposAnimales(new TiposAnimales(2, "huevo", 21, cantMaxHuevos, precioCompraH, precioVentaH));
 
-		granja.addHuevo(new Huevo(1, 10, now));
+		granja.addHuevo(new Huevo(1, 30, now));
+		granja.addHuevo(new Huevo(2, 10, now));
 
 
 		System.out.println(granja);
 
 		int opcion = 0;
-		while(opcion!=6) {
+		while (opcion != 7) {
 			granja.ofrecerMenu();
 			opcion = scanner.nextInt();
 			switch (opcion) {
@@ -88,12 +85,20 @@ public class GranjaRunner {
 				System.out.println("Vender pollitos");
 				break;
 			}
+			case 6: {
+				System.out.println("Actualizar Granja");
+				granja.actualizar();
+				break;
+
+			}
 			}
 		}
-		System.out.println("Gracias por visitar nuestra granja!!!");
+		{
+			System.out.println("Gracias por visitar nuestra granja!!!");
+			scanner.close();
+		}
+
 	}
-
-
 
 }
 

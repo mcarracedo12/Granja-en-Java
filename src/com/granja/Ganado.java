@@ -45,28 +45,14 @@ public abstract class Ganado {
 		this.ingresoAGranja = ingresoAGranja;
 	}
 
-	// public BigDecimal getPrecioCompra() {
-	// return precioCompra;
-	// }
-
-	public static void setPrecioCompra(String precioCompra) {
-		precioCompra = precioCompra;
-	}
-
-	// public BigDecimal getPrecioVenta() {
-	// return getPrecioVentaByAnimal(this.animal);
-	// return precioVenta;
-	// }
-
 	public void setPrecioVenta(BigDecimal precioVenta) {
 		precioVenta = precioVenta;
 	}
 
 	@Override
 	public String toString() {
-		return String.format(
-				"Id - %d, Fecha nacimiento - %s, Ingreso a Granja - %s, \n ",
-				id, nacimiento, ingresoAGranja);
+		return String.format("Id - %d, Fecha nacimiento - %s, Ingreso a Granja - %s, \n ", id, nacimiento,
+				ingresoAGranja);
 		// , precioCompra, precioVenta);
 	}
 
