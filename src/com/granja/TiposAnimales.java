@@ -70,8 +70,9 @@ public class TiposAnimales {
 
 	@Override
 	public String toString() {
-		return "Animal " + id + animal + " . Dias de Expiracion: " + diasExpiracion + ". Precios de compra y venta: "
-				+ precioCompra + " " + precioVenta + "cantidadMaxima: " + cantidadMaxima;
+		return "Animal " + id + " " + animal + " . Dias de Expiracion: " + diasExpiracion
+				+ ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: "
+				+ cantidadMaxima + "\n";
 	}
 
 

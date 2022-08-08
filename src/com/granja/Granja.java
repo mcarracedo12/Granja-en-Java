@@ -8,8 +8,6 @@ import java.util.Iterator;
 public class Granja {
 
 	private BigDecimal dineroEnCaja;
-	// int cantMaxPollitos;
-	// int cantMaxHuevos;
 	private ArrayList<Huevo> huevos = new ArrayList<Huevo>();
 	private ArrayList<Pollito> pollitos = new ArrayList<Pollito>();
 	private ArrayList<TiposAnimales> tiposAnimales = new ArrayList<>();

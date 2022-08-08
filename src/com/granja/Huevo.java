@@ -36,7 +36,7 @@ public class Huevo extends Ganado {
 
 	@Override
 	public String toString() {
-		return (super.toString() + " " + animal + " Expira el " + fechaExpiracion + ".");
+		return (super.toString() + " " + animal + " Expira el " + fechaExpiracion + ".\n");
 	}
 
 
