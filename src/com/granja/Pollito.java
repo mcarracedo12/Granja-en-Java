@@ -3,20 +3,18 @@ package com.granja;
 import java.time.LocalDate;
 
 public class Pollito extends Ganado {
-	static String animal = "pollito";
-	public static int diasExpiracion = 2000;
-	LocalDate fechaExpiracion;
-	public LocalDate nacimiento;
+	private static String animal = "pollito";
+	private int diasExpiracion = 2000;
+	// private int diasExpiracion;
+	public LocalDate fechaExpiracion;
+	private LocalDate nacimiento;
 
-	public Pollito(int id, int edadEnDias, LocalDate ingresoAGranja) {
-		super(id, edadEnDias, ingresoAGranja);
-		this.nacimiento = now.minusDays(edadEnDias);
+	public Pollito(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 
 		// this.animal = animal;
 		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
-
-
-
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.granja;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Ganado {
@@ -10,16 +9,16 @@ public abstract class Ganado {
 	private LocalDate nacimiento;
 	private LocalDate ingresoAGranja;
 	private String animal;
-
 	private int diasExpiracion;
-	private int edadActual;
-	private LocalDate fechaExpiracion;
+	public LocalDate fechaExpiracion;
+
 	public Ganado(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		this.id = id;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
-		this.nacimiento = now.minusDays(edadEnDiasAlIngresar);
+		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.ingresoAGranja = fechaIngresoAGranja;
-		// this.fechaExpiracion = this.nacimiento + diasExpiracion;
+		this.fechaExpiracion = this.nacimiento.plusDays(this.getDiasExpiracion());
+		// Desde aca solo no me lo toma en las clases
 	}
 
 	public int getId() {
@@ -46,20 +45,50 @@ public abstract class Ganado {
 		this.ingresoAGranja = ingresoAGranja;
 	}
 
-	public void setPrecioVenta(BigDecimal precioVenta) {
-		precioVenta = precioVenta;
-	}
+	//	public void setPrecioVenta(String animal) {
+	// TiposAnimales.getPrecioVenta(String animal) = precioVenta;
+	// this.setPrecioVenta(animal); // hay que ver si funciona esto...
+	//	}
 
 	@Override
 	public String toString() {
 		return String.format("Id - %d, Fecha nacimiento - %s, Ingreso a Granja - %s, \n ", id, nacimiento,
 				ingresoAGranja);
-		// , precioCompra, precioVenta);
 	}
 
-	public long getDiasExpiracion() {
-		// TODO Auto-generated method stub
+	public int getDiasExpiracion() {
 		return this.diasExpiracion;
 	}
+
+	public int getEdadEnDiasAlIngresar() {
+		return edadEnDiasAlIngresar;
+	}
+
+	public void setEdadEnDiasAlIngresar(int edadEnDiasAlIngresar) {
+		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
+	}
+
+	public LocalDate getFechaExpiracion() {
+		return fechaExpiracion;
+	}
+
+	public void setFechaExpiracion(LocalDate fechaExpiracion) {
+		this.fechaExpiracion = fechaExpiracion;
+	}
+
+	public String getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
+
+	public void reproducir() {
+	}
+
+	// public int diasExpiracion(String animal) {
+	// return TiposAnimales.getDiasExpiracionByAnimal(animal);
+	// }
 
 }

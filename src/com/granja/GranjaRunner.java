@@ -8,12 +8,10 @@ public class GranjaRunner {
 
 
 	public static void main(String[] args) {
-		Granja granja = new Granja(new BigDecimal(0), 0, 0);
+		Granja granja = new Granja(new BigDecimal(0));
 		LocalDate now = LocalDate.now();
 
-
 		Scanner scanner = new Scanner(System.in);
-
 
 		System.out.println("Ingrese dinero que hay en la caja de la granja: ");
 		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
@@ -72,18 +70,24 @@ public class GranjaRunner {
 
 			case 3: 
 			{
-				System.out.println("Vender huevos");
+				System.out.println("Cuantos huevos quiere vender? ");
+				int cant = scanner.nextInt();
+				granja.venderHuevos(cant);
 				break;
 			}
 
 			case 4: 
 			{
-				System.out.println("Comprar pollitos");
+				System.out.println("Cuantos pollitos quiere comprar? ");
+				int cant = scanner.nextInt();
+				granja.comprarPollitos(cant);
 				break;
 			}
 			case 5: 
 			{
-				System.out.println("Vender pollitos");
+				System.out.println("Cuantos pollitos quiere Vender?");
+				int cant = scanner.nextInt();
+				granja.venderPollitos(cant);
 				break;
 			}
 			case 6: {

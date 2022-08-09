@@ -9,6 +9,39 @@ public abstract class Producto {
 	LocalDate now = LocalDate.now();
 	private int id;
 	private String animal;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
+
+	public LocalDate getFechaExpiracion() {
+		return fechaExpiracion;
+	}
+
+	public void setFechaExpiracion(LocalDate fechaExpiracion) {
+		this.fechaExpiracion = fechaExpiracion;
+	}
+
+	public BigDecimal getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(BigDecimal precio) {
+		this.precio = precio;
+	}
+
 	private LocalDate fechaExpiracion;
 	private BigDecimal precio;
 

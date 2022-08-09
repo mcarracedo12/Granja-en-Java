@@ -3,26 +3,21 @@ package com.granja;
 import java.time.LocalDate;
 
 public class Huevo extends Ganado {
-	String animal = "huevo";
-	static int diasExpiracion = 21;
-	public LocalDate nacimiento;
-	private int edadActual;
-	LocalDate fechaExpiracion;
+	private String animal = "huevo";
+	private int diasExpiracion = 21;
+	// Hay que sacarlo de la tabla de TiposAnimales
+	private LocalDate nacimiento;
+	public LocalDate fechaExpiracion;
 
 	public Huevo(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
-		this.nacimiento = now.minusDays(edadEnDiasAlIngresar);
-		// this.edadActual = now.minusLocalDate(nacimiento);
-		// this.precioVenta = Precios.getPrecioVentaByAnimal(animal); Me pide que ponga
-		// el precio como Static
+		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
 	}
 
-
-
-	// public static void setDiasExpiracion(int diasExpiracion) {
-	//		Huevo.diasExpiracion = diasExpiracion;
-	//	}
+	//	public int diasExpiracion(String animal) {
+	// return TiposAnimales.getDiasExpiracionByAnimal(animal);
+	// }
 
 	@Override
 	public LocalDate getNacimiento() {
@@ -39,6 +34,10 @@ public class Huevo extends Ganado {
 		return (super.toString() + " " + animal + " Expira el " + fechaExpiracion + ".\n");
 	}
 
-
+	@Override
+	public void reproducir() {
+		// TODO Auto-generated method stub
+		super.reproducir();
+	}
 
 }

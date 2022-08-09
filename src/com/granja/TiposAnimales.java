@@ -75,6 +75,9 @@ public class TiposAnimales {
 				+ cantidadMaxima + "\n";
 	}
 
+	public int getDiasExpiracionByAnimal(String animal) {
+		return diasExpiracion;
+	}
 
 
 }

@@ -14,7 +14,7 @@ public class Granja {
 
 	private LocalDate now = LocalDate.now();
 
-	public Granja(BigDecimal dineroEnCaja, int cantMaxPollitos, int cantMaxHuevos) {
+	public Granja(BigDecimal dineroEnCaja) {
 		super();
 		this.dineroEnCaja = dineroEnCaja;
 	}
@@ -49,25 +49,32 @@ public class Granja {
 		this.tiposAnimales.add(tiposAnimales);
 	}
 
-	public void venderPollito(int cant) {
-		if (pollitos.size() > cant) {
-			System.out.println("Voy a Comprar pollis");
+	public void venderPollitos(int cant) {
+		if (pollitos.size() >= cant) {
+			System.out.println("Voy a Comprar " + cant + " pollitos\n");
 		}
+		else
+			System.out.println("No hay " + cant + " pollos. Hay solo " + pollitos.size());
 	}
 
-	public void comprarPollito() {}
+	public void comprarPollitos(int cant) {
+		System.out.println("Dispones de $" + dineroEnCaja + " para comprar pollos");
+	}
 
-	public void venderHuevos() {
+	public void venderHuevos(int cant) {
+		if (huevos.size() >= cant) {
+			System.out.println("Hay stock suficiente para vender " + cant + " huevos\n");
+		} else
+			System.out.println("No hay tantos huevos. Hay solo " + huevos.size() + "\n");
 
 	}
 
 	public void comprarHuevos(int cant) {
 		// private BigDecimal montoTotal =
 		// TiposAnimales.getPrecioCompraByAnimal("huevos") * cant;
-
 		// if(dineroEnCaja>(Precios.getPrecioCompraByAnimal("huevos")*cant)) {
-
 		// }
+		System.out.println("Dispones de $" + dineroEnCaja + " para comprar huevos");
 	}
 
 	public void mostrarEstado() {
@@ -135,7 +142,6 @@ public class Granja {
 				"Actualizar granja no funciona aun Quiero que Eliminar expirados me funcione con todo el ganado");
 		// eliminarExpirados(huevos);
 		eliminarExpirados(pollitos);
-
 
 	}
 
