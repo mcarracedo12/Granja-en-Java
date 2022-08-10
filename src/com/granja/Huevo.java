@@ -8,6 +8,7 @@ public class Huevo extends Ganado {
 	// Hay que sacarlo de la tabla de TiposAnimales
 	private LocalDate nacimiento;
 	public LocalDate fechaExpiracion;
+	int tiempoDeReproduccion = 21;
 
 	public Huevo(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
@@ -35,9 +36,35 @@ public class Huevo extends Ganado {
 	}
 
 	@Override
-	public void reproducir() {
-		// TODO Auto-generated method stub
-		super.reproducir();
+	public String getAnimal() {
+		return animal;
 	}
+
+	@Override
+	public void setAnimal(String animal) {
+		this.animal = animal;
+	}
+
+	@Override
+	public int getDiasExpiracion() {
+		return diasExpiracion;
+	}
+
+	public void setDiasExpiracion(int diasExpiracion) {
+		this.diasExpiracion = diasExpiracion;
+	}
+
+	@Override
+	public LocalDate getFechaExpiracion() {
+		return fechaExpiracion;
+	}
+
+	@Override
+	public void setFechaExpiracion(LocalDate fechaExpiracion) {
+		this.fechaExpiracion = fechaExpiracion;
+	}
+
+
+
 
 }

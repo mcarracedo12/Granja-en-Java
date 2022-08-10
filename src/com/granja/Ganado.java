@@ -11,6 +11,7 @@ public abstract class Ganado {
 	private String animal;
 	private int diasExpiracion;
 	public LocalDate fechaExpiracion;
+	int tiempoDeReproduccion;
 
 	public Ganado(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		this.id = id;
@@ -85,6 +86,7 @@ public abstract class Ganado {
 	}
 
 	public void reproducir() {
+
 	}
 
 	// public int diasExpiracion(String animal) {

@@ -8,6 +8,7 @@ public class Pollito extends Ganado {
 	// private int diasExpiracion;
 	public LocalDate fechaExpiracion;
 	private LocalDate nacimiento;
+	int tiempoDeReproduccion = 1;
 
 	public Pollito(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
