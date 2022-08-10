@@ -9,11 +9,13 @@ public class Huevo extends Ganado {
 	private LocalDate nacimiento;
 	public LocalDate fechaExpiracion;
 	int tiempoDeReproduccion = 21;
+	// private int edadActual;
 
 	public Huevo(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
+		// this.edadActual = now.compareTo(nacimiento);
 	}
 
 	//	public int diasExpiracion(String animal) {
@@ -63,6 +65,8 @@ public class Huevo extends Ganado {
 	public void setFechaExpiracion(LocalDate fechaExpiracion) {
 		this.fechaExpiracion = fechaExpiracion;
 	}
+
+
 
 
 

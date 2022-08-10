@@ -9,13 +9,14 @@ public class Pollito extends Ganado {
 	public LocalDate fechaExpiracion;
 	private LocalDate nacimiento;
 	int tiempoDeReproduccion = 1;
+	// private int edadActual;
 
 	public Pollito(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-
 		// this.animal = animal;
 		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
+		// this.edadActual = now.compareTo(getNacimiento());
 	}
 
 	@Override

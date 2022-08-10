@@ -12,6 +12,7 @@ public abstract class Ganado {
 	private int diasExpiracion;
 	public LocalDate fechaExpiracion;
 	int tiempoDeReproduccion;
+	// private int edadActual;
 
 	public Ganado(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		this.id = id;
@@ -19,6 +20,7 @@ public abstract class Ganado {
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.ingresoAGranja = fechaIngresoAGranja;
 		this.fechaExpiracion = this.nacimiento.plusDays(this.getDiasExpiracion());
+		// this.setEdadActual(now.compareTo(getNacimiento()));
 		// Desde aca solo no me lo toma en las clases
 	}
 
@@ -88,6 +90,8 @@ public abstract class Ganado {
 	public void reproducir() {
 
 	}
+
+
 
 	// public int diasExpiracion(String animal) {
 	// return TiposAnimales.getDiasExpiracionByAnimal(animal);

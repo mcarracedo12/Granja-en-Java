@@ -39,13 +39,17 @@ public class GranjaRunner {
 
 		granja.addTiposAnimales(new TiposAnimales(2, "huevo", 21, cantMaxHuevos, precioCompraH, precioVentaH));
 
-		granja.addPollito(new Pollito(1, 15, now));
-		granja.addPollito(new Pollito(2, 25, now));
-		granja.addPollito(new Pollito(3, 2005, now));// Lo ingreso Expirado
+		// granja.addPollito(new Pollito(1, 15, now));
+		granja.addPollito(new Pollito(2, 26, now));
+		// granja.addPollito(new Pollito(3, 2005, now));// Lo ingreso Expirado
+		// granja.addPollito(new Pollito(4, 5, now));
 
-		granja.addHuevo(new Huevo(1, 30, now));// Lo ingreso Expirado
-		granja.addHuevo(new Huevo(2, 10, now));
-
+		// granja.addHuevo(new Huevo(1, 30, now));// Lo ingreso Expirado
+		// granja.addHuevo(new Huevo(2, 10, now));
+		// granja.addHuevo(new Huevo(3, 15, now));
+		// granja.addHuevo(new Huevo(4, 40, now));
+		// granja.addHuevo(new Huevo(5, 25, now));
+		//
 
 		System.out.println(granja);
 
