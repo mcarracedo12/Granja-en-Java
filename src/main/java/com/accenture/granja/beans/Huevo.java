@@ -1,8 +1,20 @@
-package com.granja;
+package com.accenture.granja.beans;
+
+
 
 import java.time.LocalDate;
+//import java.util.ArrayList;
+//import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
 public class Huevo extends Ganado {
+	@Id
+	@GeneratedValue
+	private long id;
+
 	private String animal = "huevo";
 	private int diasExpiracion = 21;
 	// Hay que sacarlo de la tabla de TiposAnimales
@@ -11,7 +23,7 @@ public class Huevo extends Ganado {
 	int tiempoDeReproduccion = 21;
 	// private int edadActual;
 
-	public Huevo(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Huevo(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
@@ -34,7 +46,7 @@ public class Huevo extends Ganado {
 
 	@Override
 	public String toString() {
-		return (super.toString() + " " + animal + " Expira el " + fechaExpiracion + ".\n");
+		return (super.toString() + " " + id + " " + animal + " Expira el " + fechaExpiracion + ".\n");
 	}
 
 	@Override
@@ -67,8 +79,20 @@ public class Huevo extends Ganado {
 	}
 
 
-
-
-
-
-}
+	@Override
+	public void reproducir() {
+		LocalDate i = nacimiento.plusDays(tiempoDeReproduccion);
+		while (i.isBefore(now)) {
+			
+			if (now.isAfter(fechaExpiracion)) {
+				System.out.println("Convierto huevo en pollito en la fecha: " + i);
+				new Pollito(0, 0, i);
+				//huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != huevo;}).collect(Collectors.toList());
+				System.out.println("Pollito creado con fecha de nacimiento " + i);
+				
+		
+			i = i.plusDays(tiempoDeReproduccion);
+		}
+		super.reproducir();
+	}
+}}

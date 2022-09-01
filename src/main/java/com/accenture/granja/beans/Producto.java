@@ -1,4 +1,6 @@
-package com.granja;
+package com.accenture.granja.beans;
+
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

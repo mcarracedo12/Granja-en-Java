@@ -1,31 +1,32 @@
-package com.granja;
+package com.accenture.granja.beans;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public abstract class Transaccion {
-	int id;
+//	@Id
+	//@GeneratedValue
+	//long id;
 	private String nombrePersona;
-	private ArrayList<Producto> productos = new ArrayList();
+	private ArrayList<Producto> productos = new ArrayList<>();
 	private BigDecimal total;
 	private LocalDate fecha;
 
-	public Transaccion(int id, String nombrePersona, ArrayList<Producto> productos, BigDecimal total, LocalDate fecha) {
+	public Transaccion(String nombrePersona, ArrayList<Producto> productos, BigDecimal total, LocalDate fecha) {
 		super();
-		this.id = id;
+		//this.id = id;
 		this.nombrePersona = nombrePersona;
 		this.productos = productos;
 		this.fecha = fecha;
 	}
 
-	public int getId() {
-		return id;
-	}
+	//public long getId() {
+		//return id;
+//	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	public String getNombrePersona() {
 		return nombrePersona;

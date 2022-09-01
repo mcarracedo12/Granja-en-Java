@@ -1,4 +1,6 @@
-package com.granja;
+package com.accenture.granja.beans;
+
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -6,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.stream.Collectors;
+
 
 class EdadComparator implements Comparator<Ganado> {
 	@Override
@@ -17,6 +20,7 @@ class EdadComparator implements Comparator<Ganado> {
 
 public class Granja {
 
+	private long id;
 	private BigDecimal dineroEnCaja;
 	// Queue<String> queue = new PriorityQueue<>(new StringLengthComparator());
 	// public Queue<Huevo> huevos = new PriorityQueue<Huevo>(new EdadComparator());
@@ -24,9 +28,9 @@ public class Granja {
 
 	public ArrayList<Pollito> pollitos = new ArrayList<Pollito>();
 	private ArrayList<TiposAnimales> tiposAnimales = new ArrayList<>();
-
+ 
 	private LocalDate now = LocalDate.now();
-
+	private LocalDate ultimaActualizacion = now.minusDays(20);
 	public Granja(BigDecimal dineroEnCaja) {
 		super();
 		this.dineroEnCaja = dineroEnCaja;
@@ -150,14 +154,21 @@ public class Granja {
 
 	// Iterator<Ganado> iterator = huevos.iterator();
 
-	public void eliminarExpirados(ArrayList<Pollito> pollitos) {
-		Iterator<Pollito> iterator = pollitos.iterator();
-		while (iterator.hasNext()) {
-			if (now.isAfter((iterator.next().fechaExpiracion))) {
-				iterator.remove();
+	public void eliminarExpirados() {
+		Iterator<Pollito> iteratorP = pollitos.iterator();
+		while (iteratorP.hasNext()) {
+			if (now.isAfter((iteratorP.next().fechaExpiracion))) {
+				iteratorP.remove();
 			}
 		}
 		System.out.println(pollitos);
+		Iterator<Huevo> iteratorH = huevos.iterator();
+		while (iteratorH.hasNext()) {
+			if (now.isAfter((iteratorH.next().fechaExpiracion))) {
+				iteratorH.remove();
+			}
+		}
+		System.out.println(huevos);
 	}
 
 	public void reproducirHuevosIterator() {
@@ -221,17 +232,37 @@ public class Granja {
 
 	public void actualizar() {
 		System.out.println("Actualizando granja...\n");
-
-		System.out.println("Reproduciendo pollitos");
-		reproducirPollitos();
-		System.out.println(" Fin Reproduciendo pollitos");
-		System.out.println("Reproduciendo huevos");
-		reproducirHuevos();
-		System.out.println("Fin Reproduciendo huevos");
+reproducirGanado();
+	//	System.out.println("Reproduciendo pollitos");
+	//	reproducirPollitos();
+	//	System.out.println(" Fin Reproduciendo pollitos");
+	//	System.out.println("Reproduciendo huevos");
+	//	reproducirHuevos();
+	//	System.out.println("Fin Reproduciendo huevos");
 		// reproducirHuevosIterator();
-		System.out.println("Eliminando Pollitos expirados");
-		eliminarExpirados(pollitos);
 		System.out.println("Ahora hay " + pollitos.size() + " pollitos y " + huevos.size() + " huevos. \n");
+		System.out.println("Eliminando Pollitos expirados");
+		eliminarExpirados();
+		System.out.println("Ahora hay " + pollitos.size() + " pollitos y " + huevos.size() + " huevos. \n");
+	}
+
+	private void reproducirGanado() {
+		System.out.println("Voy a reproducir Ganado");
+		for(LocalDate i = ultimaActualizacion; i.isBefore(now); i.plusDays(1)) {
+			for (Pollito pollito : pollitos) {
+				pollito.reproducir();
+			}
+			for (Huevo huevo: huevos) {
+				huevo.reproducir();
+			}
+			eliminarExpirados();
+			ultimaActualizacion = ultimaActualizacion.plusDays(1);
+		}
+		System.out.println("La ultima fecha de Actualizacion es: " + ultimaActualizacion);
+	}
+
+	public long getId() {
+		return id;
 	}
 
 }

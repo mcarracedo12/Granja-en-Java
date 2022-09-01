@@ -1,10 +1,18 @@
-package com.granja;
+package com.accenture.granja.beans;
+
+
 
 import java.time.LocalDate;
+//import java.util.ArrayList;
+//import java.util.Iterator;
+
+
 
 public abstract class Ganado {
 	LocalDate now = LocalDate.now();
-	private int id;
+	//@Id
+	//@GeneratedValue
+	//private long id;
 	private int edadEnDiasAlIngresar;
 	private LocalDate nacimiento;
 	private LocalDate ingresoAGranja;
@@ -14,8 +22,8 @@ public abstract class Ganado {
 	int tiempoDeReproduccion;
 	// private int edadActual;
 
-	public Ganado(int id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		this.id = id;
+	public Ganado(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		//this.id = id;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.ingresoAGranja = fechaIngresoAGranja;
@@ -24,13 +32,11 @@ public abstract class Ganado {
 		// Desde aca solo no me lo toma en las clases
 	}
 
-	public int getId() {
-		return id;
-	}
+	//public long getId() {
+	//	return id;
+	//}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	public LocalDate getNacimiento() {
 		return nacimiento;
@@ -55,7 +61,7 @@ public abstract class Ganado {
 
 	@Override
 	public String toString() {
-		return String.format("Id - %d, Fecha nacimiento - %s, Ingreso a Granja - %s, \n ", id, nacimiento,
+		return String.format("Fecha nacimiento - %s, Ingreso a Granja - %s, \n ", nacimiento,
 				ingresoAGranja);
 	}
 
@@ -91,7 +97,7 @@ public abstract class Ganado {
 
 	}
 
-
+	
 
 	// public int diasExpiracion(String animal) {
 	// return TiposAnimales.getDiasExpiracionByAnimal(animal);
