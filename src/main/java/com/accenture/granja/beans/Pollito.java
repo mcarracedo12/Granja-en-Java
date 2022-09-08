@@ -34,19 +34,13 @@ public class Pollito extends Ganado {
 	}
 
 	@Override
-	public void reproducir() {
-		LocalDate i = nacimiento.plusDays(tiempoDeReproduccion);
-		while (i.isBefore(now)) {
-			System.out.println("Fecha de reproduccion: " + i);
-			if (i.isBefore(fechaExpiracion)) {
-				System.out.println("Aca tengo que agregar un huevo con fecha de nacimiento " + i);
-				new Huevo(0, 0, i);
-				System.out.println("Huevo creado con fecha de nacimiento " + i);
-			}
-			i = i.plusDays(tiempoDeReproduccion);
+	public void reproducir(LocalDate i) {
+		if (i.isBefore(now)) {
+			new Huevo(0, 0, i);
+			System.out.println("Huevo creado con fecha de nacimiento " + i);
+			//i = i.plusDays(tiempoDeReproduccion);
 		}
-		super.reproducir();
+		super.reproducir(i);
 	}
 	
-
 }

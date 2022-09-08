@@ -93,7 +93,7 @@ public abstract class Ganado {
 		this.animal = animal;
 	}
 
-	public void reproducir() {
+	public void reproducir(LocalDate i) {
 
 	}
 

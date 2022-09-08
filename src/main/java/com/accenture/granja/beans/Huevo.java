@@ -80,19 +80,18 @@ public class Huevo extends Ganado {
 
 
 	@Override
-	public void reproducir() {
-		LocalDate i = nacimiento.plusDays(tiempoDeReproduccion);
-		while (i.isBefore(now)) {
+	public void reproducir(LocalDate i) {
+		//LocalDate i = nacimiento.plusDays(tiempoDeReproduccion);
+		if (i.isBefore(now)) {
 			
-			if (now.isAfter(fechaExpiracion)) {
+			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
 				new Pollito(0, 0, i);
 				//huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != huevo;}).collect(Collectors.toList());
 				System.out.println("Pollito creado con fecha de nacimiento " + i);
 				
-		
-			i = i.plusDays(tiempoDeReproduccion);
+			//i = i.plusDays(tiempoDeReproduccion);
 		}
-		super.reproducir();
+		super.reproducir(i);
 	}
 }}

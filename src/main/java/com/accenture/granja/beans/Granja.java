@@ -97,6 +97,10 @@ public class Granja {
 	}
 
 	public void comprarHuevos(int cant) {
+		if(9000 < huevos.size()+cant) {
+			System.out.println("No puede comprar tantos");
+		}
+		else
 		// private BigDecimal montoTotal =
 		// TiposAnimales.getPrecioCompraByAnimal("huevos") * cant;
 		// if(dineroEnCaja>(Precios.getPrecioCompraByAnimal("huevos")*cant)) {
@@ -124,7 +128,7 @@ public class Granja {
 		System.out.println(tiposAnimales);
 	}
 
-	public static void ofrecerMenu() {
+	public void ofrecerMenu() {
 		System.out.println("\n\tIngrese una opcion del menu: ");
 		System.out.println("1. Mostrar estado de la granja");
 		System.out.println("2. Comprar huevos");
@@ -154,17 +158,17 @@ public class Granja {
 
 	// Iterator<Ganado> iterator = huevos.iterator();
 
-	public void eliminarExpirados() {
+	public void eliminarExpirados(LocalDate i) {
 		Iterator<Pollito> iteratorP = pollitos.iterator();
 		while (iteratorP.hasNext()) {
-			if (now.isAfter((iteratorP.next().fechaExpiracion))) {
+			if (i.isAfter((iteratorP.next().fechaExpiracion))) {
 				iteratorP.remove();
 			}
 		}
 		System.out.println(pollitos);
 		Iterator<Huevo> iteratorH = huevos.iterator();
 		while (iteratorH.hasNext()) {
-			if (now.isAfter((iteratorH.next().fechaExpiracion))) {
+			if (i.isAfter((iteratorH.next().fechaExpiracion))) {
 				iteratorH.remove();
 			}
 		}
@@ -232,31 +236,34 @@ public class Granja {
 
 	public void actualizar() {
 		System.out.println("Actualizando granja...\n");
-reproducirGanado();
-	//	System.out.println("Reproduciendo pollitos");
-	//	reproducirPollitos();
-	//	System.out.println(" Fin Reproduciendo pollitos");
-	//	System.out.println("Reproduciendo huevos");
-	//	reproducirHuevos();
-	//	System.out.println("Fin Reproduciendo huevos");
+	//	reproducirGanado(); Este es el que quiero hacer iterando los dias
+		System.out.println("Reproduciendo pollitos");
+		reproducirPollitos();
+		System.out.println(" Fin Reproduciendo pollitos");
+		System.out.println("Reproduciendo huevos");
+		reproducirHuevos();
+		System.out.println("Fin Reproduciendo huevos");
 		// reproducirHuevosIterator();
 		System.out.println("Ahora hay " + pollitos.size() + " pollitos y " + huevos.size() + " huevos. \n");
 		System.out.println("Eliminando Pollitos expirados");
-		eliminarExpirados();
+		//eliminarExpirados();
 		System.out.println("Ahora hay " + pollitos.size() + " pollitos y " + huevos.size() + " huevos. \n");
 	}
 
 	private void reproducirGanado() {
 		System.out.println("Voy a reproducir Ganado");
-		for(LocalDate i = ultimaActualizacion; i.isBefore(now); i.plusDays(1)) {
+		//for(LocalDate i = ultimaActualizacion; i.isBefore(now); i.plusDays(1)) {
+		LocalDate i = ultimaActualizacion;
+		while( i.isBefore(now)) {
+			System.out.println("Fecha de reproduccion: " + i);
 			for (Pollito pollito : pollitos) {
-				pollito.reproducir();
+				pollito.reproducir(i);
 			}
 			for (Huevo huevo: huevos) {
-				huevo.reproducir();
+				huevo.reproducir(i);
 			}
-			eliminarExpirados();
-			ultimaActualizacion = ultimaActualizacion.plusDays(1);
+			eliminarExpirados(i);
+			 i.plusDays(1);
 		}
 		System.out.println("La ultima fecha de Actualizacion es: " + ultimaActualizacion);
 	}
