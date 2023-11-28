@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -24,16 +25,16 @@ public class Granja {
 	private BigDecimal dineroEnCaja;
 	// Queue<String> queue = new PriorityQueue<>(new StringLengthComparator());
 	// public Queue<Huevo> huevos = new PriorityQueue<Huevo>(new EdadComparator());
-	public ArrayList<Huevo> huevos = new ArrayList<Huevo>();
+	public List<Huevo> huevos = new ArrayList<Huevo>();
 
-	public ArrayList<Pollito> pollitos = new ArrayList<Pollito>();
-	private ArrayList<TiposAnimales> tiposAnimales = new ArrayList<>();
+	public List<Pollito> pollitos = new ArrayList<Pollito>();
+	private List<TiposAnimales> tiposAnimales = new ArrayList<>();
  
 	private LocalDate now = LocalDate.now();
 	private LocalDate ultimaActualizacion = now.minusDays(20);
-	public Granja(BigDecimal dineroEnCaja) {
+	public Granja() {
 		super();
-		this.dineroEnCaja = dineroEnCaja;
+		this.dineroEnCaja = new BigDecimal(0);
 	}
 
 	public int getCantHuevos() {
@@ -82,10 +83,6 @@ public class Granja {
 		}
 		else
 			System.out.println("No hay " + cant + " pollos. Hay solo " + pollitos.size());
-	}
-
-	public void comprarPollitos(int cant) {
-		System.out.println("Dispones de $" + dineroEnCaja + " para comprar pollos");
 	}
 
 	public void venderHuevos(int cant) {
@@ -148,7 +145,7 @@ public class Granja {
 	}
 
 
-	public ArrayList<TiposAnimales> getTiposAnimales() {
+	public List<TiposAnimales> getTiposAnimales() {
 		return tiposAnimales;
 	}
 

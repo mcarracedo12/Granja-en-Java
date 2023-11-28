@@ -5,10 +5,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Transaccion {
-//	@Id
-	//@GeneratedValue
-	//long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String nombrePersona;
 	private ArrayList<Producto> productos = new ArrayList<>();
 	private BigDecimal total;
