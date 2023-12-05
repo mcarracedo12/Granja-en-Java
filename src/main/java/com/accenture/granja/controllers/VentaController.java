@@ -6,17 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accenture.granja.beans.Venta;
-import com.accenture.granja.repository.VentaRepository;
+import com.accenture.granja.model.Venta;
+import com.accenture.granja.services.VentaService;
 
 @RestController
 public class VentaController {
+	private VentaService ventaService;
 	@Autowired
-	private VentaRepository repository;
-	
-	@GetMapping("/ventas")
-	public List<Venta> getVentas(){
-		return repository.findAll();
-	}
+	public VentaController(VentaService ventaService) {
+
+	       this.ventaService = ventaService;
+
+	   }
+
+	  @GetMapping("/ventas")
+	   public List<Venta> getVentas() {
+
+	            // Aca se instancia al Servicio donde esta la logica central
+	       return ventaService.obtenerTodasLasVentas();
+
+	   }
 
 }

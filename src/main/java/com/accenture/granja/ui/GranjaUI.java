@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import com.accenture.granja.beans.*;
+import com.accenture.granja.model.*;
 
 
 public class GranjaUI {

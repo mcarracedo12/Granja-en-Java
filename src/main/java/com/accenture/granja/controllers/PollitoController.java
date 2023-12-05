@@ -6,17 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accenture.granja.beans.Pollito;
-import com.accenture.granja.repository.PollitoRepository;
+import com.accenture.granja.model.Pollito;
+import com.accenture.granja.services.PollitoService;
 
 @RestController
 public class PollitoController {
+	
+	private PollitoService pollitoService;
+	
 	@Autowired
-	private PollitoRepository repository;
+	private PollitoController(PollitoService pollitoService) {
+		this.pollitoService= pollitoService;
+	};
 	
 	@GetMapping("/pollitos")
-	public List<Pollito> getPollitos(){
-		return repository.findAll();
-	}
+	public List<Pollito> getPollitos() {
+
+        // Aca se instancia al Servicio donde esta la logica central
+   return pollitoService.obtenerTodosLosPollitos();
+
+}
 
 }

@@ -6,18 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accenture.granja.beans.Huevo;
-import com.accenture.granja.repository.HuevoRepository;
+import com.accenture.granja.model.Huevo;
+import com.accenture.granja.services.HuevoService;
 
 @RestController
 public class HuevoController {
 
+	
+	private HuevoService huevoService;
+	
 	@Autowired
-	private HuevoRepository repository;
-	
-	@GetMapping("/huevos")
-	public List<Huevo> getHuevos() {
-		return repository.findAll();
+	public HuevoController(HuevoService huevoService) {
+
+	       this.huevoService = huevoService;
+
+	   }
+
+	  @GetMapping("/huevos")
+	   public List<Huevo> getHuevos() {
+
+	            // Aca se instancia al Servicio donde esta la logica central
+	       return huevoService.obtenerTodosLosHuevos();
+
+	   }
+
 	}
-	
-}

@@ -1,4 +1,4 @@
-package com.accenture.granja.beans;
+package com.accenture.granja.model;
 
 
 

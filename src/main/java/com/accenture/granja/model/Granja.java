@@ -1,6 +1,4 @@
-package com.accenture.granja.beans;
-
-
+package com.accenture.granja.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
