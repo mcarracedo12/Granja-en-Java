@@ -3,8 +3,7 @@ package com.accenture.granja.model;
 
 
 import java.time.LocalDate;
-//import java.util.ArrayList;
-//import java.util.stream.Collectors;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -87,7 +86,7 @@ public class Huevo extends Ganado {
 			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
 				new Pollito(0, 0, i);
-				//huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != huevo;}).collect(Collectors.toList());
+				//List<Huevo> huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != this;}).collect(Collectors.toList());
 				System.out.println("Pollito creado con fecha de nacimiento " + i);
 				
 			//i = i.plusDays(tiempoDeReproduccion);

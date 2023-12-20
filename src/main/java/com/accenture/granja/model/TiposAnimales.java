@@ -3,13 +3,24 @@ package com.accenture.granja.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+@Entity
 public class TiposAnimales {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String animal;
 	private int diasExpiracion;
 	private BigDecimal precioCompra;
 	private BigDecimal precioVenta;
 	private int cantidadMaxima;
+	@ManyToOne
+	@JoinColumn(name = "granja_id")
+	private Granja granja;
 
 	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, BigDecimal precioCompra,
 			BigDecimal precioVenta) {
@@ -68,6 +79,13 @@ public class TiposAnimales {
 	public void setCantidadMaxima(int cantidadMaxima) {
 		this.cantidadMaxima = cantidadMaxima;
 	}
+	
+	/*public void mostrar() {
+		for (TipoAnimales animal : tipoAnimales) {
+			animal.toString();
+		}	
+	}
+	*/
 
 	@Override
 	public String toString() {

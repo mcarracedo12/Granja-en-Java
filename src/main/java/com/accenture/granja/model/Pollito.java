@@ -7,7 +7,11 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Entity
+
+
 public class Pollito extends Ganado {
 	@Id
 	@GeneratedValue
@@ -19,6 +23,9 @@ public class Pollito extends Ganado {
 	private LocalDate nacimiento;
 	int tiempoDeReproduccion = 1;
 	// private int edadActual;
+	@ManyToOne
+	@JoinColumn(name = "granja_id")
+	private Granja granja;
 
 	public Pollito(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);

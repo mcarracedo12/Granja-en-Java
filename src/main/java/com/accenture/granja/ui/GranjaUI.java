@@ -1,13 +1,10 @@
 package com.accenture.granja.ui;
 
-
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.accenture.granja.model.*;
-
 
 public class GranjaUI {
 
@@ -21,6 +18,8 @@ public class GranjaUI {
 		System.out.println("Ingrese dinero que hay en la caja de la granja: ");
 		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
 		granja.setDineroEnCaja(dineroEnCaja);
+		
+		
 
 		System.out.println("Cantidad maxima de pollitos que puede tener: ");
 		int cantMaxPollitos = scanner.nextInt();
@@ -45,11 +44,11 @@ public class GranjaUI {
 		granja.addTiposAnimales(new TiposAnimales(2, "huevo", 21, cantMaxHuevos, precioCompraH, precioVentaH));
 
 		// granja.addPollito(new Pollito(1, 15, now));
-		granja.addPollito(new Pollito(2, 26, now));
-		 granja.addPollito(new Pollito(3, 2005, now));// Lo ingreso Expirado
+		//granja.addPollito(new Pollito(2, 26, now));
+		// granja.addPollito(new Pollito(3, 2005, now));// Lo ingreso Expirado
 		// granja.addPollito(new Pollito(4, 5, now));
 
-		 granja.addHuevo(new Huevo(1, 30, now));// Lo ingreso Expirado
+		// granja.addHuevo(new Huevo(1, 30, now));// Lo ingreso Expirado
 		// granja.addHuevo(new Huevo(2, 10, now));
 		// granja.addHuevo(new Huevo(3, 15, now));
 		// granja.addHuevo(new Huevo(4, 40, now));
@@ -73,7 +72,7 @@ public class GranjaUI {
 			{
 				System.out.println("Cuantos huevos quiere comprar? ");
 				int cant = scanner.nextInt();
-				granja.comprarHuevos(cant);
+				//granja.comprarHuevos(cant);
 				break;
 			}
 
@@ -81,14 +80,14 @@ public class GranjaUI {
 			{
 				System.out.println("Cuantos huevos quiere vender? ");
 				int cant = scanner.nextInt();
-				granja.venderHuevos(cant);
+			//	granja.venderHuevos(cant);
 				break;
 			}
 
 			case 4: 
 			{
 				System.out.println("Cuantos pollitos quiere comprar? ");
-				int cant = scanner.nextInt();
+				//int cant = scanner.nextInt();
 				//granja.comprarPollitos(cant);
 				break;
 			}
@@ -96,7 +95,7 @@ public class GranjaUI {
 			{
 				System.out.println("Cuantos pollitos quiere Vender?");
 				int cant = scanner.nextInt();
-				granja.venderPollitos(cant);
+			//	granja.venderPollitos(cant);
 				break;
 			}
 			case 6: {
