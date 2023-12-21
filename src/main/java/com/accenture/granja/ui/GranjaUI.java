@@ -10,39 +10,48 @@ public class GranjaUI {
 
 	public void start() {
 		// TODO Auto-generated method stub
-		Granja granja = new Granja();
+		Granja granja = new Granja("6000000");
 		LocalDate now = LocalDate.now();
 
 		Scanner scanner = new Scanner(System.in);
-
+	/*	
 		System.out.println("Ingrese dinero que hay en la caja de la granja: ");
 		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
 		granja.setDineroEnCaja(dineroEnCaja);
 		
-		
-
 		System.out.println("Cantidad maxima de pollitos que puede tener: ");
 		int cantMaxPollitos = scanner.nextInt();
+		System.out.println("tiempoDeReproduccion de huevos: ");
+		int tiempoDeReproduccionP = scanner.nextInt();
 		System.out.println("Indique Precio de compra de Pollitos: ");
 		BigDecimal precioCompraP = scanner.nextBigDecimal();
 		System.out.println("Indique Precio de Venta de Pollitos: ");
 		BigDecimal precioVentaP = scanner.nextBigDecimal();
 		System.out.println(granja);
 
-		granja.addTiposAnimales(new TiposAnimales(1, "pollito", 2000, cantMaxPollitos, precioCompraP, precioVentaP));
+		granja.addTiposAnimales(new TiposAnimales(1, "pollito", 2000, cantMaxPollitos,tiempoDeReproduccionP, precioCompraP, precioVentaP));
+*/
+		
+		TiposAnimales huevo= new TiposAnimales(1, "HUEVOS", 21, 6000, 21, new BigDecimal(10), new BigDecimal(40));
+		granja.addTiposAnimales(huevo);
+		TiposAnimales pollos= new TiposAnimales(2, "POLLITOS", 2000, 600, 1, new BigDecimal(200), new BigDecimal(400));
+		granja.addTiposAnimales(pollos);
 
+		
+		
 		System.out.println(granja);
-
+/*
 		System.out.println("Cantidad maxima de huevos que puede tener: ");
 		int cantMaxHuevos = scanner.nextInt();
+		System.out.println("tiempoDeReproduccion de huevos: ");
+		int tiempoDeReproduccionH = scanner.nextInt();
 		System.out.println("Indique Precio de compra de Huevos: ");
 		BigDecimal precioCompraH = scanner.nextBigDecimal();
 		System.out.println("Indique Precio de Venta de Huevos: ");
 		BigDecimal precioVentaH = scanner.nextBigDecimal();
 
-
-		granja.addTiposAnimales(new TiposAnimales(2, "huevo", 21, cantMaxHuevos, precioCompraH, precioVentaH));
-
+		granja.addTiposAnimales(new TiposAnimales(2, "huevo", 21, cantMaxHuevos,tiempoDeReproduccionH, precioCompraH, precioVentaH));
+*/
 		// granja.addPollito(new Pollito(1, 15, now));
 		//granja.addPollito(new Pollito(2, 26, now));
 		// granja.addPollito(new Pollito(3, 2005, now));// Lo ingreso Expirado
@@ -55,7 +64,7 @@ public class GranjaUI {
 		// granja.addHuevo(new Huevo(5, 25, now));
 		//
 
-		System.out.println(granja);
+	//	System.out.println(granja);
 
 		int opcion = 0;
 		while (opcion != 7) {

@@ -2,12 +2,16 @@ package com.accenture.granja.model;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class TiposAnimales {
 	@Id
@@ -15,21 +19,27 @@ public class TiposAnimales {
 	private int id;
 	private String animal;
 	private int diasExpiracion;
+	private int cantidadMaxima;
+	private int tiempoDeReproduccion;
 	private BigDecimal precioCompra;
 	private BigDecimal precioVenta;
-	private int cantidadMaxima;
+	
+	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Pollito> pollitos = new ArrayList<Pollito>();
 	@ManyToOne
 	@JoinColumn(name = "granja_id")
-	private Granja granja;
+	public Granja granja;
 
-	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, BigDecimal precioCompra,
+							
+	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) {
 		this.id = id;
 		this.animal = animal;
 		this.diasExpiracion = diasExpiracion;
+		this.cantidadMaxima = cantidadMaxima;
+		this.tiempoDeReproduccion =tiempoDeReproduccion;
 		this.precioCompra = precioCompra;
 		this.precioVenta = precioVenta;
-		this.cantidadMaxima = cantidadMaxima;
 	}
 
 	public int getId() {
@@ -55,6 +65,14 @@ public class TiposAnimales {
 	public void setDiasExpiracion(int diasExpiracion) {
 		this.diasExpiracion = diasExpiracion;
 	}
+	
+	public int getCantidadMaxima() {
+		return cantidadMaxima;
+	}
+
+	public void setCantidadMaxima(int cantidadMaxima) {
+		this.cantidadMaxima = cantidadMaxima;
+	}
 
 	public BigDecimal getPrecioCompra() {
 		return precioCompra;
@@ -72,31 +90,33 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	public int getCantidadMaxima() {
-		return cantidadMaxima;
-	}
-
-	public void setCantidadMaxima(int cantidadMaxima) {
-		this.cantidadMaxima = cantidadMaxima;
-	}
 	
-	/*public void mostrar() {
-		for (TipoAnimales animal : tipoAnimales) {
-			animal.toString();
-		}	
-	}
-	*/
+	
+	
+	
 
 	@Override
 	public String toString() {
-		return "Animal " + id + " " + animal + " . Dias de Expiracion: " + diasExpiracion
-				+ ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: "
-				+ cantidadMaxima + "\n";
+		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidadMaxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
 	}
 
-	public int getDiasExpiracionByAnimal(String animal) {
-		return diasExpiracion;
+	
+
+	public int getTiempoDeReproduccion() {
+		return tiempoDeReproduccion;
 	}
 
+	public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
+		this.tiempoDeReproduccion = tiempoDeReproduccion;
+	}
+
+	//public int getTiempoDeReproduccionByAnimal(int animal_id) {
+		//return tiempoDeReproduccion;
+	//}
+
+	/*public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
+		this.tiempoDeReproduccion = tiempoDeReproduccion;
+	}
+*/
 
 }

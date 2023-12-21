@@ -29,27 +29,16 @@ public class Granja {
 	@GeneratedValue
 	private long id;
 	private BigDecimal dineroEnCaja;
-	// Queue<String> queue = new PriorityQueue<>(new StringLengthComparator());
-	// public Queue<Huevo> huevos = new PriorityQueue<Huevo>(new EdadComparator());
-	//public List<Huevo> huevos = new ArrayList<Huevo>();
-	//@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	//private TiposAnimales[] tiposAnimales;
 	
-	//[new TiposAnimales(1, "HUEVO", 21, 200000, 20, 40)]
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
-	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Pollito> pollitos = new ArrayList<Pollito>();
-	//public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
- 
-	private LocalDate now = LocalDate.now();
-	private LocalDate ultimaActualizacion = now.minusDays(20);
-	public Granja() {
+	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
+	public Granja(String cajita) {
 		super();
-		this.dineroEnCaja = new BigDecimal(0);
+		this.dineroEnCaja = new BigDecimal(cajita);
 	}
 
-	/*public int getCantHuevos() {
+/*	public int getCantHuevos() {
 		return huevos.size();
 	}
 
@@ -64,8 +53,8 @@ public class Granja {
 	public void setDineroEnCaja(BigDecimal dineroEnCaja) {
 		this.dineroEnCaja = dineroEnCaja;
 	}
-
-
+	
+	
 
 	/*public void addPollito(Pollito pollito) {
 		this.pollitos.add(pollito);
@@ -86,10 +75,9 @@ public class Granja {
 	}
 */
 	public void addTiposAnimales(TiposAnimales tipo) {
-		//tiposAnimales.add(tipo);// solo funciona con list
+		tiposAnimales.add(tipo);// solo funciona con list
 		
 	}
-
 /*	public void venderPollitos(int cant) {
 		if (pollitos.size() >= cant) {
 			System.out.println("Voy a Comprar " + cant + " pollitos\n");
@@ -120,29 +108,29 @@ public class Granja {
 */
 	public void mostrarEstado() {
 		System.out.println("La caja es de " + this.dineroEnCaja + " pesos");
-		mostrarStock();
+		//mostrarStock();
 		//System.out.println("DETALLE DE HUEVOS: " + huevos);
 		//System.out.println("DETALLE DE POLLITOS: " + pollitos);
-		mostrarTiposAnimales();
+		
+		this.mostrarTiposAnimales();
+		
+		System.out.println("Fecha de ultima actualizacion: "+ this.ultimaActualizacion+"\n\n" );
 	}
 
 
 	private void mostrarStock() {
 		System.out.println("STOCK: ");
-	//	System.out.println("La cantidad de huevos: " + huevos.size());
-	//	System.out.println("La cantidad de pollitos: " + pollitos.size());
-		//System.out.println("La cantidad de tipos de Animales: " + tiposAnimales.size());
-		
-	//	System.out.println("La cantidad de tipos de Animales: " + tiposAnimales.length);
+		//System.out.println("La cantidad de huevos: " + huevos.size());
+		//System.out.println("La cantidad de pollitos: " + pollitos.size());
+
 		
 	}
 
-	private void mostrarTiposAnimales() {
-		System.out.println("TIPOS DE ANIMALES:");
-		//for (TiposAnimales animal : tiposAnimales) {
-		//	animal.toString();
-		//}	
-		//System.out.println(tiposAnimales);
+	public void mostrarTiposAnimales() {
+		System.out.println("TIPOS DE ANIMALES: " + tiposAnimales.size()+"\n\n");
+		for (TiposAnimales tipo : tiposAnimales) {
+		System.out.println(tipo.toString());
+		}	
 	}
 
 	public void ofrecerMenu() {
@@ -161,22 +149,15 @@ public class Granja {
 		return String.format(
 				// "Huevos %s - CantHuevos %d - Pollitos %s - CantPollitos %d  - "
 				// + "tiposAnimales %s - CantidadtiposAnimales %d "
-				  "- DineroEnCaja %s - Precios %s - Ultima Actualizacion %s",
+				  "- DineroEnCaja %s - Ultima Actualizacion %s",
 				//huevos, huevos.size(), pollitos, pollitos.size(),
 				//tiposAnimales, tiposAnimales.size(),
 				// tiposAnimales, tiposAnimales.length,
-				dineroEnCaja, tiposAnimales, getUltimaActualizacion());
+				dineroEnCaja, getUltimaActualizacion());
 	}
 
 
-/*	public List<TiposAnimales> getTiposAnimales() {
-		return tiposAnimales;
-	}
 
-	public void setTiposAnimales(ArrayList<TiposAnimales> tiposAnimales) {
-		this.tiposAnimales = tiposAnimales;
-	}
-*/
 	// Iterator<Ganado> iterator = huevos.iterator();
 /*
 	public void eliminarExpirados(LocalDate i) {
@@ -269,7 +250,7 @@ public class Granja {
 		//System.out.println("Eliminando Pollitos expirados");
 		//eliminarExpirados();
 		//System.out.println("Ahora hay " + pollitos.size() + " pollitos y " + huevos.size() + " huevos. \n");
-		this.setUltimaActualizacion(now);
+		this.setUltimaActualizacion(LocalDate.now());
 	}
 
 	/*private void reproducirGanado() {

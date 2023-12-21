@@ -1,9 +1,6 @@
 package com.accenture.granja.model;
 
-
-
 import java.time.LocalDate;
-
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,75 +10,47 @@ public class Huevo extends Ganado {
 	@Id
 	@GeneratedValue
 	private long id;
-
-	private String animal = "huevo";
-	private int diasExpiracion = 21;
-	// Hay que sacarlo de la tabla de TiposAnimales
+	
+	private String animal= tipoAnimal.getAnimal();
+	private int diasExpiracion = getDiasExpiracionByAnimal();
 	private LocalDate nacimiento;
 	public LocalDate fechaExpiracion;
-	int tiempoDeReproduccion = 21;
-	// private int edadActual;
+	int tiempoDeReproduccion;
+	private int edadActual;
 
 	public Huevo(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
-		// this.edadActual = now.compareTo(nacimiento);
+		this.edadActual = LocalDate.now().compareTo(nacimiento);
 	}
 
-	//	public int diasExpiracion(String animal) {
-	// return TiposAnimales.getDiasExpiracionByAnimal(animal);
-	// }
 
-	@Override
-	public LocalDate getNacimiento() {
-		return nacimiento;
-	}
 
-	@Override
+
+/*	@Override
 	public void setNacimiento(LocalDate nacimiento) {
-		this.nacimiento = nacimiento;
+		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 	}
-
-	@Override
+*/
+/*	@Override
 	public String toString() {
 		return (super.toString() + " " + id + " " + animal + " Expira el " + fechaExpiracion + ".\n");
 	}
+*/
 
-	@Override
-	public String getAnimal() {
-		return animal;
-	}
-
-	@Override
-	public void setAnimal(String animal) {
-		this.animal = animal;
-	}
-
-	@Override
-	public int getDiasExpiracion() {
-		return diasExpiracion;
-	}
-
-	public void setDiasExpiracion(int diasExpiracion) {
+/*	public void setDiasExpiracion(int diasExpiracion) {
 		this.diasExpiracion = diasExpiracion;
 	}
 
-	@Override
-	public LocalDate getFechaExpiracion() {
-		return fechaExpiracion;
-	}
-
-	@Override
-	public void setFechaExpiracion(LocalDate fechaExpiracion) {
-		this.fechaExpiracion = fechaExpiracion;
-	}
+*/	
+	
 
 
 	@Override
 	public void reproducir(LocalDate i) {
 		//LocalDate i = nacimiento.plusDays(tiempoDeReproduccion);
-		if (i.isBefore(now)) {
+		if (i.isBefore(LocalDate.now())) {
 			
 			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
