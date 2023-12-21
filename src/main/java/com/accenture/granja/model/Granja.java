@@ -120,6 +120,9 @@ public class Granja {
 
 	private void mostrarStock() {
 		System.out.println("STOCK: ");
+		for (TiposAnimales tipo : tiposAnimales) {
+			tipo.mostrarDetallesCadaAnimal();
+			}
 		//System.out.println("La cantidad de huevos: " + huevos.size());
 		//System.out.println("La cantidad de pollitos: " + pollitos.size());
 

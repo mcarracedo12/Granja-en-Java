@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Entity
 public class Huevo extends Ganado {
 	@Id
@@ -18,6 +20,10 @@ public class Huevo extends Ganado {
 	int tiempoDeReproduccion;
 	private int edadActual;
 
+	@ManyToOne
+	@JoinColumn(name = "tiposAnimales_id")
+	private TiposAnimales tiposAnimales;
+	
 	public Huevo(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);

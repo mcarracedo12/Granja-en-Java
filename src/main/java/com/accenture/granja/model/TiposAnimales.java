@@ -23,9 +23,12 @@ public class TiposAnimales {
 	private int tiempoDeReproduccion;
 	private BigDecimal precioCompra;
 	private BigDecimal precioVenta;
-	
+	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Huevo> huevos = new ArrayList<Huevo>();
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Pollito> pollitos = new ArrayList<Pollito>();
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
@@ -108,6 +111,16 @@ public class TiposAnimales {
 
 	public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;
+	}
+
+	public void mostrarDetallesCadaAnimal() {
+		for(Ganado animalH: huevos) {
+		System.out.println(animal.toString());	
+		}
+		for(Ganado animalP: pollitos) {
+			System.out.println(animal.toString());	
+		}
+		
 	}
 
 	//public int getTiempoDeReproduccionByAnimal(int animal_id) {
