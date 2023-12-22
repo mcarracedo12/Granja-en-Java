@@ -114,7 +114,7 @@ public class Granja {
 		
 		this.mostrarTiposAnimales();
 		
-		System.out.println("Fecha de ultima actualizacion: "+ this.ultimaActualizacion+"\n\n" );
+		System.out.println("Fecha de ultima actualizacion: " + this.ultimaActualizacion+"\n\n" );
 	}
 
 

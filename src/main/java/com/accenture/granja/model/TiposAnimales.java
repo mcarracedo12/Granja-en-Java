@@ -18,10 +18,10 @@ public class TiposAnimales {
 	@GeneratedValue
 	private int id;
 	private String animal;
-	private int diasExpiracion;
+	private int diasExpiracion;// Expectativa de vida del animal: 21 dias huevos - 2000 dias pollos 
 	private int cantidadMaxima;
-	private int tiempoDeReproduccion;
-	private BigDecimal precioCompra;
+	private int tiempoDeReproduccion; // cada cuanto se reproduce: - 21 dias huevos - 1 dia pollos 
+	private BigDecimal precioCompra; // Los precios se actualizan a nivel tipoAnimal, por cada Transaccion se toma el precio de ahi para los productos
 	private BigDecimal precioVenta;
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Huevo> huevos = new ArrayList<Huevo>();
@@ -93,10 +93,6 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	
-	
-	
-	
 
 	@Override
 	public String toString() {
@@ -104,7 +100,6 @@ public class TiposAnimales {
 	}
 
 	
-
 	public int getTiempoDeReproduccion() {
 		return tiempoDeReproduccion;
 	}

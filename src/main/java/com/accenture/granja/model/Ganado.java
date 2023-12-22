@@ -1,5 +1,6 @@
 package com.accenture.granja.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.JoinColumn;
@@ -17,21 +18,23 @@ public abstract class Ganado {
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
 	protected TiposAnimales tipoAnimal;
-	private String animal= getAnimalByTipoAnimal();
+	protected String animal= getAnimal();
 	public LocalDate fechaExpiracion;
-	private int diasExpiracion;
+	private int diasExpiracion = getDiasExpiracion();
 	int tiempoDeReproduccion;
 	protected int edadActual;
+	BigDecimal precioCompra = getPrecioCompra();
+	BigDecimal precioVenta = getPrecioVenta();
+	int cantidadMaxima = getCantidadMaxima();
 
 	public Ganado(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
-		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
-		//this.animal= getAnimalByTipoAnimal(tipoAnimal);
+		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
+		this.animal= getAnimal();
 		this.fechaExpiracion = this.nacimiento.plusDays(diasExpiracion);
-		this.edadActual = setEdadActual();
-		
+		this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
 		
 	}
 
@@ -50,71 +53,38 @@ public abstract class Ganado {
 	public void setIngresoAGranja(LocalDate ingresoAGranja) {
 		this.fechaIngresoAGranja = ingresoAGranja;
 	}
-
-/*		public void setPrecioVenta(String animal) {
-	 tiposAnimales.getPrecioVenta(String animal) = precioVenta;
-	 this.setPrecioVenta(animal); // hay que ver si funciona esto...
-		}
-*/
-/*	@Override
-	public String toString() {
-		return String.format("Fecha nacimiento - %s, Ingreso a Granja - %s, \n ", nacimiento,
-				fechaIngresoAGranja);
-	}
-*/
-
-/*	public int getEdadEnDiasAlIngresar() {
-		return edadEnDiasAlIngresar;
-	}
-*/
-/*	public void setEdadEnDiasAlIngresar(int edadEnDiasAlIngresar) {
-		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
-	}
-*/
 	
-	
-	public int getDiasExpiracionByAnimal(int tipoAnimal_id) {
-		return tipoAnimal.getDiasExpiracion();
-	}
-
-	public int getDiasExpiracionByAnimal() {
+	public int getDiasExpiracion() {
         return tipoAnimal.getDiasExpiracion();
-}
+	}
 	
-	protected String getAnimalByTipoAnimal(){
+	protected String getAnimal(){
         return tipoAnimal.getAnimal();
 	}
-
 	
-
-/*	public String getAnimal() {
-		return animal;
+	protected BigDecimal getPrecioCompra(){
+        return tipoAnimal.getPrecioCompra();
 	}
-*/
+	
+	protected BigDecimal getPrecioVenta(){
+        return tipoAnimal.getPrecioVenta();
+	}
+	public int getCantidadMaxima() {
+        return tipoAnimal.getCantidadMaxima();
+	}
 	
 	public void reproducir(LocalDate i) {
 			
 	}
 
-	
-
 	public int getEdadActual() {
 		return edadActual;
 	}
 
-	public int setEdadActual() {
-		return this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
-	}
-
 	@Override
 	public String toString() {
-		return String.format("Stringto Srting Ganado");
-		//return String.format("Animal " + id + " " + animal + " . Dias de Expiracion: " + diasExpiracion 
-				//+ " . Tiempo de Reproduccion: " + tiempoDeReproduccion
-			//	+ ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: "
-			//	+ cantidadMaxima 
-			//	+ "\n");
+		return String.format("Animal " +" " + animal + " . Dias de Expiracion: " + diasExpiracion 
+				+ " . Tiempo de Reproduccion: " + tiempoDeReproduccion + ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: " + cantidadMaxima + "\n");
 	}
-
 
 }

@@ -16,8 +16,8 @@ public class Pollito extends Ganado {
 	@Id
 	@GeneratedValue
 	private long id;
-	//private static String animal = "pollito";
-	private int diasExpiracion = 2000;
+	private static String animal;
+	private int diasExpiracion;
 	// private int diasExpiracion;
 	public LocalDate fechaExpiracion;
 	private LocalDate nacimiento;
@@ -35,11 +35,6 @@ public class Pollito extends Ganado {
 		// this.edadActual = now.compareTo(getNacimiento());
 	}
 
-	/*@Override
-	public String toString() {
-		return (super.toString() + " " + id +  " " + animal + " Expira el " + fechaExpiracion + ".\n");
-	}
-*/
 	@Override
 	public void reproducir(LocalDate i) {
 		if (i.isBefore(LocalDate.now())) {
