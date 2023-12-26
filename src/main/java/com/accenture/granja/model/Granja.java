@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -37,8 +38,8 @@ public class Granja {
 		super();
 		this.dineroEnCaja = new BigDecimal(cajita);
 	}
-
-/*	public int getCantHuevos() {
+/*
+	public int getCantHuevos() {
 		return huevos.size();
 	}
 
@@ -54,30 +55,52 @@ public class Granja {
 		this.dineroEnCaja = dineroEnCaja;
 	}
 	
-	
-
-	/*public void addPollito(Pollito pollito) {
-		this.pollitos.add(pollito);
-	}
-
-
-	public void addPollito() {
-		pollitos.add(new Pollito(1, 0, now));
-	}
-
-
-	public void addHuevo(Huevo huevo) {
-		this.huevos.add(huevo);
-	}
-
-	public void addHuevo() {
-		huevos.add(new Huevo(1, 0, now));
-	}
-*/
-	public void addTiposAnimales(TiposAnimales tipo) {
-		tiposAnimales.add(tipo);// solo funciona con list
+	public void comprarPollitos(int cant) {
+		for(int i =0; i< cant; i++ ) {
+				
+			try (Scanner scanner = new Scanner(System.in)) {
+				System.out.println("Ingrese cantidad de dias de vida actual de los pollitos");	
+					int dias = scanner.nextInt();
+					System.out.println("llega aca 2");
+					//pollitos.comprar(pollitos, dias);
+					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
+					
+					((TiposAnimales) this.tiposAnimales).agregaPollito(dias);
+					//getPollitos().add(new Pollito((long)2,dias,LocalDate.now()));
+					//System.out.println(pollitos);// null
+					
+					
+					new Pollito((long)2,dias,LocalDate.now());
+					//System.out.println(pollitos);
+					System.out.println("llega aca 2 1/5");
+					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
+					//pollitos.add(pollo);
+					System.out.println("llega aca 3 ");
+			}
+			System.out.println("Compra terminada ");
+			System.out.println("llega aca 4 ");
+				//BigDecimal costoTotal = precio.multiply(cant);
+			//	System.out.println("llega aca 4 ");
+				//dineroEnCaja= dineroEnCaja.subtract(costoTotal);
+			//	System.out.println("llega aca 5 ");
+		}
 		
 	}
+
+
+	/*public List<Pollito> getPollitos(Long id) {
+		System.out.println("getPollitos no tiene implementacion en Granja");
+		return tiposAnimales.getPollitos();
+
+	}
+	*/
+
+
+	/*public void addTiposAnimales(TiposAnimales tipo) {
+		tiposAnimales.add(tipo);// solo funciona con list
+	}
+	*/
+	
 /*	public void venderPollitos(int cant) {
 		if (pollitos.size() >= cant) {
 			System.out.println("Voy a Comprar " + cant + " pollitos\n");
@@ -107,27 +130,14 @@ public class Granja {
 	}
 */
 	public void mostrarEstado() {
-		System.out.println("La caja es de " + this.dineroEnCaja + " pesos");
-		//mostrarStock();
-		//System.out.println("DETALLE DE HUEVOS: " + huevos);
-		//System.out.println("DETALLE DE POLLITOS: " + pollitos);
-		
+		System.out.println("La caja es de " + this.getDineroEnCaja() + " pesos");
 		this.mostrarTiposAnimales();
 		
-		System.out.println("Fecha de ultima actualizacion: " + this.ultimaActualizacion+"\n\n" );
+		System.out.println("Fecha de ultima actualizacion: " + this.getUltimaActualizacion()+"\n\n" );
 	}
 
 
-	private void mostrarStock() {
-		System.out.println("STOCK: ");
-		for (TiposAnimales tipo : tiposAnimales) {
-			tipo.mostrarDetallesCadaAnimal();
-			}
-		//System.out.println("La cantidad de huevos: " + huevos.size());
-		//System.out.println("La cantidad de pollitos: " + pollitos.size());
-
-		
-	}
+	
 
 	public void mostrarTiposAnimales() {
 		System.out.println("TIPOS DE ANIMALES: " + tiposAnimales.size()+"\n\n");
@@ -144,18 +154,13 @@ public class Granja {
 		System.out.println("4. Comprar pollitos");
 		System.out.println("5. Vender pollitos");
 		System.out.println("6. Actualizar granja");
-		System.out.println("7. Salir \n");
+		System.out.println("7. Dar de alta tipos de animales");
+		System.out.println("8. Salir \n");
 	}
 
 	@Override
 	public String toString() {
-		return String.format(
-				// "Huevos %s - CantHuevos %d - Pollitos %s - CantPollitos %d  - "
-				// + "tiposAnimales %s - CantidadtiposAnimales %d "
-				  "- DineroEnCaja %s - Ultima Actualizacion %s",
-				//huevos, huevos.size(), pollitos, pollitos.size(),
-				//tiposAnimales, tiposAnimales.size(),
-				// tiposAnimales, tiposAnimales.length,
+		return String.format("DineroEnCaja %s - Ultima Actualizacion %s",
 				dineroEnCaja, getUltimaActualizacion());
 	}
 
@@ -285,5 +290,28 @@ public class Granja {
 	public void setUltimaActualizacion(LocalDate ultimaActualizacion) {
 		this.ultimaActualizacion = ultimaActualizacion;
 	}
+	
+	
+	
 
+	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
+			BigDecimal precioVenta) {
+		tiposAnimales.add(new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+		System.out.println("El animal "+ animal +" ha sido agregado");
+	}
+	
+	/*
+	public void agregarAnimal(long tipoAnimal_id, int edad, LocalDate fechaIngreso) {
+		if(tipoAnimal_id==1) {
+			List<Huevo>huevos=((TiposAnimales)this.tiposAnimales).huevos;
+			huevos.add(new Huevo(tipoAnimal_id, edad, fechaIngreso));
+			
+		}
+		else if(tipoAnimal_id==2) {
+			List<Pollito>pollitos=((TiposAnimales)this.tiposAnimales).pollitos;
+			pollitos.add(new Pollito(tipoAnimal_id, edad, fechaIngreso));
+	}
+
+	}
+	*/
 }

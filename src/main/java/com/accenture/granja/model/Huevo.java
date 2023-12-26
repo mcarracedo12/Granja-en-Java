@@ -13,24 +13,26 @@ public class Huevo extends Ganado {
 	@GeneratedValue
 	private long id;
 
-	private String animal;
-	private int diasExpiracion;
-	private LocalDate nacimiento;
-	public LocalDate fechaExpiracion;
-	int tiempoDeReproduccion;
-	private int edadActual;
+	protected String animal;
+	protected int diasExpiracion;
+	protected LocalDate nacimiento;
+	protected LocalDate fechaExpiracion;
+	protected int tiempoDeReproduccion;
+	protected int edadActual;
 
 	@ManyToOne
 	@JoinColumn(name = "tiposAnimales_id")
-	private TiposAnimales tiposAnimales;
+	public TiposAnimales tiposAnimales;
+	
 
-	public Huevo(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
-		//this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		//this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
-		//this.edadActual = LocalDate.now().compareTo(nacimiento);
+	public Huevo(Long tiposAnimales_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
+		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
+		this.edadActual = LocalDate.now().compareTo(nacimiento);
+		this.animal = tipoAnimal.getAnimal();
 	}
-
+	
 
 	@Override
 	public void reproducir(LocalDate i) {
@@ -39,13 +41,13 @@ public class Huevo extends Ganado {
 
 			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
-				new Pollito(0, 0, i);
+				new Pollito((long)2, 0, i);
 				//List<Huevo> huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != this;}).collect(Collectors.toList());
 				System.out.println("Pollito creado con fecha de nacimiento " + i);
 
 				//i = i.plusDays(tiempoDeReproduccion);
 			}
-			super.reproducir(i);
+			//super.reproducir(i);
 		}
 	}
 }

@@ -2,8 +2,11 @@ package com.accenture.granja.model;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,9 +37,9 @@ public class TiposAnimales {
 	public Granja granja;
 
 							
-	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
+	public TiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) {
-		this.id = id;
+		//this.id = id;
 		this.animal = animal;
 		this.diasExpiracion = diasExpiracion;
 		this.cantidadMaxima = cantidadMaxima;
@@ -92,13 +95,6 @@ public class TiposAnimales {
 	public void setPrecioVenta(BigDecimal precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-
-
-	@Override
-	public String toString() {
-		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidadMaxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
-	}
-
 	
 	public int getTiempoDeReproduccion() {
 		return tiempoDeReproduccion;
@@ -110,21 +106,81 @@ public class TiposAnimales {
 
 	public void mostrarDetallesCadaAnimal() {
 		for(Ganado animalH: huevos) {
-		System.out.println(animal.toString());	
+		System.out.println(animalH.toString());	
 		}
 		for(Ganado animalP: pollitos) {
-			System.out.println(animal.toString());	
+			System.out.println(animalP.toString());	
 		}
 		
 	}
 
-	//public int getTiempoDeReproduccionByAnimal(int animal_id) {
-		//return tiempoDeReproduccion;
-	//}
+/*	public ArrayList<Pollito> getPollitos() {
+		System.out.println("tipos animales get Pollitos to stream\n");
+		return pollitos;
+	}
+	*/
+/*	public List<Pollito> addPollito(Pollito pollito) {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Ingrese edad del pollitos");	
+			int edad = scanner.nextInt();
+
+			pollito.agregar(edad);
+		}
+		System.out.println("Pollito agregado");
+		return pollitos;
+	}
+	
+	*/
+	
+	
+	@Override
+	public String toString() {
+		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidadMaxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
+	}
 
 	/*public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;
 	}
 */
+	
+
+	public List<Pollito> getPollitos(){
+		for (Pollito p: pollitos) {
+			System.out.println(p.toString());
+		}
+		return pollitos;
+	}
+	
+	public void printHuevos(){
+		for (Huevo h: huevos) {
+			System.out.println(h.toString());
+		}
+	}
+	
+	public void agregaPollito(int dias) {
+		pollitos.add(new Pollito((long)2,dias,LocalDate.now()));
+	}
+	public void agregahuevo(int dias) {
+		huevos.add(new Huevo((long)2,dias,LocalDate.now()));
+	}
+	
+	/*public List<Ganado> getAnimalesByid1(Long id) {
+		switch(id) {
+		case 1:
+			return huevos;
+			break;
+		
+		case 2:
+		return pollitos;
+		break;
+	}
+*/
+	public void addHuevo() {
+		huevos.add(new Huevo((long)1, 0, LocalDate.now()));
+	}
+
+	
+	
+	
 
 }

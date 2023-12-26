@@ -4,6 +4,7 @@ package com.accenture.granja.model;
 
 import java.time.LocalDate;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,33 +17,35 @@ public class Pollito extends Ganado {
 	@Id
 	@GeneratedValue
 	private long id;
-	private static String animal;
-	private int diasExpiracion;
-	// private int diasExpiracion;
+	protected String animal;
 	public LocalDate fechaExpiracion;
 	private LocalDate nacimiento;
 	int tiempoDeReproduccion;
-	// private int edadActual;
+	protected int edadActual = LocalDate.now().compareTo(this.getNacimiento());
 	@ManyToOne
 	@JoinColumn(name = "tiposAnimales_id")
-	private TiposAnimales tiposAnimales;
+	public TiposAnimales tiposAnimales;
 
-	public Pollito(long id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		super(id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+	public Pollito( Long tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		// this.animal = animal;
-		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
-		// this.edadActual = now.compareTo(getNacimiento());
+		this.animal = tipoAnimal.getAnimal();
+		this.fechaExpiracion = nacimiento.plusDays(getDiasExpiracion());
+		this.edadActual = LocalDate.now().compareTo(getNacimiento());
 	}
 
+	public void agregar(int diasEdad){
+		new Pollito((long) 2, diasEdad, LocalDate.now()); 
+	}
+	
 	@Override
 	public void reproducir(LocalDate i) {
 		if (i.isBefore(LocalDate.now())) {
-			new Huevo(0, 0, i);
+			new Huevo((long)1, 0, i);
 			System.out.println("Huevo creado con fecha de nacimiento " + i);
 			//i = i.plusDays(tiempoDeReproduccion);
 		}
-		super.reproducir(i);
+		//super.reproducir(i);
 	}
 	
 }
