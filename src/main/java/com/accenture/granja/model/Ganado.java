@@ -28,7 +28,9 @@ public class Ganado {
 	//protected int cantidadMaxima; // Lo busca por tipo de animal 
 	protected BigDecimal precioCompra;
 	protected BigDecimal precioVenta;
-	
+	@ManyToOne
+    @JoinColumn(name = "granja_id")
+	protected Granja granjaId;
 
 	public Ganado(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
@@ -106,6 +108,14 @@ public class Ganado {
 		return tiposAnimales.getPrecioCompra();
 	}
 	
+	public TiposAnimales getTiposAnimales() {
+		return tiposAnimales;
+	}
+
+	public void setTiposAnimales(TiposAnimales tiposAnimales) {
+		this.tiposAnimales = tiposAnimales;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Animal " +" " + getAnimal()  

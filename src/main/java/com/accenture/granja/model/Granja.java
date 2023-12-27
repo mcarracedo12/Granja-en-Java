@@ -30,10 +30,12 @@ public class Granja {
 	@GeneratedValue
 	private long id;
 	private BigDecimal dineroEnCaja;
-	
+	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
-	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
+	@OneToMany(mappedBy = "granjaId", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Ganado> animales = new ArrayList<Ganado>();
+	
 	
 	
 	public Granja(String cajita) {
@@ -56,15 +58,11 @@ public class Granja {
 				System.out.println("Ingrese cantidad de dias de vida actual de los pollitos");	
 					int dias = scanner.nextInt();
 					System.out.println("llega aca 2");
-					//pollitos.comprar(pollitos, dias);
-					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
-					
-					//((TiposAnimales) this.tiposAnimales).agregaPollito(dias);
-					//getPollitos().add(new Pollito((long)2,dias,LocalDate.now()));
-					//System.out.println(pollitos);// null
 					
 					
-					new Pollito((long)2,dias,LocalDate.now());
+					
+					List<Ganado>pollitos = this.getGanadoByTipoAnimal(2);
+					pollitos.add(new Pollito((long)2,dias,LocalDate.now()) );
 					//System.out.println(pollitos);
 					System.out.println("llega aca 2 1/5");
 					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
@@ -81,6 +79,11 @@ public class Granja {
 		
 	}
 
+
+	private List<Ganado> getGanadoByTipoAnimal(int tipoAnimal_id) {
+		ArrayList<Ganado> ganado = (ArrayList<Ganado>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
+		return ganado;
+	}
 
 	/*public List<Pollito> getPollitos(Long id) {
 		System.out.println("getPollitos no tiene implementacion en Granja");

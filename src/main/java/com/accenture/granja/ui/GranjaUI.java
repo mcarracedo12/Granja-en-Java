@@ -54,7 +54,7 @@ public class GranjaUI {
 			case 1: 
 			{
 				granja.mostrarEstado();
-				granja.mostrarTiposAnimales();
+				
 				break;
 			}
 

@@ -23,10 +23,10 @@ public class TiposAnimales {
 	private int tiempoDeReproduccion; // cada cuanto se reproduce: - 21 dias huevos - 1 dia pollos 
 	private BigDecimal precioCompra; // Los precios se actualizan a nivel tipoAnimal, por cada Transaccion se toma el precio de ahi para los productos
 	private BigDecimal precioVenta;
+	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<TiposAnimales> tiposAnimales= new ArrayList<TiposAnimales>();
-	//@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	//public List<Pollito> pollitos = new ArrayList<Pollito>();
+	public List<Ganado> ganado= new ArrayList<Ganado>();
+	
 	
 	
 	@ManyToOne
@@ -132,7 +132,7 @@ public class TiposAnimales {
 	
 	@Override
 	public String toString() {
-		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidadMaxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
+		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidad Maxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
 	}
 
 	/*public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
