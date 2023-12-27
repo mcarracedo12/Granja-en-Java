@@ -1,6 +1,7 @@
 package com.accenture.granja.ui;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.accenture.granja.model.*;
@@ -23,7 +24,7 @@ public class GranjaUI {
 
 		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, new BigDecimal(10), new BigDecimal(40));
 		granja.addTiposAnimales("POLLITOS", 2000, 600, 1, new BigDecimal(200), new BigDecimal(400));
-		//	Huevo huevo = new Huevo(1, 2, LocalDate.now());
+		//Ganado ganado= new Ganado((long)1, 2, LocalDate.now());
 		//granja.addhuevo(1, 2, LocalDate.now());
 
 

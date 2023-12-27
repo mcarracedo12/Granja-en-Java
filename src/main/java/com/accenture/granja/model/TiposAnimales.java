@@ -24,9 +24,9 @@ public class TiposAnimales {
 	private BigDecimal precioCompra; // Los precios se actualizan a nivel tipoAnimal, por cada Transaccion se toma el precio de ahi para los productos
 	private BigDecimal precioVenta;
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Huevo> huevos = new ArrayList<Huevo>();
-	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Pollito> pollitos = new ArrayList<Pollito>();
+	public List<TiposAnimales> tiposAnimales= new ArrayList<TiposAnimales>();
+	//@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
+	//public List<Pollito> pollitos = new ArrayList<Pollito>();
 	
 	
 	@ManyToOne
@@ -101,8 +101,8 @@ public class TiposAnimales {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;
 	}
 
-	public void mostrarDetallesCadaAnimal() {
-		for(Ganado animalH: huevos) {
+	/*public void mostrarDetallesCadaAnimal() {
+		for(Ganado animal: huevos) {
 		System.out.println(animalH.toString());	
 		}
 		for(Ganado animalP: pollitos) {
@@ -110,7 +110,7 @@ public class TiposAnimales {
 		}
 		
 	}
-
+*/
 /*	public ArrayList<Pollito> getPollitos() {
 		System.out.println("tipos animales get Pollitos to stream\n");
 		return pollitos;

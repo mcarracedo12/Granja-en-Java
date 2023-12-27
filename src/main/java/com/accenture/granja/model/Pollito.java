@@ -8,16 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+//@Entity
 
 public class Pollito extends Ganado {
-	@Id
-	@GeneratedValue
-	private long id;
+	//@Id
+	//@GeneratedValue
+	protected long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "tiposAnimales_id")
-	public TiposAnimales tiposAnimales;
+	//@ManyToOne
+	//@JoinColumn(name = "tiposAnimales_id")
+	//public TiposAnimales tiposAnimales;
+	
 	//protected String animal;// Lo busca por tipo de animal 
 	protected LocalDate fechaIngresoAGranja;
 	protected int edadEnDiasAlIngresar;
@@ -30,7 +31,7 @@ public class Pollito extends Ganado {
 	protected BigDecimal precioVenta;
 	
 
-	public Pollito( Long tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Pollito(Long tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		//this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;

@@ -8,15 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+//@Entity
 public class Huevo extends Ganado {
-	@Id
-	@GeneratedValue
-	private long id;
+	//@Id
+	//@GeneratedValue
+	protected long id;
 
-	@ManyToOne
-	@JoinColumn(name = "tiposAnimales_id")
-	public TiposAnimales tiposAnimales;
+	//@ManyToOne
+	//@JoinColumn(name = "tiposAnimales_id")
+	//public TiposAnimales tiposAnimales;
+	
 	//protected String animal;// Lo busca por tipo de animal 
 	protected LocalDate fechaIngresoAGranja;
 	protected int edadEnDiasAlIngresar;

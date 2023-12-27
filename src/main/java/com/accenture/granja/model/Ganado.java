@@ -3,14 +3,17 @@ package com.accenture.granja.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-public abstract class Ganado {
+@Entity
+public class Ganado {
 	
-	//@Id
-	//@GeneratedValue
-	//private long id;
+	@Id
+	@GeneratedValue
+	protected long id;
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
