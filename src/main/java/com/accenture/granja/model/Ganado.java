@@ -2,8 +2,6 @@ package com.accenture.granja.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,43 +14,33 @@ public abstract class Ganado {
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
-	protected TiposAnimales tipoAnimal;
-	protected String animal;
+	protected TiposAnimales tiposAnimales;
+	//protected String animal;// Lo busca por tipo de animal 
 	protected LocalDate fechaIngresoAGranja;
 	protected int edadEnDiasAlIngresar;
-	protected LocalDate nacimiento;
-	
-	
-	
-	protected LocalDate fechaExpiracion;
-	
-
-	protected int tiempoDeReproduccion;
-	protected int edadActual;
+	protected LocalDate nacimiento;// calcula ingreso-edad
+	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
+	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
+	protected int edadActual;// hoy - nacimiento
+	//protected int cantidadMaxima; // Lo busca por tipo de animal 
 	protected BigDecimal precioCompra;
 	protected BigDecimal precioVenta;
-	protected int cantidadMaxima ;
+	
 
 	public Ganado(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
-		this.animal= tipoAnimal.getAnimal();
+	//	this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		
 		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracion());
-		this.tiempoDeReproduccion= getTiempoDeReproduccion();
+		//this.tiempoDeReproduccion= getTiempoDeReproduccion();
 		this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
-		
-		cantidadMaxima = getCantidadMaxima();
+		//this.cantidadMaxima = getCantidadMaxima();
 	}
 
 	public LocalDate getNacimiento() {
 		return nacimiento;
-	}
-
-	public void setNacimiento(LocalDate nacimiento) {
-		this.nacimiento = nacimiento;
 	}
 
 	public LocalDate getIngresoAGranja() {
@@ -64,26 +52,26 @@ public abstract class Ganado {
 	}
 	
 	public int getDiasExpiracion() {
-        return tipoAnimal.getDiasExpiracion();
+        return tiposAnimales.getDiasExpiracion();
 	}
 
 	
 	protected BigDecimal getPrecioCompra(){
-        return tipoAnimal.getPrecioCompra();
+        return tiposAnimales.getPrecioCompra();
 	}
 	
 	protected BigDecimal getPrecioVenta(){
-        return tipoAnimal.getPrecioVenta();
+        return tiposAnimales.getPrecioVenta();
 	}
 	public int getCantidadMaxima() {
-        return tipoAnimal.getCantidadMaxima();
+        return tiposAnimales.getCantidadMaxima();
 	}
 	
 	public void reproducir(LocalDate i) {
 	}
 	
 	public int getTiempoDeReproduccion() {
-		return tipoAnimal.getTiempoDeReproduccion();
+		return tiposAnimales.getTiempoDeReproduccion();
 	}
 
 	public int getEdadActual() {
@@ -91,10 +79,11 @@ public abstract class Ganado {
 	}
 	
 	public String getAnimal() {
-		return tipoAnimal.getAnimal();
+		return tiposAnimales.getAnimal();
 	}
 	
-	public void comprar(Ganado tipoGanado, int edad) {
+	
+/*	public void comprar(Ganado tipoGanado, int edad) {
 		this.precioCompra = setPrecioCompraByAnimal();
 	}
 	
@@ -105,19 +94,19 @@ public abstract class Ganado {
 		//BigDecimal totalVenta = precioVenta.multiply(new BigDecimal(cant));
 		//System.out.println("El total de la venta es de "+ totalVenta);
 	}
-
+*/
 	public BigDecimal setPrecioVentaByAnimal() {
-		return tipoAnimal.getPrecioVenta();
+		return tiposAnimales.getPrecioVenta();
 	}
 	
 	public BigDecimal setPrecioCompraByAnimal() {
-		return tipoAnimal.getPrecioCompra();
+		return tiposAnimales.getPrecioCompra();
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("Animal " +" " + animal  
-				+ " . Tiempo de Reproduccion: " + tiempoDeReproduccion + ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: " + cantidadMaxima + "\n");
+		return String.format("Animal " +" " + getAnimal()  
+				+ " . Tiempo de Reproduccion: " + getTiempoDeReproduccion() + ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: " + getCantidadMaxima() + "\n");
 	}
 
 }

@@ -34,19 +34,13 @@ public class Granja {
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
+	
+	
 	public Granja(String cajita) {
 		super();
 		this.dineroEnCaja = new BigDecimal(cajita);
 	}
-/*
-	public int getCantHuevos() {
-		return huevos.size();
-	}
 
-	public int getCantPollitos() {
-		return pollitos.size();
-	}
-*/
 	public BigDecimal getDineroEnCaja() {
 		return dineroEnCaja;
 	}
@@ -65,7 +59,7 @@ public class Granja {
 					//pollitos.comprar(pollitos, dias);
 					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
 					
-					((TiposAnimales) this.tiposAnimales).agregaPollito(dias);
+					//((TiposAnimales) this.tiposAnimales).agregaPollito(dias);
 					//getPollitos().add(new Pollito((long)2,dias,LocalDate.now()));
 					//System.out.println(pollitos);// null
 					
@@ -184,7 +178,8 @@ public class Granja {
 		}
 		System.out.println(huevos);
 	}
-
+*/
+	/*
 	public void reproducirHuevosIterator() {
 		Iterator<Huevo> iterator = huevos.iterator();
 		System.out.println("Inicia Huevo iterator");
@@ -206,7 +201,7 @@ public class Granja {
 		System.out.println("Se termino de Reproducir Huevos..\n");
 		System.out.println("Ahora hay " + pollitos.size() + " pollitos y " + huevos.size() + " huevos. \n");
 	}
-
+/*
 	public void reproducirHuevos() {
 		for (Huevo huevo : huevos) {
 			LocalDate i = huevo.getNacimiento().plusDays(huevo.tiempoDeReproduccion);
@@ -291,15 +286,17 @@ public class Granja {
 		this.ultimaActualizacion = ultimaActualizacion;
 	}
 	
-	
-	
 
-	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
-			BigDecimal precioVenta) {
-		tiposAnimales.add(new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+
+
+	public void addTiposAnimales( String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
+			BigDecimal precioVenta) 
+	{
+		tiposAnimales.add(new TiposAnimales((tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
 		System.out.println("El animal "+ animal +" ha sido agregado");
 	}
 	
+
 	/*
 	public void agregarAnimal(long tipoAnimal_id, int edad, LocalDate fechaIngreso) {
 		if(tipoAnimal_id==1) {

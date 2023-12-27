@@ -2,11 +2,8 @@ package com.accenture.granja.model;
 
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -37,9 +34,9 @@ public class TiposAnimales {
 	public Granja granja;
 
 							
-	public TiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
+	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) {
-		//this.id = id;
+		this.id = id;
 		this.animal = animal;
 		this.diasExpiracion = diasExpiracion;
 		this.cantidadMaxima = cantidadMaxima;
@@ -143,15 +140,15 @@ public class TiposAnimales {
 	}
 */
 	
-
+/*
 	public List<Pollito> getPollitos(){
 		for (Pollito p: pollitos) {
 			System.out.println(p.toString());
 		}
 		return pollitos;
 	}
-	
-	public void printHuevos(){
+	*/
+	/*public void printHuevos(){
 		for (Huevo h: huevos) {
 			System.out.println(h.toString());
 		}
@@ -163,7 +160,7 @@ public class TiposAnimales {
 	public void agregahuevo(int dias) {
 		huevos.add(new Huevo((long)2,dias,LocalDate.now()));
 	}
-	
+	*/
 	/*public List<Ganado> getAnimalesByid1(Long id) {
 		switch(id) {
 		case 1:
@@ -175,10 +172,10 @@ public class TiposAnimales {
 		break;
 	}
 */
-	public void addHuevo() {
+/*	public void addHuevo() {
 		huevos.add(new Huevo((long)1, 0, LocalDate.now()));
 	}
-
+*/
 	
 	
 	

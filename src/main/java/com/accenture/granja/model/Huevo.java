@@ -1,36 +1,44 @@
 package com.accenture.granja.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 @Entity
 public class Huevo extends Ganado {
 	@Id
 	@GeneratedValue
 	private long id;
 
-	protected String animal;
-	protected int diasExpiracion;
-	protected LocalDate nacimiento;
-	protected LocalDate fechaExpiracion;
-	protected int tiempoDeReproduccion;
-	protected int edadActual;
-
 	@ManyToOne
 	@JoinColumn(name = "tiposAnimales_id")
 	public TiposAnimales tiposAnimales;
-	
+	//protected String animal;// Lo busca por tipo de animal 
+	protected LocalDate fechaIngresoAGranja;
+	protected int edadEnDiasAlIngresar;
+	protected LocalDate nacimiento;// calcula ingreso-edad
+	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
+	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
+	protected int edadActual;// hoy - nacimiento
+	//protected int cantidadMaxima; // Lo busca por tipo de animal 
+	protected BigDecimal precioCompra;
+	protected BigDecimal precioVenta;
+
 
 	public Huevo(Long tiposAnimales_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+		//this.animal= getAnimal();
+		this.fechaIngresoAGranja = fechaIngresoAGranja;
+		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		this.fechaExpiracion = nacimiento.plusDays(diasExpiracion);
-		this.edadActual = LocalDate.now().compareTo(nacimiento);
-		this.animal = tipoAnimal.getAnimal();
+		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracion());
+		//this.tiempoDeReproduccion= getTiempoDeReproduccion();
+		this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
+		//this.cantidadMaxima = getCantidadMaxima();
 	}
 	
 

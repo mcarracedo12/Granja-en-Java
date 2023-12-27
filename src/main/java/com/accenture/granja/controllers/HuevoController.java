@@ -12,7 +12,6 @@ import com.accenture.granja.services.HuevoService;
 @RestController
 public class HuevoController {
 
-	
 	private HuevoService huevoService;
 	
 	@Autowired

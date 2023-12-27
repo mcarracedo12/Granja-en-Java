@@ -1,8 +1,6 @@
 package com.accenture.granja.ui;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Scanner;
 
 import com.accenture.granja.model.*;
@@ -20,18 +18,7 @@ public class GranjaUI {
 		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
 		granja.setDineroEnCaja(dineroEnCaja);
 
-		System.out.println("Cantidad maxima de pollitos que puede tener: ");
-		int cantMaxPollitos = scanner.nextInt();
-		System.out.println("tiempoDeReproduccion de huevos: ");
-		int tiempoDeReproduccionP = scanner.nextInt();
-		System.out.println("Indique Precio de compra de Pollitos: ");
-		BigDecimal precioCompraP = scanner.nextBigDecimal();
-		System.out.println("Indique Precio de Venta de Pollitos: ");
-		BigDecimal precioVentaP = scanner.nextBigDecimal();
-		System.out.println(granja);
-
-		granja.addTiposAnimales(new TiposAnimales(1, "pollito", 2000, cantMaxPollitos,tiempoDeReproduccionP, precioCompraP, precioVentaP));
-		 */
+		*/
 
 
 		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, new BigDecimal(10), new BigDecimal(40));
@@ -41,19 +28,6 @@ public class GranjaUI {
 
 
 
-		//System.out.println(granja);
-		/*
-		System.out.println("Cantidad maxima de huevos que puede tener: ");
-		int cantMaxHuevos = scanner.nextInt();
-		System.out.println("tiempoDeReproduccion de huevos: ");
-		int tiempoDeReproduccionH = scanner.nextInt();
-		System.out.println("Indique Precio de compra de Huevos: ");
-		BigDecimal precioCompraH = scanner.nextBigDecimal();
-		System.out.println("Indique Precio de Venta de Huevos: ");
-		BigDecimal precioVentaH = scanner.nextBigDecimal();
-
-		granja.addTiposAnimales(new TiposAnimales(2, "huevo", 21, cantMaxHuevos,tiempoDeReproduccionH, precioCompraH, precioVentaH));
-		 */
 
 		//granja.agregarAnimal(2,15,LocalDate.now());// agrega Pollo no funciona
 
@@ -86,9 +60,9 @@ public class GranjaUI {
 			case 2:
 			{
 				System.out.println("Cuantos huevos quiere comprar? ");
-				int cant = scanner.nextInt();
+				//int cant = scanner.nextInt();
 				//Prolemas con esto
-				((TiposAnimales) granja.tiposAnimales).agregahuevo(cant);
+				//((TiposAnimales) granja.tiposAnimales).agregahuevo(cant);
 
 				break;
 			}
@@ -111,8 +85,8 @@ public class GranjaUI {
 			case 5: 
 			{
 				System.out.println("Cuantos pollitos quiere Vender?");
-				int cant = scanner.nextInt();
-				//	granja.venderPollitos(cant);
+				//int cant = scanner.nextInt();
+				//granja.venderPollitos(cant);
 				break;
 			}
 			case 6: {
