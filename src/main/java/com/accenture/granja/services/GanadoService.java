@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.accenture.granja.model.Ganado;
+import com.accenture.granja.model.Animal;
 import com.accenture.granja.repository.GanadoRepository;
 @Service
 public class GanadoService {
@@ -17,7 +17,7 @@ public class GanadoService {
 
 	   }
 	   
-	   public List<Ganado> obtenerTodoElGanado() {
+	   public List<Animal> obtenerTodoElGanado() {
 
 	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
 	    return ganadoRepository.findAll();

@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 //@Entity
-public class Huevo extends Ganado {
+public class Huevo extends Animal {
 	//@Id
 	//@GeneratedValue
 	protected long id;

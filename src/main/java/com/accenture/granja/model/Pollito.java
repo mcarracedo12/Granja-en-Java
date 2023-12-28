@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 //@Entity
 
-public class Pollito extends Ganado {
+public class Pollito extends Animal {
 	//@Id
 	//@GeneratedValue
 	protected long id;

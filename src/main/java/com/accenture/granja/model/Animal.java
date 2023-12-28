@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import io.micrometer.core.lang.NonNull;
 @Entity
-public class Ganado {
+public class Animal {
 	
 	@Id
 	@GeneratedValue
@@ -19,7 +21,9 @@ public class Ganado {
     @JoinColumn(name = "tipo_animal_id")
 	protected TiposAnimales tiposAnimales;
 	//protected String animal;// Lo busca por tipo de animal 
+	@NonNull
 	protected LocalDate fechaIngresoAGranja;
+	
 	protected int edadEnDiasAlIngresar;
 	protected LocalDate nacimiento;// calcula ingreso-edad
 	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
@@ -32,7 +36,7 @@ public class Ganado {
     @JoinColumn(name = "granja_id")
 	protected Granja granjaId;
 
-	public Ganado(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Animal(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
 	//	this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;

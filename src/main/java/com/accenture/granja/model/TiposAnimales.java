@@ -25,7 +25,7 @@ public class TiposAnimales {
 	private BigDecimal precioVenta;
 	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Ganado> ganado= new ArrayList<Ganado>();
+	public List<Animal> ganado= new ArrayList<Animal>();
 	
 	
 	

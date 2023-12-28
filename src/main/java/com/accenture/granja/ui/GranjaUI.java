@@ -10,6 +10,7 @@ public class GranjaUI {
 
 	public void start() {
 		// TODO Auto-generated method stub
+		
 		Granja granja = new Granja("6000000");
 		//	LocalDate now = LocalDate.now();
 

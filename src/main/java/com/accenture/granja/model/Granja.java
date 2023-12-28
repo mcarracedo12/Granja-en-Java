@@ -34,7 +34,7 @@ public class Granja {
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
 	@OneToMany(mappedBy = "granjaId", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Ganado> animales = new ArrayList<Ganado>();
+	public List<Animal> animales = new ArrayList<Animal>();
 	
 	
 	
@@ -61,7 +61,7 @@ public class Granja {
 					
 					
 					
-					List<Ganado>pollitos = this.getGanadoByTipoAnimal(2);
+					List<Animal>pollitos = this.getGanadoByTipoAnimal(2);
 					pollitos.add(new Pollito((long)2,dias,LocalDate.now()) );
 					//System.out.println(pollitos);
 					System.out.println("llega aca 2 1/5");
@@ -80,8 +80,8 @@ public class Granja {
 	}
 
 
-	private List<Ganado> getGanadoByTipoAnimal(int tipoAnimal_id) {
-		ArrayList<Ganado> ganado = (ArrayList<Ganado>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
+	private List<Animal> getGanadoByTipoAnimal(int tipoAnimal_id) {
+		ArrayList<Animal> ganado = (ArrayList<Animal>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
 		return ganado;
 	}
 
