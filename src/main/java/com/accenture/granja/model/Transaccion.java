@@ -20,6 +20,8 @@ public abstract class Transaccion {
 	private BigDecimal total;
 	private LocalDate fecha;
 
+	public Transaccion() {}
+	
 	public Transaccion(String nombrePersona, ArrayList<Producto> productos, BigDecimal total, LocalDate fecha) {
 		super();
 		//this.id = id;

@@ -32,7 +32,8 @@ public class TiposAnimales {
 	@ManyToOne
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
-
+	
+	public TiposAnimales() {}
 							
 	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) {

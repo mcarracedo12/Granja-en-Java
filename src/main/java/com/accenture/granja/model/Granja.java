@@ -36,7 +36,9 @@ public class Granja {
 	@OneToMany(mappedBy = "granjaId", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> animales = new ArrayList<Animal>();
 	
-	
+	 // Default constructor para que no me de error despues de un rato
+    public Granja() {
+    }
 	
 	public Granja(String cajita) {
 		super();
@@ -80,8 +82,9 @@ public class Granja {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	private List<Animal> getGanadoByTipoAnimal(int tipoAnimal_id) {
-		ArrayList<Animal> ganado = (ArrayList<Animal>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
+		List<Animal> ganado = (List<Animal>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
 		return ganado;
 	}
 

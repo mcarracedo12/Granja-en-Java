@@ -36,6 +36,10 @@ public class Animal {
     @JoinColumn(name = "granja_id")
 	protected Granja granjaId;
 
+	  // Default constructor para que no me de error despues de un rato
+    public Animal() {
+    }
+    
 	public Animal(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
 	//	this.animal= getAnimal();
@@ -104,11 +108,11 @@ public class Animal {
 		//System.out.println("El total de la venta es de "+ totalVenta);
 	}
 */
-	public BigDecimal setPrecioVentaByAnimal() {
+	public BigDecimal setPrecioVentaByTipoAnimal() {
 		return tiposAnimales.getPrecioVenta();
 	}
 	
-	public BigDecimal setPrecioCompraByAnimal() {
+	public BigDecimal setPrecioCompraByTipoAnimal() {
 		return tiposAnimales.getPrecioCompra();
 	}
 	

@@ -5,22 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.accenture.granja.model.Animal;
-import com.accenture.granja.repository.GanadoRepository;
+import com.accenture.granja.repository.AnimalRepository;
+
+
 @Service
-public class GanadoService {
-	private final GanadoRepository ganadoRepository;
+public class AnimalService {
+	private final AnimalRepository animalRepository;
 
 	   @Autowired
-	   public GanadoService(GanadoRepository ganadoRepository) {
+	   public AnimalService(AnimalRepository animalRepository) {
 
-	       this.ganadoRepository = ganadoRepository;
+	       this.animalRepository = animalRepository;
 
 	   }
 	   
-	   public List<Animal> obtenerTodoElGanado() {
+	   public List<Animal> obtenerTodosLosAnimales() {
 
 	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
-	    return ganadoRepository.findAll();
+	    return animalRepository.findAll();
 
 	   }    
 
