@@ -1,7 +1,5 @@
 package com.accenture.granja.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,22 +8,20 @@ import com.accenture.granja.repository.GranjaRepository;
 
 
 @Service
-public class GranjaService {
-	private final GranjaRepository granjaRepository;
+public class GranjaService implements IGranjaService {
+    
+    @Autowired
+    public GranjaRepository granjaRepo;
 
-	   @Autowired
-	   public GranjaService(GranjaRepository granjaRepository) {
+    @Override
+    public Granja buscarGranja() {
+    	Granja granja= granjaRepo.findById((long)1).orElse(null);
+         return granja;
+    }
 
-	       this.granjaRepository = granjaRepository;
+    @Override
+    public Granja editarGranja(Granja granja) {
+        return granjaRepo.save(granja);
+    }
 
-	   }
-	   
-	   public List<Granja> obtenerTodasLasGranjas() {
-
-	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
-	    return granjaRepository.findAll();
-
-	   }    
-
-	   
 }

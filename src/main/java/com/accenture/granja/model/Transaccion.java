@@ -19,8 +19,6 @@ public abstract class Transaccion {
 	private ArrayList<Producto> productos = new ArrayList<>();
 	private BigDecimal total;
 	private LocalDate fecha;
-
-	public Transaccion() {}
 	
 	public Transaccion(String nombrePersona, ArrayList<Producto> productos, BigDecimal total, LocalDate fecha) {
 		super();

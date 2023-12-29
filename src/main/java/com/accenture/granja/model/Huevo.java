@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Huevo extends Animal {
 	//@Id
 	//@GeneratedValue
-	protected long id;
+	protected Long id;
 
 	//@ManyToOne
 	//@JoinColumn(name = "tiposAnimales_id")

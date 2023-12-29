@@ -15,7 +15,7 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue
-	protected long id;
+	protected Long id;
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
@@ -36,10 +36,11 @@ public class Animal {
     @JoinColumn(name = "granja_id")
 	protected Granja granjaId;
 
-	  // Default constructor para que no me de error despues de un rato
-    public Animal() {
-    }
-    
+	//Agrego para que no tire error despues nada mas, no deberia hacer falta
+	public Animal() {
+		super();
+	}
+
 	public Animal(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
 	//	this.animal= getAnimal();

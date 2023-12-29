@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class TiposAnimales {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	private String animal;
 	private int diasExpiracion;// Expectativa de vida del animal: 21 dias huevos - 2000 dias pollos 
 	private int cantidadMaxima;
@@ -33,9 +33,12 @@ public class TiposAnimales {
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
-	public TiposAnimales() {}
-							
-	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
+	//Agrego para que no tire error despues nada mas, no deberia hacer falta
+	public TiposAnimales() {
+		super();
+	}
+	
+	public TiposAnimales(Long id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) {
 		this.id = id;
 		this.animal = animal;
@@ -46,11 +49,11 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

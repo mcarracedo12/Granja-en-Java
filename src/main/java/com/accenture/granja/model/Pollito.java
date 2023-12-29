@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Pollito extends Animal {
 	//@Id
 	//@GeneratedValue
-	protected long id;
+	protected Long id;
 	
 	//@ManyToOne
 	//@JoinColumn(name = "tiposAnimales_id")

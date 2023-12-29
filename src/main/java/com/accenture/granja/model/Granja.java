@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+//import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,7 +30,7 @@ import javax.persistence.OneToMany;
 public class Granja {
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	private BigDecimal dineroEnCaja;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -36,9 +38,10 @@ public class Granja {
 	@OneToMany(mappedBy = "granjaId", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> animales = new ArrayList<Animal>();
 	
-	 // Default constructor para que no me de error despues de un rato
-    public Granja() {
-    }
+	//Agrego para que no tire error despues nada mas, no deberia hacer falta
+	public Granja() {
+		super();
+	}
 	
 	public Granja(String cajita) {
 		super();
@@ -63,7 +66,7 @@ public class Granja {
 					
 					
 					
-					List<Animal>pollitos = this.getGanadoByTipoAnimal(2);
+					List<Animal>pollitos = this.getGanadoByTipoAnimal((long)2);
 					pollitos.add(new Pollito((long)2,dias,LocalDate.now()) );
 					//System.out.println(pollitos);
 					System.out.println("llega aca 2 1/5");
@@ -82,10 +85,17 @@ public class Granja {
 	}
 
 
-	@SuppressWarnings("unchecked")
+/*	//@SuppressWarnings("unchecked")
 	private List<Animal> getGanadoByTipoAnimal(int tipoAnimal_id) {
 		List<Animal> ganado = (List<Animal>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
 		return ganado;
+	}
+*/	
+
+	public List<Animal> getGanadoByTipoAnimal(Long tipoAnimalId) {
+	    return animales.stream()
+	            .filter(animal -> tipoAnimalId == animal.getTiposAnimales().getId())
+	            .collect(Collectors.toList());
 	}
 
 	/*public List<Pollito> getPollitos(Long id) {
@@ -298,7 +308,7 @@ public class Granja {
 	public void addTiposAnimales( String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) 
 	{
-		tiposAnimales.add(new TiposAnimales((tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+		tiposAnimales.add(new TiposAnimales((long)(tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
 		System.out.println("El animal "+ animal +" ha sido agregado");
 	}
 	
