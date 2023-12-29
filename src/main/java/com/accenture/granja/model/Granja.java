@@ -30,7 +30,7 @@ import javax.persistence.OneToMany;
 public class Granja {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	private BigDecimal dineroEnCaja;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -66,8 +66,8 @@ public class Granja {
 					
 					
 					
-					List<Animal>pollitos = this.getGanadoByTipoAnimal((long)2);
-					pollitos.add(new Pollito((long)2,dias,LocalDate.now()) );
+					List<Animal>pollitos = this.getGanadoByTipoAnimal(2);
+					pollitos.add(new Pollito(2,dias,LocalDate.now()) );
 					//System.out.println(pollitos);
 					System.out.println("llega aca 2 1/5");
 					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
@@ -92,7 +92,7 @@ public class Granja {
 	}
 */	
 
-	public List<Animal> getGanadoByTipoAnimal(Long tipoAnimalId) {
+	public List<Animal> getGanadoByTipoAnimal(Integer tipoAnimalId) {
 	    return animales.stream()
 	            .filter(animal -> tipoAnimalId == animal.getTiposAnimales().getId())
 	            .collect(Collectors.toList());
@@ -308,7 +308,7 @@ public class Granja {
 	public void addTiposAnimales( String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) 
 	{
-		tiposAnimales.add(new TiposAnimales((long)(tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+		tiposAnimales.add(new TiposAnimales((tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
 		System.out.println("El animal "+ animal +" ha sido agregado");
 	}
 	

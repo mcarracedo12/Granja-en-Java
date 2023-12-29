@@ -27,7 +27,7 @@ public class Pollito extends Animal {
 	protected BigDecimal precioVenta;
 	
 
-	public Pollito(Long tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Pollito(Integer tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		//this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
@@ -40,13 +40,13 @@ public class Pollito extends Animal {
 	}
 
 	public void agregar(int diasEdad){
-		new Pollito((long) 2, diasEdad, LocalDate.now()); 
+		new Pollito(2, diasEdad, LocalDate.now()); 
 	}
 	
 	@Override
 	public void reproducir(LocalDate i) {
 		if (i.isBefore(LocalDate.now())) {
-			new Huevo((long)1, 0, i);
+			new Huevo(1, 0, i);
 			System.out.println("Huevo creado con fecha de nacimiento " + i);
 			//i = i.plusDays(tiempoDeReproduccion);
 		}

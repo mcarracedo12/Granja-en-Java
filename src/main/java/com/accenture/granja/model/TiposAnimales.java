@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class TiposAnimales {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	private String animal;
 	private int diasExpiracion;// Expectativa de vida del animal: 21 dias huevos - 2000 dias pollos 
 	private int cantidadMaxima;
@@ -38,7 +38,7 @@ public class TiposAnimales {
 		super();
 	}
 	
-	public TiposAnimales(Long id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
+	public TiposAnimales(Integer id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
 			BigDecimal precioVenta) {
 		this.id = id;
 		this.animal = animal;
@@ -49,11 +49,11 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

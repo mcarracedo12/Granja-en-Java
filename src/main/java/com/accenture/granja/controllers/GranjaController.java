@@ -25,14 +25,14 @@ public class GranjaController {
 	public Granja getGranja() {
 		//Granja g = new Granja("2");
 		//return g;
-		return IgranjaService.buscarGranja();		
+		return IgranjaService.buscarGranja(1);		
 	}
 	
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
     @ResponseBody
-    public Granja mostrarGranja(@PathVariable Long id) {
-        return IgranjaService.buscarGranja();
+    public Granja mostrarGranja(@PathVariable Integer id) {
+        return IgranjaService.buscarGranja(id);
     }
 
 }

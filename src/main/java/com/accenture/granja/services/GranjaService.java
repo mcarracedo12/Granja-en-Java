@@ -14,9 +14,10 @@ public class GranjaService implements IGranjaService {
     public GranjaRepository granjaRepo;
 
     @Override
-    public Granja buscarGranja() {
-    	Granja granja= granjaRepo.findById((long)1).orElse(null);
+    public Granja buscarGranja(Integer id) {
+    	Granja granja= granjaRepo.findById(id).orElse(null);
          return granja;
+         
     }
 
     @Override

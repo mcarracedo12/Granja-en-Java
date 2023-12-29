@@ -15,7 +15,7 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue
-	protected Long id;
+	protected Integer id;
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
@@ -41,7 +41,7 @@ public class Animal {
 		super();
 	}
 
-	public Animal(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Animal(Integer i, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
 	//	this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;

@@ -26,8 +26,8 @@ public class Huevo extends Animal {
 	protected BigDecimal precioVenta;
 
 
-	public Huevo(Long tiposAnimales_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+	public Huevo(Integer i,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(i, edadEnDiasAlIngresar, fechaIngresoAGranja);
 		//this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
@@ -46,7 +46,7 @@ public class Huevo extends Animal {
 
 			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
-				new Pollito((long)2, 0, i);
+				new Pollito(2, 0, i);
 				//List<Huevo> huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != this;}).collect(Collectors.toList());
 				System.out.println("Pollito creado con fecha de nacimiento " + i);
 
