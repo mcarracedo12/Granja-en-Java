@@ -9,14 +9,14 @@ import java.time.LocalDate;
 
 public abstract class Producto {
 	LocalDate now = LocalDate.now();
-	private long id;
+	private int id;
 	private String animal;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -47,7 +47,7 @@ public abstract class Producto {
 	private LocalDate fechaExpiracion;
 	private BigDecimal precio;
 
-	public Producto(long id, String animal, LocalDate fechaExpiracion, BigDecimal precio) {
+	public Producto(int id, String animal, LocalDate fechaExpiracion, BigDecimal precio) {
 		this.id = id;
 		this.fechaExpiracion = fechaExpiracion;
 		this.precio = precio;

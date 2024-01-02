@@ -16,13 +16,13 @@ import javax.persistence.OneToMany;
 public class TiposAnimales {
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private int id;
 	private String animal;
 	private int diasExpiracion;// Expectativa de vida del animal: 21 dias huevos - 2000 dias pollos 
 	private int cantidadMaxima;
 	private int tiempoDeReproduccion; // cada cuanto se reproduce: - 21 dias huevos - 1 dia pollos 
-	private BigDecimal precioCompra; // Los precios se actualizan a nivel tipoAnimal, por cada Transaccion se toma el precio de ahi para los productos
-	private BigDecimal precioVenta;
+	private double precioCompra; // Los precios se actualizan a nivel tipoAnimal, por cada Transaccion se toma el precio de ahi para los productos
+	private double precioVenta;
 	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> ganado= new ArrayList<Animal>();
@@ -38,8 +38,7 @@ public class TiposAnimales {
 		super();
 	}
 	
-	public TiposAnimales(Integer id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
-			BigDecimal precioVenta) {
+	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
 		this.id = id;
 		this.animal = animal;
 		this.diasExpiracion = diasExpiracion;
@@ -49,11 +48,11 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -81,19 +80,19 @@ public class TiposAnimales {
 		this.cantidadMaxima = cantidadMaxima;
 	}
 
-	public BigDecimal getPrecioCompra() {
+	public double getPrecioCompra() {
 		return precioCompra;
 	}
 
-	public void setPrecioCompra(BigDecimal precioCompra) {
+	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
 
-	public BigDecimal getPrecioVenta() {
+	public double getPrecioVenta() {
 		return precioVenta;
 	}
 
-	public void setPrecioVenta(BigDecimal precioVenta) {
+	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
 	

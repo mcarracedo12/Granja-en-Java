@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -29,8 +29,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Granja {
 	@Id
-	@GeneratedValue
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int id;
 	private BigDecimal dineroEnCaja;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -40,7 +40,7 @@ public class Granja {
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public Granja() {
-		super();
+		super();		
 	}
 	
 	public Granja(String cajita) {
@@ -93,9 +93,10 @@ public class Granja {
 */	
 
 	public List<Animal> getGanadoByTipoAnimal(Integer tipoAnimalId) {
-	    return animales.stream()
-	            .filter(animal -> tipoAnimalId == animal.getTiposAnimales().getId())
-	            .collect(Collectors.toList());
+		return null;
+	   // return animales.stream()
+	   //         .filter(animal -> tipoAnimalId == animal.getTiposAnimales().getId())
+	   //         .collect(Collectors.toList());
 	}
 
 	/*public List<Pollito> getPollitos(Long id) {
@@ -305,8 +306,8 @@ public class Granja {
 
 
 
-	public void addTiposAnimales( String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, BigDecimal precioCompra,
-			BigDecimal precioVenta) 
+	public void addTiposAnimales( String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
+			double precioVenta) 
 	{
 		tiposAnimales.add(new TiposAnimales((tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
 		System.out.println("El animal "+ animal +" ha sido agregado");

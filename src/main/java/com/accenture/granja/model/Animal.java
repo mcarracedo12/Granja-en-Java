@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,8 +15,8 @@ import io.micrometer.core.lang.NonNull;
 public class Animal {
 	
 	@Id
-	@GeneratedValue
-	protected Integer id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	protected int id;
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
@@ -30,10 +31,10 @@ public class Animal {
 	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
 	protected int edadActual;// hoy - nacimiento
 	//protected int cantidadMaxima; // Lo busca por tipo de animal 
-	protected BigDecimal precioCompra;
-	protected BigDecimal precioVenta;
+	protected double precioCompra;// Se setean al momento de la transaccion correspondiente
+	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 	@ManyToOne
-    @JoinColumn(name = "granja_id")
+   @JoinColumn(name = "granja_id")
 	protected Granja granjaId;
 
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
@@ -70,11 +71,11 @@ public class Animal {
 	}
 
 	
-	protected BigDecimal getPrecioCompra(){
+	protected double getPrecioCompra(){
         return tiposAnimales.getPrecioCompra();
 	}
 	
-	protected BigDecimal getPrecioVenta(){
+	protected double getPrecioVenta(){
         return tiposAnimales.getPrecioVenta();
 	}
 	public int getCantidadMaxima() {
@@ -109,11 +110,11 @@ public class Animal {
 		//System.out.println("El total de la venta es de "+ totalVenta);
 	}
 */
-	public BigDecimal setPrecioVentaByTipoAnimal() {
+	public double setPrecioVentaByTipoAnimal() {
 		return tiposAnimales.getPrecioVenta();
 	}
 	
-	public BigDecimal setPrecioCompraByTipoAnimal() {
+	public double setPrecioCompraByTipoAnimal() {
 		return tiposAnimales.getPrecioCompra();
 	}
 	

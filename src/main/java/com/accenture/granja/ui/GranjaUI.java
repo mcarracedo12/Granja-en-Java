@@ -23,8 +23,8 @@ public class GranjaUI {
 		*/
 
 
-		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, new BigDecimal(10), new BigDecimal(40));
-		granja.addTiposAnimales("POLLITOS", 2000, 600, 1, new BigDecimal(200), new BigDecimal(400));
+		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
+		granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
 		//Ganado ganado= new Ganado((long)1, 2, LocalDate.now());
 		//granja.addhuevo(1, 2, LocalDate.now());
 
@@ -109,9 +109,11 @@ public class GranjaUI {
 				System.out.println("Cada cuanto tiempo se reproduce");
 				int tiempoDeReproduccion = scanner.nextInt();
 				System.out.println("Cual va a ser su precio de compra");
-				BigDecimal precioCompra= scanner.nextBigDecimal();
+				float precioCompra= scanner.nextFloat();
+//				BigDecimal precioCompra= scanner.nextBigDecimal();
 				System.out.println("Cual va a ser su precio de venta");
-				BigDecimal precioVenta= scanner.nextBigDecimal();
+				float precioVenta= scanner.nextFloat();
+//				BigDecimal precioVenta= scanner.nextBigDecimal();
 				granja.addTiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
 				break;
 			}
