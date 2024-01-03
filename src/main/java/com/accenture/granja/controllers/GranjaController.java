@@ -2,7 +2,6 @@ package com.accenture.granja.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,16 +21,10 @@ public class GranjaController {
 	@GetMapping("/granja")
 	@ResponseBody
 	public Granja getGranja() {
-		//Granja g = new Granja("2");
-		//return g;
 		return granjaService.buscarGranja(1);		
 	}
 	
 	
-	@GetMapping("/{id}")
-    @ResponseBody
-    public Granja mostrarGranja(@PathVariable Integer id) {
-        return granjaService.buscarGranja(id);
-    }
+	
 
 }

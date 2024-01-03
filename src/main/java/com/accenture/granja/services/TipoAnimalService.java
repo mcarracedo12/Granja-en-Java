@@ -10,21 +10,26 @@ import com.accenture.granja.repository.TipoAnimalRepository;
 
 @Service
 public class TipoAnimalService {
-	private final TipoAnimalRepository tipoAnimalRepository;
+	private final TipoAnimalRepository tiposAnimalesRepository;
 
 	   @Autowired
-	   public TipoAnimalService(TipoAnimalRepository tipoAnimalRepository) {
+	   public TipoAnimalService(TipoAnimalRepository tiposAnimalesRepository) {
 
-	       this.tipoAnimalRepository = tipoAnimalRepository;
+	       this.tiposAnimalesRepository = tiposAnimalesRepository;
 
 	   }
 	   
 	   public List<TiposAnimales> obtenerTodosLosTiposAnimales() {
 
 	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
-	    return tipoAnimalRepository.findAll();
+	    return tiposAnimalesRepository.findAll();
 
 	   }    
+	   
+	   public TiposAnimales getById(int tipoAnimalId) {
+	        return tiposAnimalesRepository.findById(tipoAnimalId)
+	                .orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
+	    }
 
 	   
 }

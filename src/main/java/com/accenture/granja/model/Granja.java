@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 //import java.util.stream.Collectors;
 //import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -66,8 +67,9 @@ public class Granja {
 					
 					
 					
-					List<Animal>pollitos = this.getGanadoByTipoAnimal(2);
-					pollitos.add(new Pollito(2,dias,LocalDate.now()) );
+					List<Animal>pollitos = this.getAnimalesByTipo(2);
+					System.out.println("Cantidad de pollitos actual: " + pollitos.size());
+					//pollitos.add(new Pollito(2,dias,LocalDate.now()) );
 					//System.out.println(pollitos);
 					System.out.println("llega aca 2 1/5");
 					//Pollito pollo= new Pollito((long)2,dias,LocalDate.now());
@@ -92,11 +94,11 @@ public class Granja {
 	}
 */	
 
-	public List<Animal> getGanadoByTipoAnimal(Integer tipoAnimalId) {
-		return null;
-	   // return animales.stream()
-	   //         .filter(animal -> tipoAnimalId == animal.getTiposAnimales().getId())
-	   //         .collect(Collectors.toList());
+	public List<Animal> getAnimalesByTipo(int tipoAnimalId) {
+		//return null;
+	    return animales.stream()
+	            .filter(animal -> tipoAnimalId == animal.getTiposAnimales().getId())
+	            .collect(Collectors.toList());
 	}
 
 	/*public List<Pollito> getPollitos(Long id) {
@@ -303,29 +305,21 @@ public class Granja {
 		this.ultimaActualizacion = ultimaActualizacion;
 	}
 	
-
-
-
-	public void addTiposAnimales( String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
+	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
 			double precioVenta) 
 	{
 		tiposAnimales.add(new TiposAnimales((tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
 		System.out.println("El animal "+ animal +" ha sido agregado");
 	}
 	
-
-	/*
-	public void agregarAnimal(long tipoAnimal_id, int edad, LocalDate fechaIngreso) {
-		if(tipoAnimal_id==1) {
-			List<Huevo>huevos=((TiposAnimales)this.tiposAnimales).huevos;
-			huevos.add(new Huevo(tipoAnimal_id, edad, fechaIngreso));
-			
-		}
-		else if(tipoAnimal_id==2) {
-			List<Pollito>pollitos=((TiposAnimales)this.tiposAnimales).pollitos;
-			pollitos.add(new Pollito(tipoAnimal_id, edad, fechaIngreso));
+	public List<TiposAnimales> getTiposAnimales(){
+		return tiposAnimales;
 	}
 
+	
+	public void agregarAnimal(TiposAnimales tipoAnimal_id,  int edad, LocalDate fechaIngreso) {
+			List<Animal>animales=((TiposAnimales)this.tiposAnimales).animales;
+			animales.add(new Animal(tipoAnimal_id, edad, fechaIngreso));
+		
 	}
-	*/
 }

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+
 @Entity
 public class TiposAnimales {
 	@Id
@@ -137,6 +139,12 @@ public class TiposAnimales {
 		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidad Maxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
 	}
 
+	public TiposAnimales getById(TiposAnimales tipo_animal_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	/*public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;
 	}
@@ -163,7 +171,7 @@ public class TiposAnimales {
 		huevos.add(new Huevo((long)2,dias,LocalDate.now()));
 	}
 	*/
-	/*public List<Ganado> getAnimalesByid1(Long id) {
+	/*public List<Ganado> getAnimalesByTipo1(int id) {
 		switch(id) {
 		case 1:
 			return huevos;

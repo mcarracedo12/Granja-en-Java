@@ -14,7 +14,7 @@ public class GranjaService {
     public GranjaRepository granjaRepo;
 
     
-    public Granja buscarGranja(Integer id) {
+    public Granja buscarGranja(int id) {
     	Granja granja= granjaRepo.findById(id).orElse(null);
          return granja;
          

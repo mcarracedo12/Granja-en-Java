@@ -1,6 +1,7 @@
 package com.accenture.granja.ui;
 
 
+
 import java.util.Scanner;
 
 import com.accenture.granja.model.*;
@@ -30,7 +31,8 @@ public class GranjaUI {
 
 
 
-		//granja.agregarAnimal(2,15,LocalDate.now());// agrega Pollo no funciona
+		//granja.agregarAnimal(1, 15, LocalDate.now());// agrega Huevo
+		//granja.agregarAnimal(2, 15, LocalDate.now());// agrega Pollo
 
 		//granja.addPollito(new Pollito(2, 26, now));
 		// granja.addPollito(new Pollito(2, 2005, now));// Lo ingreso Expirado

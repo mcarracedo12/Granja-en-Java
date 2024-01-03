@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Huevo extends Animal {
 	//@Id
 	//@GeneratedValue
-	protected Long id;
+	protected int id;
 
 	//@ManyToOne
 	//@JoinColumn(name = "tiposAnimales_id")
@@ -26,8 +26,10 @@ public class Huevo extends Animal {
 	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 
 
-	public Huevo(Integer i,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		super(i, edadEnDiasAlIngresar, fechaIngresoAGranja);
+	public Huevo(TiposAnimales tipo_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(tipo_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+		
+		this.tiposAnimales= tipo_id;
 		//this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
@@ -46,7 +48,7 @@ public class Huevo extends Animal {
 
 			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
-				new Pollito(2, 0, i);
+				//new Animal(2, 0, i);
 				//List<Huevo> huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != this;}).collect(Collectors.toList());
 				System.out.println("Pollito creado con fecha de nacimiento " + i);
 
