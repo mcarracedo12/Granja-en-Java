@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accenture.granja.model.Granja;
 
 import com.accenture.granja.services.GranjaService;
-import com.accenture.granja.services.IGranjaService;
 
 @RestController
 public class GranjaController {
 
 	@Autowired
-	private IGranjaService IgranjaService;
+	private GranjaService granjaService;
 
 	// Aca se instancia al Servicio donde esta la logica central
 
@@ -25,14 +24,14 @@ public class GranjaController {
 	public Granja getGranja() {
 		//Granja g = new Granja("2");
 		//return g;
-		return IgranjaService.buscarGranja(1);		
+		return granjaService.buscarGranja(1);		
 	}
 	
 	
 	@GetMapping("/{id}")
     @ResponseBody
     public Granja mostrarGranja(@PathVariable Integer id) {
-        return IgranjaService.buscarGranja(id);
+        return granjaService.buscarGranja(id);
     }
 
 }

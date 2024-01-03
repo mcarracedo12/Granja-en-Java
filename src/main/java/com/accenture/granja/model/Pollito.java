@@ -1,6 +1,6 @@
 package com.accenture.granja.model;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 
 
@@ -23,8 +23,8 @@ public class Pollito extends Animal {
 	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
 	protected int edadActual;// hoy - nacimiento
 	//protected int cantidadMaxima; // Lo busca por tipo de animal 
-	protected BigDecimal precioCompra;
-	protected BigDecimal precioVenta;
+	protected double precioCompra;// Se setean al momento de la transaccion correspondiente
+	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 	
 
 	public Pollito(Integer tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
@@ -39,14 +39,12 @@ public class Pollito extends Animal {
 		//this.cantidadMaxima = getCantidadMaxima();
 	}
 
-	public void agregar(int diasEdad){
-		new Pollito(2, diasEdad, LocalDate.now()); 
-	}
+
 	
 	@Override
 	public void reproducir(LocalDate i) {
 		if (i.isBefore(LocalDate.now())) {
-			new Huevo(1, 0, i);
+			new Animal(1, 0, i);
 			System.out.println("Huevo creado con fecha de nacimiento " + i);
 			//i = i.plusDays(tiempoDeReproduccion);
 		}

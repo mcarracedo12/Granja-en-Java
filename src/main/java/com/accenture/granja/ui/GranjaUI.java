@@ -1,6 +1,5 @@
 package com.accenture.granja.ui;
 
-import java.math.BigDecimal;
 
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class GranjaUI {
 	public void start() {
 		// TODO Auto-generated method stub
 		
-		Granja granja = new Granja("6000000");
+		Granja granja = new Granja(6000000);
 		//	LocalDate now = LocalDate.now();
 
 		Scanner scanner = new Scanner(System.in);

@@ -1,11 +1,11 @@
 package com.accenture.granja.model;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 //import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
@@ -31,7 +31,7 @@ public class Granja {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
-	private BigDecimal dineroEnCaja;
+	private double dineroEnCaja;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
@@ -43,16 +43,16 @@ public class Granja {
 		super();		
 	}
 	
-	public Granja(String cajita) {
+	public Granja(double cajita) {
 		super();
-		this.dineroEnCaja = new BigDecimal(cajita);
+		this.dineroEnCaja = cajita;
 	}
 
-	public BigDecimal getDineroEnCaja() {
+	public double getDineroEnCaja() {
 		return dineroEnCaja;
 	}
 
-	public void setDineroEnCaja(BigDecimal dineroEnCaja) {
+	public void setDineroEnCaja(double dineroEnCaja) {
 		this.dineroEnCaja = dineroEnCaja;
 	}
 	

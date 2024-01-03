@@ -1,7 +1,6 @@
 package com.accenture.granja.model;
 
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class TiposAnimales {
 	private double precioVenta;
 	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Animal> ganado= new ArrayList<Animal>();
+	public List<Animal> animales= new ArrayList<Animal>();
 	
 	
 	

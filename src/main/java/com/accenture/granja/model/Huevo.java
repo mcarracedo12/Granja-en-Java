@@ -1,6 +1,6 @@
 package com.accenture.granja.model;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 
 
@@ -22,8 +22,8 @@ public class Huevo extends Animal {
 	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
 	protected int edadActual;// hoy - nacimiento
 	//protected int cantidadMaxima; // Lo busca por tipo de animal 
-	protected BigDecimal precioCompra;
-	protected BigDecimal precioVenta;
+	protected double precioCompra;// Se setean al momento de la transaccion correspondiente
+	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 
 
 	public Huevo(Integer i,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {

@@ -8,19 +8,19 @@ import com.accenture.granja.repository.GranjaRepository;
 
 
 @Service
-public class GranjaService implements IGranjaService {
+public class GranjaService {
     
     @Autowired
     public GranjaRepository granjaRepo;
 
-    @Override
+    
     public Granja buscarGranja(Integer id) {
     	Granja granja= granjaRepo.findById(id).orElse(null);
          return granja;
          
     }
 
-    @Override
+    
     public Granja editarGranja(Granja granja) {
         return granjaRepo.save(granja);
     }

@@ -1,6 +1,6 @@
 package com.accenture.granja.model;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -48,7 +48,7 @@ public class Animal {
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracion());
+		this.fechaExpiracion = this.nacimiento.plusDays(this.getDiasExpiracion());
 		//this.tiempoDeReproduccion= getTiempoDeReproduccion();
 		this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
 		//this.cantidadMaxima = getCantidadMaxima();
@@ -67,18 +67,30 @@ public class Animal {
 	}
 	
 	public int getDiasExpiracion() {
+		if(tiposAnimales==null) {
+			return 0;
+		}else
         return tiposAnimales.getDiasExpiracion();
 	}
 
 	
 	protected double getPrecioCompra(){
+		if(tiposAnimales== null) {
+			return 0;
+		}else
         return tiposAnimales.getPrecioCompra();
 	}
 	
 	protected double getPrecioVenta(){
+		if(tiposAnimales== null) {
+			return 0;
+		}else
         return tiposAnimales.getPrecioVenta();
 	}
 	public int getCantidadMaxima() {
+		if(tiposAnimales== null) {
+			return 0;
+		}else
         return tiposAnimales.getCantidadMaxima();
 	}
 	
@@ -86,6 +98,9 @@ public class Animal {
 	}
 	
 	public int getTiempoDeReproduccion() {
+		if(tiposAnimales==null) {
+			return 0;
+		}else
 		return tiposAnimales.getTiempoDeReproduccion();
 	}
 
@@ -94,6 +109,9 @@ public class Animal {
 	}
 	
 	public String getAnimal() {
+		if(tiposAnimales== null) {
+			return null;
+		}else
 		return tiposAnimales.getAnimal();
 	}
 	
@@ -132,4 +150,9 @@ public class Animal {
 				+ " . Tiempo de Reproduccion: " + getTiempoDeReproduccion() + ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: " + getCantidadMaxima() + "\n");
 	}
 
+	
+	public void agregar(int tipo, int diasEdad, LocalDate i){
+		new Animal(tipo, diasEdad, i); 
+	}
+	
 }
