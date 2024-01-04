@@ -16,14 +16,11 @@ public class AnimalController {
 	
 	@Autowired
 	public AnimalController(AnimalService animalService) {
-
 	       this.animalService = animalService;
-
 	   }
 
 	  @GetMapping("/animales")
 	   public List<Animal> getAnimales() {
-
 	            // Aca se instancia al Servicio donde esta la logica central
 	       return animalService.obtenerTodosLosAnimales();
 

@@ -58,6 +58,8 @@ public class Granja {
 	}
 	
 	public void comprarPollitos(int cant) {
+		List<Animal>pollitos = this.getAnimalesByTipo(2);
+		if(cant<pollitos.size()) {
 		for(int i =0; i< cant; i++ ) {
 				
 			try (Scanner scanner = new Scanner(System.in)) {
@@ -67,8 +69,9 @@ public class Granja {
 					
 					
 					
-					List<Animal>pollitos = this.getAnimalesByTipo(2);
+					
 					System.out.println("Cantidad de pollitos actual: " + pollitos.size());
+					
 					//pollitos.add(new Pollito(2,dias,LocalDate.now()) );
 					//System.out.println(pollitos);
 					System.out.println("llega aca 2 1/5");
@@ -82,6 +85,10 @@ public class Granja {
 			//	System.out.println("llega aca 4 ");
 				//dineroEnCaja= dineroEnCaja.subtract(costoTotal);
 			//	System.out.println("llega aca 5 ");
+		}
+	}
+		else {
+			System.out.println("Cantidad de pollitos actual: " + pollitos.size());
 		}
 		
 	}

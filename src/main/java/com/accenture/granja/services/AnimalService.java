@@ -14,16 +14,12 @@ public class AnimalService {
 
 	   @Autowired
 	   public AnimalService(AnimalRepository animalRepository) {
-
 	       this.animalRepository = animalRepository;
-
 	   }
 	   
 	   public List<Animal> obtenerTodosLosAnimales() {
-
 	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
 	    return animalRepository.findAll();
-
 	   }    
 
 	   

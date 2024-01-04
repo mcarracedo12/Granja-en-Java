@@ -1,5 +1,7 @@
 package com.accenture.granja.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,22 @@ public class GranjaService {
          
     }
 
+    public List<Granja> buscarGranjas() {
+    	List<Granja> granjas= granjaRepo.findAll();
+         return granjas;
+         
+    }
     
     public Granja editarGranja(Granja granja) {
         return granjaRepo.save(granja);
     }
+
+
+	public void agregarGranja(Granja granja) {
+		granjaRepo.save(granja);
+		
+	}
+
+	
 
 }
