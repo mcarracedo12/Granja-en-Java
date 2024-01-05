@@ -1,6 +1,5 @@
 package com.accenture.granja.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -10,8 +9,8 @@ import javax.persistence.Entity;
 public class Compra extends Transaccion {
 
    
-	public Compra(long id, String nombrePersona, ArrayList<Producto> productos, BigDecimal total, LocalDate fecha) {
-		super(nombrePersona, productos, total, fecha);
+	public Compra(String nombrePersona, ArrayList<Producto> productos,  LocalDate fecha) {
+		super(nombrePersona, productos,  fecha);
 	}
 
 }

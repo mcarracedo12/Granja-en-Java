@@ -26,7 +26,7 @@ public class TipoAnimalService {
 
 	   }    
 	   
-	   public TiposAnimales getById(int tipoAnimalId) {
+	   public TiposAnimales getById(long tipoAnimalId) {
 	        return tiposAnimalesRepository.findById(tipoAnimalId)
 	                .orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
 	    }

@@ -17,22 +17,16 @@ public abstract class Transaccion {
 	private Long id;
 	private String nombrePersona;
 	private ArrayList<Producto> productos = new ArrayList<>();
-	private BigDecimal total;
 	private LocalDate fecha;
+	private double total;
 	
-	public Transaccion(String nombrePersona, ArrayList<Producto> productos, BigDecimal total, LocalDate fecha) {
+	public Transaccion(String nombrePersona, ArrayList<Producto> productos, LocalDate fecha) {
 		super();
-		//this.id = id;
 		this.nombrePersona = nombrePersona;
 		this.productos = productos;
 		this.fecha = fecha;
+		this.total=setTotal();
 	}
-
-	//public long getId() {
-		//return id;
-//	}
-
-	
 
 	public String getNombrePersona() {
 		return nombrePersona;
@@ -46,20 +40,19 @@ public abstract class Transaccion {
 		return productos;
 	}
 
-	public void setProductos(ArrayList<Producto> productos) {
+	public double setTotal() {
 		for (Producto producto : productos) {
-			total = total.add(producto.getPrecio());
+			total = total +producto.getPrecio();
 			// total = total.reduce(total, producto.getPrecio());
 		}
-	}
-
-	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(BigDecimal total) {
-		this.total = total;
+	public double getTotal() {
+		return total;
 	}
+
+
 
 	public LocalDate getFecha() {
 		return fecha;

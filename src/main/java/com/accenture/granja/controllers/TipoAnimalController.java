@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accenture.granja.model.Animal;
+
 import com.accenture.granja.model.TiposAnimales;
-import com.accenture.granja.services.AnimalService;
 import com.accenture.granja.services.TipoAnimalService;
 
 @RestController
@@ -34,7 +33,7 @@ public class TipoAnimalController {
 	   }
 	  
 	  @GetMapping("/{id}")
-	    public ResponseEntity<TiposAnimales> getTipoAnimalById(@PathVariable int id) {
+	    public ResponseEntity<TiposAnimales> getTipoAnimalById(@PathVariable Long id) {
 	        TiposAnimales tipoAnimal = tipoAnimalService.getById(id);
 	        return ResponseEntity.ok(tipoAnimal);
 	    }

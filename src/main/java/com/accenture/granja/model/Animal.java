@@ -16,7 +16,7 @@ public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	protected int id;
+	protected Long id;
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")

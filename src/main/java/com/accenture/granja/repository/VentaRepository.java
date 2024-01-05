@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.accenture.granja.model.Venta;
 
-public interface VentaRepository extends JpaRepository<Venta, Integer>{
+public interface VentaRepository extends JpaRepository<Venta, Long>{
 
 }

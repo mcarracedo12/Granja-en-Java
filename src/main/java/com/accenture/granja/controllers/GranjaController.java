@@ -56,7 +56,7 @@ public class GranjaController {
 
 	@PutMapping("/granjas/{id}")
 	public void updateGranja(@RequestBody Granja granja, @PathVariable Long id) {
-		granjaService.editarGranja(granja); // 
+		granjaService.editarGranja(granja); // // la granja SI necesita tener el ID para el PUT
 	}
 	
 	@DeleteMapping("/granjas/{id}")

@@ -59,7 +59,7 @@ public class Granja {
 	
 	public void comprarPollitos(int cant) {
 		List<Animal>pollitos = this.getAnimalesByTipo(2);
-		if(cant<pollitos.size()) {
+		
 		for(int i =0; i< cant; i++ ) {
 				
 			try (Scanner scanner = new Scanner(System.in)) {
@@ -86,10 +86,7 @@ public class Granja {
 				//dineroEnCaja= dineroEnCaja.subtract(costoTotal);
 			//	System.out.println("llega aca 5 ");
 		}
-	}
-		else {
-			System.out.println("Cantidad de pollitos actual: " + pollitos.size());
-		}
+	
 		
 	}
 
@@ -180,7 +177,7 @@ public class Granja {
 
 	@Override
 	public String toString() {
-		return String.format("DineroEnCaja %s - Ultima Actualizacion %s",
+		return String.format("DineroEnCaja %d - Ultima Actualizacion %s",
 				dineroEnCaja, getUltimaActualizacion());
 	}
 
@@ -315,7 +312,7 @@ public class Granja {
 	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
 			double precioVenta) 
 	{
-		tiposAnimales.add(new TiposAnimales((tiposAnimales.size()+1), animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+		tiposAnimales.add(new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
 		System.out.println("El animal "+ animal +" ha sido agregado");
 	}
 	

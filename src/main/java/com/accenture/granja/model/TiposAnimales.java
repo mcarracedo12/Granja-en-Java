@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 public class TiposAnimales {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	private String animal;
 	private int diasExpiracion;// Expectativa de vida del animal: 21 dias huevos - 2000 dias pollos 
 	private int cantidadMaxima;
@@ -39,8 +39,7 @@ public class TiposAnimales {
 		super();
 	}
 	
-	public TiposAnimales(int id, String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
-		this.id = id;
+	public TiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
 		this.animal = animal;
 		this.diasExpiracion = diasExpiracion;
 		this.cantidadMaxima = cantidadMaxima;
@@ -49,11 +48,11 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -139,9 +138,9 @@ public class TiposAnimales {
 		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidad Maxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
 	}
 
-	public TiposAnimales getById(TiposAnimales tipo_animal_id) {
+	public TiposAnimales getById(Long tipo_animal_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 
