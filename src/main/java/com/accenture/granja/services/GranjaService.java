@@ -16,7 +16,7 @@ public class GranjaService {
     public GranjaRepository granjaRepo;
 
     
-    public Granja buscarGranja(int id) {
+    public Granja buscarGranja(Long id) {
     	Granja granja= granjaRepo.findById(id).orElse(null);
          return granja;
          
@@ -35,6 +35,11 @@ public class GranjaService {
 
 	public void agregarGranja(Granja granja) {
 		granjaRepo.save(granja);
+		
+	}
+
+	public void borrarGranja(Long id) {
+		granjaRepo.deleteById(id);
 		
 	}
 

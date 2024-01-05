@@ -31,7 +31,7 @@ import javax.persistence.OneToMany;
 public class Granja {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private Long id;
 	private double dineroEnCaja;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -94,12 +94,12 @@ public class Granja {
 	}
 
 
-/*	//@SuppressWarnings("unchecked")
-	private List<Animal> getGanadoByTipoAnimal(int tipoAnimal_id) {
+	//@SuppressWarnings("unchecked")
+/*	private List<Animal> getAnimalesByTipoAnimal(int tipoAnimal_id) {
 		List<Animal> ganado = (List<Animal>) animales.stream().filter((animal) ->  tipoAnimal_id == animal.getTiposAnimales().getId());
 		return ganado;
 	}
-*/	
+	*/
 
 	public List<Animal> getAnimalesByTipo(int tipoAnimalId) {
 		//return null;
