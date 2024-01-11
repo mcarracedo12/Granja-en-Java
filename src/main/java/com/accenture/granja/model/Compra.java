@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public class Compra extends Transaccion {
 
    
-	public Compra(String nombrePersona, ArrayList<Producto> productos,  LocalDate fecha) {
+	public Compra(String nombrePersona, ArrayList<Animal> productos,  LocalDate fecha) {
 		super(nombrePersona, productos,  fecha);
 	}
 

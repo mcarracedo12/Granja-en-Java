@@ -31,14 +31,14 @@ public class GranjaController {
 		Granja granja = granjaService.buscarGranja((long)1);
 		return granja;				
 	}
-	
+
 	@GetMapping("/granjas")
 	@ResponseBody
 	public List<Granja> getGranjas() {
 		List<Granja> granjas = granjaService.buscarGranjas();
 		return granjas;				
 	}
-	
+
 	@GetMapping("/granjas/{id}")
 	public Granja getGranjaDetails(@PathVariable Long id) {
 		Granja granja = granjaService.buscarGranja(id);
@@ -47,8 +47,8 @@ public class GranjaController {
 		}
 		return granja;		
 	}
-	
-	
+
+
 	@PostMapping("/granjas")
 	public void createGranja(@RequestBody Granja granja) {
 		granjaService.agregarGranja(granja); // la granja no necesita tener ID para el POST
@@ -56,12 +56,12 @@ public class GranjaController {
 
 	@PutMapping("/granjas/{id}")
 	public void updateGranja(@RequestBody Granja granja, @PathVariable Long id) {
-		granjaService.editarGranja(granja); // // la granja SI necesita tener el ID para el PUT
+		granjaService.editarGranja(granja); //  la granja SI necesita tener el ID para el PUT
 	}
-	
+
 	@DeleteMapping("/granjas/{id}")
 	public void deleteGranja(@PathVariable Long id) {
-		granjaService.borrarGranja(id); // 
+		granjaService.eliminarGranja(id); // 
 	}
-	
+
 }

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 public class Venta extends Transaccion {
 
-	public Venta(String nombrePersona, ArrayList<Producto> productos, LocalDate fecha) {
+	public Venta(String nombrePersona, ArrayList<Animal> productos, LocalDate fecha) {
 		super(nombrePersona, productos, fecha);
 	}
 

@@ -9,21 +9,33 @@ import com.accenture.granja.model.Compra;
 import com.accenture.granja.repository.CompraRepository;
 @Service
 public class CompraService {
-	private final CompraRepository compraRepository;
 
-	   @Autowired
-	   public CompraService(CompraRepository compraRepository) {
+	@Autowired
+	private CompraRepository compraRepository;
 
-	       this.compraRepository = compraRepository;
+	public List<Compra> obtenerTodasLasCompras() {
+		// Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
+		return compraRepository.findAll();
+	}
 
-	   }
-	   
-	   public List<Compra> obtenerTodasLasCompras() {
+	public Compra buscarCompra(Long id) {
+		Compra compra= compraRepository.findById(id).orElse(null);
+		return compra;
+	}
 
-	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
-	    return compraRepository.findAll();
+	public void agregarCompra(Compra compra) {
+		compraRepository.save(compra);
+		
+	}
 
-	   }    
+	public void editarCompra(Compra compra) {
+		compraRepository.save(compra);
+		
+	}
 
-	   
+	public void eliminarCompra(Long id) {
+		compraRepository.deleteById(id);		
+	}    
+
+
 }

@@ -10,26 +10,33 @@ import com.accenture.granja.repository.TipoAnimalRepository;
 
 @Service
 public class TipoAnimalService {
-	private final TipoAnimalRepository tiposAnimalesRepository;
 
-	   @Autowired
-	   public TipoAnimalService(TipoAnimalRepository tiposAnimalesRepository) {
 
-	       this.tiposAnimalesRepository = tiposAnimalesRepository;
+	// Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
 
-	   }
-	   
-	   public List<TiposAnimales> obtenerTodosLosTiposAnimales() {
+	@Autowired
+	private TipoAnimalRepository tiposAnimalesRepository;
 
-	        // Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
-	    return tiposAnimalesRepository.findAll();
+	public List<TiposAnimales> obtenerTodosLosTiposAnimales() {  
+		return tiposAnimalesRepository.findAll();
+	}    
 
-	   }    
-	   
-	   public TiposAnimales getById(long tipoAnimalId) {
-	        return tiposAnimalesRepository.findById(tipoAnimalId)
-	                .orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
-	    }
+	public TiposAnimales getById(long tipoAnimalId) {
+		return tiposAnimalesRepository.findById(tipoAnimalId)
+				.orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
+	}
 
-	   
+	public void agregarTipo(TiposAnimales tipo) {
+		tiposAnimalesRepository.save(tipo);
+	}
+
+	public void editarTipo(TiposAnimales tipo) {
+		tiposAnimalesRepository.save(tipo);		
+	}
+
+	public void eliminarTipo(Long id) {
+		tiposAnimalesRepository.deleteById(id);
+	}
+
+
 }

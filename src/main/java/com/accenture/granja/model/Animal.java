@@ -10,19 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import io.micrometer.core.lang.NonNull;
+//import io.micrometer.core.lang.NonNull;
 @Entity
 public class Animal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	protected Long id;
+	private Long id;
 
 	@ManyToOne
     @JoinColumn(name = "tipo_animal_id")
-	protected TiposAnimales tiposAnimales;
+	public TiposAnimales tiposAnimales;
 	//protected String animal;// Lo busca por tipo de animal 
-	@NonNull
+	//@NonNull
 	protected LocalDate fechaIngresoAGranja;
 	
 	protected int edadEnDiasAlIngresar;
@@ -35,7 +35,7 @@ public class Animal {
 	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 	@ManyToOne
    @JoinColumn(name = "granja_id")
-	protected Granja granjaId;
+	public Granja granjaId;
 
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public Animal() {
@@ -55,6 +55,9 @@ public class Animal {
 		//this.cantidadMaxima = getCantidadMaxima();
 	}
 	
+	public long getId() {
+		return id;
+	}
 
 	public LocalDate getNacimiento() {
 		return nacimiento;
