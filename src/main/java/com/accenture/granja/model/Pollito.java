@@ -11,11 +11,6 @@ public class Pollito extends Animal {
 	//@GeneratedValue
 	protected Long id;
 	
-	//@ManyToOne
-	//@JoinColumn(name = "tiposAnimales_id")
-	//public TiposAnimales tiposAnimales;
-	
-	//protected String animal;// Lo busca por tipo de animal 
 	protected LocalDate fechaIngresoAGranja;
 	protected int edadEnDiasAlIngresar;
 	protected LocalDate nacimiento;// calcula ingreso-edad
@@ -27,9 +22,9 @@ public class Pollito extends Animal {
 	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 	
 
-	public Pollito(TiposAnimales tiposAnimales_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		super(tiposAnimales_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
-		//this.animal= getAnimal();
+	public Pollito(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(tipo_animal_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+		this.tiposAnimales= getAnimalById(tipo_animal_id);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);

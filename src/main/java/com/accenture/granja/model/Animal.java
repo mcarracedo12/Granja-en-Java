@@ -4,11 +4,14 @@ package com.accenture.granja.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import io.micrometer.core.lang.NonNull;
 @Entity
@@ -18,10 +21,18 @@ public class Animal {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@ManyToOne
-    @JoinColumn(name = "tipo_animal_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name = "granja_id")
+	public Granja granja;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+    @JoinColumn(name = "tipos_animal_id")
 	public TiposAnimales tiposAnimales;
-	//protected String animal;// Lo busca por tipo de animal 
+	
+
 	//@NonNull
 	protected LocalDate fechaIngresoAGranja;
 	
@@ -33,18 +44,16 @@ public class Animal {
 	//protected int cantidadMaxima; // Lo busca por tipo de animal 
 	protected double precioCompra;// Se setean al momento de la transaccion correspondiente
 	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
-	@ManyToOne
-   @JoinColumn(name = "granja_id")
-	public Granja granjaId;
 
+	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public Animal() {
 		super();
 	}
 
-	public Animal(TiposAnimales tipo_animal_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Animal(Long tipo_animal_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
-		this.tiposAnimales= tipo_animal_id;
+		this.tiposAnimales= getAnimalById(tipo_animal_id);
 	//	this.animal= getAnimal();
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
@@ -111,6 +120,10 @@ public class Animal {
 
 	public int getEdadActual() {
 		return edadActual;
+	}
+	
+	public TiposAnimales getAnimalById(Long id) {
+		return tiposAnimales;
 	}
 	
 	public String getAnimal() {
@@ -223,7 +236,7 @@ public class Animal {
 	}
 
 	
-	public void agregar(TiposAnimales tipo, int diasEdad, LocalDate i){
+	public void agregar(Long tipo, int diasEdad, LocalDate i){
 		new Animal(tipo, diasEdad, i); 
 	}
 	

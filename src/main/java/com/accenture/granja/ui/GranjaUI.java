@@ -10,7 +10,7 @@ public class GranjaUI {
 
 	public void start() {
 		// TODO Auto-generated method stub
-		
+
 		Granja granja = new Granja(6000000);
 		//	LocalDate now = LocalDate.now();
 
@@ -20,11 +20,11 @@ public class GranjaUI {
 		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
 		granja.setDineroEnCaja(dineroEnCaja);
 
-		*/
+		 */
 
 
-		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-		granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
+	//	granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
+	//	granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
 		//Ganado ganado= new Ganado((long)1, 2, LocalDate.now());
 		//granja.addhuevo(1, 2, LocalDate.now());
 
@@ -50,13 +50,12 @@ public class GranjaUI {
 
 		int opcion = 0;
 		while (opcion != 8) {
-			granja.ofrecerMenu();
+			ofrecerMenu();
 			opcion = scanner.nextInt();
 			switch (opcion) {
 			case 1: 
 			{
 				granja.mostrarEstado();
-				
 				break;
 			}
 
@@ -111,11 +110,11 @@ public class GranjaUI {
 				int tiempoDeReproduccion = scanner.nextInt();
 				System.out.println("Cual va a ser su precio de compra");
 				float precioCompra= scanner.nextFloat();
-//				BigDecimal precioCompra= scanner.nextBigDecimal();
+				//				BigDecimal precioCompra= scanner.nextBigDecimal();
 				System.out.println("Cual va a ser su precio de venta");
 				float precioVenta= scanner.nextFloat();
-//				BigDecimal precioVenta= scanner.nextBigDecimal();
-				granja.addTiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
+				//				BigDecimal precioVenta= scanner.nextBigDecimal();
+				//granja.addTiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
 				break;
 			}
 			}
@@ -124,6 +123,21 @@ public class GranjaUI {
 			System.out.println("Gracias por visitar nuestra granja!!!");
 			scanner.close();
 		}
+
+	}
+
+	private void ofrecerMenu() {
+
+		System.out.println("\n\tIngrese una opcion del menu: ");
+		System.out.println("1. Mostrar estado de la granja");
+		System.out.println("2. Comprar huevos");
+		System.out.println("3. Vender huevos");
+		System.out.println("4. Comprar pollitos");
+		System.out.println("5. Vender pollitos");
+		System.out.println("6. Actualizar granja");
+		System.out.println("7. Dar de alta tipos de animales");
+		System.out.println("8. Salir \n");
+
 
 	}
 

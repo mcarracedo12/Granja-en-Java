@@ -6,12 +6,15 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -29,11 +32,12 @@ public class TiposAnimales {
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> animales= new ArrayList<Animal>();
 	
-	
-	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
+	
+
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public TiposAnimales() {
@@ -136,7 +140,10 @@ public class TiposAnimales {
 	
 	@Override
 	public String toString() {
-		return String.format("Animal " + id + " " + animal + ". \nDias de Expiracion: " + diasExpiracion +  ". \nCantidad Maxima: "+ cantidadMaxima + ". \nTiempo De Reproduccion: " + tiempoDeReproduccion +". \nPrecio de compra " + precioCompra +". \nPrecio de venta: " + precioVenta  +".\n\n");
+		return String.format("Animal: " 
+	//+ getId()
+		+ " " 
+	+ getAnimal() + ". \nDias de Expiracion: " + getDiasExpiracion() +  ". \nCantidad Maxima: "+ getCantidadMaxima() + ". \nTiempo De Reproduccion: " + getTiempoDeReproduccion() +". \nPrecio de compra " + getPrecioCompra() +". \nPrecio de venta: " + getPrecioVenta()  +".\n\n");
 	}
 
 	public TiposAnimales getById(Long tipo_animal_id) {

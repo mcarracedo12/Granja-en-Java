@@ -26,11 +26,10 @@ public class Huevo extends Animal {
 	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
 
 
-	public Huevo(TiposAnimales tipo_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		super(tipo_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
-		
-		this.tiposAnimales= tipo_id;
-		//this.animal= getAnimal();
+	public Huevo(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+		super(tipo_animal_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
+		this.tiposAnimales= getAnimalById(tipo_animal_id);
+
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);

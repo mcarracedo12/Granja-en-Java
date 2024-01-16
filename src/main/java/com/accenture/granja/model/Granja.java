@@ -16,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.accenture.granja.controllers.TipoAnimalController;
+import com.accenture.granja.services.TipoAnimalService;
+
 
 
 
@@ -35,9 +38,9 @@ public class Granja {
 	private double dineroEnCaja;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<TiposAnimales> tiposAnimales = new ArrayList<TiposAnimales>();
-	@OneToMany(mappedBy = "granjaId", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Animal> animales = new ArrayList<Animal>();
+	public List<TiposAnimales> tiposAnimales;
+	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Animal> animales;
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public Granja() {
@@ -148,7 +151,7 @@ public class Granja {
 */
 	public void mostrarEstado() {
 		System.out.println("La caja es de " + this.getDineroEnCaja() + " pesos");
-		this.mostrarTiposAnimales();
+		mostrarAnimales();
 		
 		System.out.println("Fecha de ultima actualizacion: " + this.getUltimaActualizacion()+"\n\n" );
 	}
@@ -156,24 +159,14 @@ public class Granja {
 
 	
 
-	public void mostrarTiposAnimales() {
-		System.out.println("TIPOS DE ANIMALES: " + tiposAnimales.size()+"\n\n");
-		for (TiposAnimales tipo : tiposAnimales) {
-		System.out.println(tipo.toString());
+	public void mostrarAnimales() {
+		System.out.println("ANIMALES: " + animales.size()+"\n\n");
+		for (Animal animal : animales) {
+		System.out.println(animal.toString());
 		}	
 	}
 
-	public void ofrecerMenu() {
-		System.out.println("\n\tIngrese una opcion del menu: ");
-		System.out.println("1. Mostrar estado de la granja");
-		System.out.println("2. Comprar huevos");
-		System.out.println("3. Vender huevos");
-		System.out.println("4. Comprar pollitos");
-		System.out.println("5. Vender pollitos");
-		System.out.println("6. Actualizar granja");
-		System.out.println("7. Dar de alta tipos de animales");
-		System.out.println("8. Salir \n");
-	}
+	
 
 	@Override
 	public String toString() {
@@ -309,21 +302,28 @@ public class Granja {
 		this.ultimaActualizacion = ultimaActualizacion;
 	}
 	
-	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
+	/*public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
 			double precioVenta) 
 	{
-		tiposAnimales.add(new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
-		System.out.println("El animal "+ animal +" ha sido agregado");
+		try {
+			tiposAnimales.add(new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+			System.out.println("El animal "+ animal +" ha sido agregado");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public List<TiposAnimales> getTiposAnimales(){
 		return tiposAnimales;
 	}
+	*/
 
-	
+	/*
 	public void agregarAnimal(TiposAnimales tipoAnimal_id,  int edad, LocalDate fechaIngreso) {
 			List<Animal>animales=((TiposAnimales)this.tiposAnimales).animales;
 			animales.add(new Animal(tipoAnimal_id, edad, fechaIngreso));
 		
 	}
+	*/
 }
