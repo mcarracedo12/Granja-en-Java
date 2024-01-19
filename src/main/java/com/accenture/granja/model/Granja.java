@@ -41,6 +41,10 @@ public class Granja {
 	public List<TiposAnimales> tiposAnimales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> animales;
+	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Compra> compras;
+	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<Venta> ventas;
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public Granja() {

@@ -2,11 +2,19 @@ package com.accenture.granja.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
 public abstract class Transaccion {
@@ -14,16 +22,25 @@ public abstract class Transaccion {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nombrePersona; // Cliente / comprador segun sea la transaccion
-	private ArrayList<Animal> productos = new ArrayList<>();
-	private LocalDate fecha;
-	private double total;
 	
-	public Transaccion(String nombrePersona, ArrayList<Animal> productos, LocalDate fecha) {
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name = "granja_id")
+	public Granja granja;
+	
+	private LocalDate fecha;
+	//private double total;
+	
+	public Transaccion() {
+		super();
+	}
+	
+	public Transaccion(String nombrePersona, LocalDate fecha) {
 		super();
 		this.nombrePersona = nombrePersona;
-		this.productos = productos;
 		this.fecha = fecha;
-		this.total=setTotal();
 	}
 
 	public String getNombrePersona() {
@@ -34,11 +51,8 @@ public abstract class Transaccion {
 		this.nombrePersona = nombrePersona;
 	}
 
-	public ArrayList<Animal> getProductos() {
-		return productos;
-	}
-
-	public double setTotal() {
+	
+	/*public double setTotal() {
 		for (Animal producto : productos) {
 			double total = 0;
 			//total = total + producto.getPrecio();// Aca segun si es compra o venta es el precio que sumo
@@ -50,11 +64,27 @@ public abstract class Transaccion {
 	public double getTotal() {
 		return total;
 	}
-
+*/
 
 
 	public LocalDate getFecha() {
 		return fecha;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Granja getGranja() {
+		return granja;
+	}
+
+	public void setGranja(Granja granja) {
+		this.granja = granja;
 	}
 
 	public void setFecha(LocalDate fecha) {

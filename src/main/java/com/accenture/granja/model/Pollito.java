@@ -16,10 +16,10 @@ public class Pollito extends Animal {
 	protected LocalDate nacimiento;// calcula ingreso-edad
 	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
 	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
-	protected int edadActual;// hoy - nacimiento
+	//protected int edadActual;// hoy - nacimiento
 	//protected int cantidadMaxima; // Lo busca por tipo de animal 
-	protected double precioCompra;// Se setean al momento de la transaccion correspondiente
-	protected double precioVenta; // Se setean al momento de la transaccion correspondiente
+	//public double precioCompra;// Se setean al momento de la transaccion correspondiente
+	//public double precioVenta; // Se setean al momento de la transaccion correspondiente
 	
 
 	public Pollito(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
@@ -28,10 +28,10 @@ public class Pollito extends Animal {
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracion());
-		//this.tiempoDeReproduccion= getTiempoDeReproduccion();
-		this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
-		//this.cantidadMaxima = getCantidadMaxima();
+		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracionByTipo());
+		//this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
+		//this.precioCompra= getPrecioCompraByTipo();
+		//this.precioVenta= 0;
 	}
 
 
