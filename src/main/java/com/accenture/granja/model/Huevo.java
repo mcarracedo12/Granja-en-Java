@@ -38,7 +38,7 @@ public class Huevo extends Animal {
 		//this.precioCompra= getPrecioCompraByTipo();
 		//this.precioVenta= 0;
 	}
-	
+
 
 	@Override
 	public void reproducir(LocalDate i) {

@@ -24,11 +24,10 @@ public class Venta extends Transaccion {
 	private Long id;
 	private String nombrePersona;
 	
-	@OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> productos = new ArrayList<Animal>();
 	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
@@ -44,14 +43,14 @@ public class Venta extends Transaccion {
 		super(nombrePersona, fecha);
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-
+	
 	public String getNombrePersona() {
 		return nombrePersona;
 	}
@@ -60,13 +59,7 @@ public class Venta extends Transaccion {
 		this.nombrePersona = nombrePersona;
 	}
 
-	public List<Animal> getProductos() {
-		return productos;
-	}
 
-	public void setProductos(List<Animal> productos) {
-		this.productos = productos;
-	}
 
 	public Granja getGranja() {
 		return granja;

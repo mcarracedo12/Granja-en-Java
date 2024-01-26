@@ -2,11 +2,14 @@ package com.accenture.granja.ui;
 
 
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.accenture.granja.model.*;
 
 public class GranjaUI {
+	
+
 
 	public void start() {
 		// TODO Auto-generated method stub
@@ -23,15 +26,20 @@ public class GranjaUI {
 		 */
 
 
-	//	granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-	//	granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
+		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
+		granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
 		//Ganado ganado= new Ganado((long)1, 2, LocalDate.now());
 		//granja.addhuevo(1, 2, LocalDate.now());
 
 
+		TiposAnimales tipo1 = new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
 
-
-		//granja.agregarAnimal(1, 15, LocalDate.now());// agrega Huevo
+		tipo1.agregar(tipo1);// agrega Huevo
+		
+		
+		Animal animal = new Animal();
+		animal.agregar((long)2, 15, LocalDate.now());
+		
 		//granja.agregarAnimal(2, 15, LocalDate.now());// agrega Pollo
 
 		//granja.addPollito(new Pollito(2, 26, now));
@@ -101,7 +109,7 @@ public class GranjaUI {
 
 				System.out.println("Ingrese nombre de tipo de animal\n");
 
-				String animal= scanner.next();
+				String animalName= scanner.next();
 				System.out.println("Ingrese cantidad de dias que se animal vive");
 				int diasExpiracion = scanner.nextInt();
 				System.out.println("Ingrese cantidad maxima que quiere tener en la granja");
@@ -110,11 +118,12 @@ public class GranjaUI {
 				int tiempoDeReproduccion = scanner.nextInt();
 				System.out.println("Cual va a ser su precio de compra");
 				float precioCompra= scanner.nextFloat();
-				//				BigDecimal precioCompra= scanner.nextBigDecimal();
+				//				double precioCompra= scanner.nextBigDecimal();
 				System.out.println("Cual va a ser su precio de venta");
 				float precioVenta= scanner.nextFloat();
 				//				BigDecimal precioVenta= scanner.nextBigDecimal();
-				//granja.addTiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
+				//TiposAnimales tipo = new TiposAnimales(animalName, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
+				granja.addTiposAnimales(animalName, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
 				break;
 			}
 			}

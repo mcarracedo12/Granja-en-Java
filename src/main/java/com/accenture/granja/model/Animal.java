@@ -2,6 +2,7 @@ package com.accenture.granja.model;
 
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,28 +35,30 @@ public class Animal {
     @JoinColumn(name = "tipos_animal_id")
 	public TiposAnimales tiposAnimales;
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "compra_id")
 	public Compra compra;
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "venta_id")
 	public Venta venta;
+	
 
 	//@NonNull
 	public LocalDate fechaIngresoAGranja;
 	//@NonNull
 	public int edadEnDiasAlIngresar;
-	protected LocalDate nacimiento;// calcula ingreso-edad
-	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
-	
-	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
-	//public int edadActual= getEdadActual();// hoy - nacimiento
-	//protected int cantidadMaxima; // Lo busca por tipo de animal 
+	public LocalDate nacimiento;// calcula ingreso-edad
+	public LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
+
+	//public int edadActual;
 	public double precioCompra;// Se setean al momento de la transaccion correspondiente
 	public double precioVenta; // Se setean al momento de la transaccion correspondiente
+
 
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
@@ -70,20 +73,16 @@ public class Animal {
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = getNacimiento();
 		this.fechaExpiracion = getFechaExpiracion();
-		//this.edadActual = setEdadActual();
-		//this.precioCompra= getPrecioCompraByTipo();
-		//this.precioVenta= 0;
+		
+				
 	}
-	
-	/*public int setEdadActual() {
-		int edad= LocalDate.now().compareTo(this.getNacimiento());
-		return edad;
-	}
-*/
+
 	public long getId() {
 		return id;
 	}
 
+	
+	
 	public LocalDate getNacimiento() {
 		return fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 	}
@@ -99,11 +98,54 @@ public class Animal {
 	public LocalDate getFechaExpiracion() {
 		return getNacimiento().plusDays(getDiasExpiracionByTipo());
 	}
+/*
+	public Compra getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
+*/
+	public int getEdadActual() { 
+		int edad = (int)ChronoUnit.DAYS.between(getNacimiento(), LocalDate.now());
+		return edad;
+	}
 
 
 
+/*	public Venta getVentaById(Long venta_id) {
+		return venta;
+	}
+	*/
+	public void setVenta(Venta venta) {
+		if(venta!= null) {	
+		this.venta = venta;
+		}
+	}
 	
+	public Venta getVenta() {
+		if(venta== null) {
+			return null;
+		}else
+		return venta;
+	}
 	
+	public Compra getCompra() {
+		if(compra== null) {
+			return null;
+		}else
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		if(compra!= null) {	
+		this.compra = compra;
+		}
+	}
+
+
+
 	public void reproducir(LocalDate i) {
 	}
 	
@@ -118,16 +160,9 @@ public class Animal {
 		return LocalDate.now().compareTo(this.getNacimiento());
 	}
 	*/
-	public TiposAnimales getAnimalById(Long id) {
-		return tiposAnimales;
-	}
+
 	
-	public String getAnimalByTipo() {
-		if(tiposAnimales== null) {
-			return null;
-		}else
-		return tiposAnimales.getAnimal();
-	}
+
 	
 /*	public void comprar(Ganado tipoGanado, int edad) {
 		this.precioCompra = setPrecioCompraByAnimal();
@@ -167,9 +202,15 @@ public class Animal {
 		this.tiposAnimales = tiposAnimales;
 		}
 	}
-	
-
-	
+	public TiposAnimales getAnimalById(Long id) {
+		return tiposAnimales;
+	}
+	public String getAnimalByTipo() {
+		if(tiposAnimales== null) {
+			return null;
+		}else
+		return tiposAnimales.getAnimal();
+	}
 
 	public int getDiasExpiracionByTipo() {
 		if(tiposAnimales== null) {
@@ -224,5 +265,7 @@ public class Animal {
 	public void agregar(Long tipo, int diasEdad, LocalDate i){
 		new Animal(tipo, diasEdad, i); 
 	}
+
+	
 	
 }

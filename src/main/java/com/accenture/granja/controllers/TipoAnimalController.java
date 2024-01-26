@@ -36,7 +36,7 @@ public class TipoAnimalController {
 	}
 
 	@PostMapping("/tipos")
-	public void createAnimal(@RequestBody TiposAnimales tipo) {
+	public void createTipoAnimal(@RequestBody TiposAnimales tipo) {
 		tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
 	}
 

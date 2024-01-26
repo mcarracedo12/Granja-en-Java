@@ -2,7 +2,6 @@ package com.accenture.granja.model;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 //import java.util.stream.Collectors;
@@ -15,9 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.accenture.granja.controllers.TipoAnimalController;
-import com.accenture.granja.services.TipoAnimalService;
 
 
 
@@ -36,6 +32,7 @@ public class Granja {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private double dineroEnCaja;
+	private String nombre;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<TiposAnimales> tiposAnimales;
@@ -62,6 +59,22 @@ public class Granja {
 
 	public void setDineroEnCaja(double dineroEnCaja) {
 		this.dineroEnCaja = dineroEnCaja;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public LocalDate getUltimaActualizacion() {
+		return ultimaActualizacion;
+	}
+
+	public void setUltimaActualizacion(LocalDate ultimaActualizacion) {
+		this.ultimaActualizacion = ultimaActualizacion;
 	}
 	
 	public void comprarPollitos(int cant) {
@@ -155,8 +168,8 @@ public class Granja {
 */
 	public void mostrarEstado() {
 		System.out.println("La caja es de " + this.getDineroEnCaja() + " pesos");
-		mostrarAnimales();
-		
+		//mostrarAnimales();
+		mostrarTiposAnimales();
 		System.out.println("Fecha de ultima actualizacion: " + this.getUltimaActualizacion()+"\n\n" );
 	}
 
@@ -164,12 +177,34 @@ public class Granja {
 	
 
 	public void mostrarAnimales() {
-		System.out.println("ANIMALES: " + animales.size()+"\n\n");
-		for (Animal animal : animales) {
-		System.out.println(animal.toString());
+		try {
+			System.out.println("ANIMALES: " + animales.size()+"\n\n");
+			for (Animal animal : animales) {
+			System.out.println(animal.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	public void mostrarTiposAnimales() {
+		try {
+			if(tiposAnimales!=null) {
+			System.out.println("TIPOS DE ANIMALES: " + tiposAnimales.size()+"\n\n");
+			for (TiposAnimales tipo : tiposAnimales) {
+			System.out.println(tipo.toString());
+			}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}	
 	}
 
+	public void addTiposAnimales(TiposAnimales tipo) {
+		tipo.agregar(tipo);
+	}
 	
 
 	@Override
@@ -298,25 +333,20 @@ public class Granja {
 		return id;
 	}
 
-	public LocalDate getUltimaActualizacion() {
-		return ultimaActualizacion;
-	}
-
-	public void setUltimaActualizacion(LocalDate ultimaActualizacion) {
-		this.ultimaActualizacion = ultimaActualizacion;
-	}
 	
-	/*public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra,
-			double precioVenta) 
-	{
+	
+	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
 		try {
-			tiposAnimales.add(new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta));
+			TiposAnimales tipo = new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
+			tipo.agregar(tipo);
 			System.out.println("El animal "+ animal +" ha sido agregado");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
+/*
 	
 	public List<TiposAnimales> getTiposAnimales(){
 		return tiposAnimales;

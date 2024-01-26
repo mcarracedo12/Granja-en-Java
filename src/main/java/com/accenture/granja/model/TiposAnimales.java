@@ -14,11 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.accenture.granja.repository.TipoAnimalRepository;
+import com.accenture.granja.services.TipoAnimalService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
 public class TiposAnimales {
+	
+//	@Autowired
+//	private TipoAnimalService tipoAnimalService;
+	
+//	@Autowired
+	//private TipoAnimalRepository tiposAnimalesRepository;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
@@ -28,6 +39,7 @@ public class TiposAnimales {
 	private int tiempoDeReproduccion; // cada cuanto se reproduce: - 21 dias huevos - 1 dia pollos 
 	private double precioCompra; // Los precios se actualizan a nivel tipoAnimal, por cada Transaccion se toma el precio de ahi para los productos
 	private double precioVenta;
+	private String imagen;
 	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Animal> animales= new ArrayList<Animal>();
@@ -108,6 +120,8 @@ public class TiposAnimales {
 	public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;
 	}
+	
+	
 
 	/*public void mostrarDetallesCadaAnimal() {
 		for(Ganado animal: huevos) {
@@ -138,6 +152,14 @@ public class TiposAnimales {
 	*/
 	
 	
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Animal: " 
@@ -151,6 +173,12 @@ public class TiposAnimales {
 		return this;
 	}
 
+	public void agregar(TiposAnimales tipo1) {
+		//TipoAnimalService.agregarTipo(tipo1);
+		System.out.println("Quiero hacer el post aca en TiposAnimales.agregar(tipo)");
+		//tiposAnimalesRepository.save(tipo1);
+	}
+	
 
 	/*public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;

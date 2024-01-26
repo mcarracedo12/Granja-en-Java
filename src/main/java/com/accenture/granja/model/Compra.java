@@ -30,7 +30,7 @@ public class Compra extends Transaccion {
 	public List<Animal> productos = new ArrayList<Animal>();
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
@@ -46,11 +46,11 @@ public class Compra extends Transaccion {
 		super(nombrePersona, fecha);
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -60,14 +60,6 @@ public class Compra extends Transaccion {
 
 	public void setNombrePersona(String nombrePersona) {
 		this.nombrePersona = nombrePersona;
-	}
-
-	public List<Animal> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Animal> productos) {
-		this.productos = productos;
 	}
 
 	public Granja getGranja() {
