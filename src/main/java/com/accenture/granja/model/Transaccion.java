@@ -25,11 +25,11 @@ public abstract class Transaccion {
 	
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
-	
+	*/
 	private LocalDate fecha;
 	//private double total;
 	
@@ -79,7 +79,7 @@ public abstract class Transaccion {
 		this.id = id;
 	}
 	
-
+/*
 	public Granja getGranja() {
 		return granja;
 	}
@@ -87,7 +87,7 @@ public abstract class Transaccion {
 	public void setGranja(Granja granja) {
 		this.granja = granja;
 	}
-
+*/
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}

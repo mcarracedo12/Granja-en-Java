@@ -32,7 +32,7 @@ public class Compra extends Transaccion {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
-	@JoinColumn(name = "granja_id")
+	@JoinColumn(name = "granjaCompra_id")
 	public Granja granja;
 	
 	
@@ -61,7 +61,7 @@ public class Compra extends Transaccion {
 	public void setNombrePersona(String nombrePersona) {
 		this.nombrePersona = nombrePersona;
 	}
-
+/*
 	public Granja getGranja() {
 		return granja;
 	}
@@ -69,7 +69,7 @@ public class Compra extends Transaccion {
 	public void setGranja(Granja granja) {
 		this.granja = granja;
 	}
-
+*/
 	public LocalDate getFecha() {
 		return fecha;
 	}
