@@ -42,10 +42,11 @@ public class TiposAnimales {
 	private String imagen;
 	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<Animal> animales= new ArrayList<Animal>();
-	
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
+	public List<Animal> animales;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	//@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
@@ -79,6 +80,14 @@ public class TiposAnimales {
 
 	public void setAnimal(String animal) {
 		this.animal = animal;
+	}
+
+	public List<Animal> getAnimales() {
+		return animales;
+	}
+
+	public void setAnimales(List<Animal> animales) {
+		this.animales = animales;
 	}
 
 	public int getDiasExpiracion() {

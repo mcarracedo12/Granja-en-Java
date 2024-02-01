@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -24,12 +25,14 @@ public class Venta extends Transaccion {
 	private Long id;
 	private String nombrePersona;
 	
-	@OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy= "venta", orphanRemoval = true)
+	//@JsonIgnore
 	public List<Animal> productos = new ArrayList<Animal>();
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-	@JoinColumn(name = "granjaVenta_id")
+	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
 	
@@ -77,7 +80,23 @@ public class Venta extends Transaccion {
 		this.fecha = fecha;
 	}
 
-	
+
+	public List<Animal> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Animal> productos) {
+		this.productos = productos;
+	}
+
+	public Granja getGranja() {
+		return granja;
+	}
+
+	public void setGranja(Granja granja) {
+		this.granja = granja;
+	}
+
 	
 	
 }

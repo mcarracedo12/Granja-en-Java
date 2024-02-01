@@ -2,6 +2,7 @@ package com.accenture.granja.model;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 //import java.util.stream.Collectors;
@@ -14,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -35,12 +38,16 @@ public class Granja {
 	private String nombre;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	public List<TiposAnimales> tiposAnimales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	public List<Animal> animales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	//@JsonIgnore
 	public List<Compra> compras;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	//@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
 	public List<Venta> ventas;
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
@@ -346,12 +353,17 @@ public class Granja {
 		}
 		
 	}
-/*
+
 	
 	public List<TiposAnimales> getTiposAnimales(){
 		return tiposAnimales;
 	}
-	*/
+	public List<Animal> getAnimales(){
+		if(animales==null) {
+			return null;
+		}
+		return animales;
+	}
 
 	/*
 	public void agregarAnimal(TiposAnimales tipoAnimal_id,  int edad, LocalDate fechaIngreso) {

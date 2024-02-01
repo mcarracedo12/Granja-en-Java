@@ -3,6 +3,10 @@ package com.accenture.granja.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.springframework.lang.NonNull;
@@ -25,27 +30,29 @@ public class Animal {
 	private Long id;
 
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
     @JoinColumn(name = "tipos_animal_id")
 	public TiposAnimales tiposAnimales;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "compra_id")
 	public Compra compra;
 	
-	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "venta_id")
 	public Venta venta;
+	
+
 	
 
 	//@NonNull
@@ -98,15 +105,10 @@ public class Animal {
 	public LocalDate getFechaExpiracion() {
 		return getNacimiento().plusDays(getDiasExpiracionByTipo());
 	}
-/*
-	public Compra getCompra() {
-		return compra;
-	}
 
-	public void setCompra(Compra compra) {
-		this.compra = compra;
-	}
-*/
+
+
+
 	public int getEdadActual() { 
 		int edad = (int)ChronoUnit.DAYS.between(getNacimiento(), LocalDate.now());
 		return edad;
