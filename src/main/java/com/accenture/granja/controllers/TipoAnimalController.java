@@ -48,20 +48,16 @@ public class TipoAnimalController {
 	public ResponseEntity<TiposAnimales> getTipoAnimalById(@PathVariable Long id, @PathVariable Long granja_id) {
 	    List<TiposAnimales> tiposAnimales = tipoAnimalService.obtenerTodosLosTiposAnimales();
 	    
-	    // Filtrar tipos de animales por id y granja
-	    List<TiposAnimales> tipos = tiposAnimales.stream()
-	                                            .filter(tipo -> tipo.getId()==id && tipo.getGranjaId()==granja_id)
-	                                            .collect(Collectors.toList());
-	    
-	    // Verificar si se encontró un tipo de animal
-	    if (!tipos.isEmpty()) {
-	        TiposAnimales tipoAnimal = tipos.get(0);
-	        return ResponseEntity.ok(tipoAnimal);
-	    } else {
-	        // Si no se encuentra el tipo de animal, retornar un ResponseEntity con estado 404 (Not Found)
-	        System.out.println("No se encontro ese tipo");
-	    	return ResponseEntity.notFound().build();
-	    }
+	    TiposAnimales tipos = null;
+	    try {
+			tipos = tiposAnimales.stream().filter(t->t.getId()== id && t.getGranjaId()== granja_id).findFirst().get();
+			return ResponseEntity.ok(tipos);
+		} catch (Exception e) {
+			e.printStackTrace();
+			 System.out.println("No se encontro ese tipo");
+				return ResponseEntity.notFound().build();
+		}
+			    
 	}
 	
 	
