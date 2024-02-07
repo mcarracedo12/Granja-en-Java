@@ -26,37 +26,14 @@ public class TipoAnimalController {
 
 	@GetMapping("/granjas/{granja_id}/tipos")
 	public List<TiposAnimales> getTiposAnimales(@PathVariable Long granja_id) {
-		List<TiposAnimales> allTipos = tipoAnimalService.obtenerTodosLosTiposAnimales();
-		 /*List<TiposAnimales> tipos = new ArrayList<>();
-		    // Filtrar los tipos de animales para la granja específica
-		    for (TiposAnimales tipo : allTipos) {
-		        if (tipo.getGranjaId()==granja_id) {
-		            tipos.add(tipo);
-		        }
-		    }
-		    */
-		 // Filtrar los tipos de animales para la granja específica usando Stream API
-		    List<TiposAnimales> tipos = allTipos.stream()
-		            .filter(tipo -> tipo.getGranjaId()==granja_id)
-		            .collect(Collectors.toList());
-		    
+		List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimalesByGranja(granja_id);
 		return tipos;
 
 	}
 
 	@GetMapping("/granjas/{granja_id}/tipos/{id}")
 	public ResponseEntity<TiposAnimales> getTipoAnimalById(@PathVariable Long id, @PathVariable Long granja_id) {
-	    List<TiposAnimales> tiposAnimales = tipoAnimalService.obtenerTodosLosTiposAnimales();
-	    
-	    TiposAnimales tipos = null;
-	    try {
-			tipos = tiposAnimales.stream().filter(t->t.getId()== id && t.getGranjaId()== granja_id).findFirst().get();
-			return ResponseEntity.ok(tipos);
-		} catch (Exception e) {
-			e.printStackTrace();
-			 System.out.println("No se encontro ese tipo");
-				return ResponseEntity.notFound().build();
-		}
+	  return tipoAnimalService.getByGranjaIdAndId(granja_id, id);
 			    
 	}
 	
