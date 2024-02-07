@@ -35,6 +35,7 @@ public class Animal {
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
     @JoinColumn(name = "tipos_animal_id")
@@ -80,15 +81,12 @@ public class Animal {
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = getNacimiento();
 		this.fechaExpiracion = getFechaExpiracion();
-		
-				
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	
 	
 	public LocalDate getNacimiento() {
 		return fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);

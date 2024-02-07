@@ -181,6 +181,10 @@ public class TiposAnimales {
 		// TODO Auto-generated method stub
 		return this;
 	}
+	
+	public long getGranjaId() {
+		return granja.getId();
+	}
 
 	public void agregar(TiposAnimales tipo1) {
 		//TipoAnimalService.agregarTipo(tipo1);
