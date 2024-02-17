@@ -3,10 +3,6 @@ package com.accenture.granja.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,16 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import org.springframework.lang.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.accenture.granja.controllers.AnimalController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import io.micrometer.core.lang.NonNull;
 @Entity
 public class Animal {
+
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -146,14 +144,36 @@ public class Animal {
 
 
 
-	public void reproducir(LocalDate i) {
+	public void reproducir() {
+		LocalDate i = granja.getUltimaActualizacion();
+		while( i.isBefore(LocalDate.now())) {
+				if( i.isBefore(getFechaExpiracion())) {
+					System.out.println("Fecha de reproduccion: " + i);
+					agregar(getTipoId(), 0, i);
+					 i.plusDays(getTiempoDeReproduccionByTipo());
+				}
+				else {
+					System.out.println("Hay que eliminar Animal id " + getId());
+					//eliminar(getId());
+				}
+				System.out.println("La ultima fecha de Actualizacion es: " + granja.getUltimaActualizacion());
+		}
+		System.out.println("Se actualizo Granja exitosamente a la fecha " + granja.getUltimaActualizacion() );
 	}
+	
 	
 	public int getTiempoDeReproduccionByTipo() {
 		if(tiposAnimales==null) {
 			return 0;
 		}else
 		return tiposAnimales.getTiempoDeReproduccion();
+	}
+	
+	public long getTipoId() {
+		if(tiposAnimales==null) {
+			return 0;
+		}else
+		return tiposAnimales.getId();
 	}
 	
 /*	public int getEdadActual() {

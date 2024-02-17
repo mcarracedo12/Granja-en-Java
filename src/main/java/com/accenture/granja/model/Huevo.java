@@ -41,19 +41,24 @@ public class Huevo extends Animal {
 
 
 	@Override
-	public void reproducir(LocalDate i) {
-		//LocalDate i = nacimiento.plusDays(tiempoDeReproduccion);
+	public void reproducir() {
+		LocalDate i = nacimiento.plusDays(getTiempoDeReproduccionByTipo());
 		if (i.isBefore(LocalDate.now())) {
 
 			if (i.equals(fechaExpiracion)) {
 				System.out.println("Convierto huevo en pollito en la fecha: " + i);
-				//new Animal(2, 0, i);
+				Pollito pollito = new Pollito((long)2, 0, i);
+				agregar((long)2, 0, i);
+				pollito.reproducir();
 				//List<Huevo> huevos = (ArrayList<Huevo>) huevos.stream().filter((h) -> {return h != this;}).collect(Collectors.toList());
 				System.out.println("Pollito creado con fecha de nacimiento " + i);
-
-				//i = i.plusDays(tiempoDeReproduccion);
+				//this.eliminar(getId());
+				System.out.println("Hay que eliminar Animal id " + getId());
+				//eliminar(getId());
+				i = i.plusDays(getTiempoDeReproduccionByTipo());
 			}
-			//super.reproducir(i);
+			
+			
 		}
 	}
 }

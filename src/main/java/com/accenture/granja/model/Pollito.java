@@ -37,13 +37,16 @@ public class Pollito extends Animal {
 
 	
 	@Override
-	public void reproducir(LocalDate i) {
+	public void reproducir() {
+		LocalDate i = granja.getUltimaActualizacion();
 		if (i.isBefore(LocalDate.now())) {
-			//new Huevo(1, 0, i);
+			Huevo huevo = new Huevo((long)1,0, i);
+			agregar((long)1, 0, i);
+			huevo.reproducir();
 			System.out.println("Huevo creado con fecha de nacimiento " + i);
-			//i = i.plusDays(tiempoDeReproduccion);
+			i = i.plusDays( getTiempoDeReproduccionByTipo());
 		}
-		//super.reproducir(i);
+	
 	}
 	
 }

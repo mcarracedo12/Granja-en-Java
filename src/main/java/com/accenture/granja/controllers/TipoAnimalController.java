@@ -26,7 +26,7 @@ public class TipoAnimalController {
 
 	@GetMapping("/granjas/{granja_id}/tipos")
 	public List<TiposAnimales> getTiposAnimales(@PathVariable Long granja_id) {
-		List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimalesByGranja(granja_id);
+	List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimalesByGranja(granja_id);
 		return tipos;
 
 	}

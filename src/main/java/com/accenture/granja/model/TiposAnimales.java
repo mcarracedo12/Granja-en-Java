@@ -46,7 +46,7 @@ public class TiposAnimales {
 	public List<Animal> animales;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	//@JsonIgnore
+	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
@@ -67,7 +67,13 @@ public class TiposAnimales {
 	}
 
 	public long getId() {
-		return id;
+		try {
+			return id;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	public void setId(long id) {
