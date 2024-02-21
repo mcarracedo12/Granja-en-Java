@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 
 import com.accenture.granja.repository.TipoAnimalRepository;
 import com.accenture.granja.services.TipoAnimalService;
@@ -45,6 +46,7 @@ public class TiposAnimales {
 	@JsonIgnore
 	public List<Animal> animales;
 	
+	@NonNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
@@ -188,8 +190,30 @@ public class TiposAnimales {
 		return this;
 	}
 	
+	public Granja getGranja() {
+		if(granja== null) {
+			return null;
+		}else
+		return granja;
+	}
+	
+
+	public void setGranja(Granja granja) {
+		if(granja!= null) {	
+		this.granja = granja;
+		}
+	}
+	
 	public long getGranjaId() {
-		return granja.getId();
+		long id=(long)-1;
+		if (granja!=null) {
+			id = granja.getId();
+		}
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void agregar(TiposAnimales tipo1) {

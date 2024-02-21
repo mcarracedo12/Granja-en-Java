@@ -38,10 +38,10 @@ public class Granja {
 	private String nombre;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
+	//@JsonIgnore
 	public List<TiposAnimales> tiposAnimales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
+	//@JsonIgnore
 	public List<Animal> animales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore

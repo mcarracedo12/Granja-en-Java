@@ -1,5 +1,6 @@
 package com.accenture.granja.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,16 +57,17 @@ public class TipoAnimalService {
 
 	public List<TiposAnimales> obtenerTodosLosTiposAnimalesByGranja(long granja_id) {
 		List<TiposAnimales> allTipos = obtenerTodosLosTiposAnimales();
-		 /*List<TiposAnimales> tipos = new ArrayList<>();
+		/* List<TiposAnimales> tipos = new ArrayList<>();
 		    // Filtrar los tipos de animales para la granja específica
 		    for (TiposAnimales tipo : allTipos) {
 		        if (tipo.getGranjaId()==granja_id) {
 		            tipos.add(tipo);
 		        }
 		    }
-		    */
+		  */  
+		
 		 // Filtrar los tipos de animales para la granja específica usando Stream API
-		    List<TiposAnimales> tipos = allTipos.stream()
+		   List<TiposAnimales> tipos = allTipos.stream()
 		            .filter(tipo -> tipo.getGranjaId()==granja_id)
 		            .collect(Collectors.toList());
 		    
