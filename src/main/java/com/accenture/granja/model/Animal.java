@@ -41,7 +41,7 @@ public class Animal {
 	
 	
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinColumn(name = "compra_id")
 	public Compra compra;
