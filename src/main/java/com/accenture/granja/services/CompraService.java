@@ -2,12 +2,15 @@ package com.accenture.granja.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.accenture.granja.model.Compra;
 import com.accenture.granja.repository.CompraRepository;
 @Service
+@Transactional// Hace un rollback si alg ova mal en la transaccion
 public class CompraService {
 
 	@Autowired
@@ -21,6 +24,10 @@ public class CompraService {
 	public Compra buscarCompra(Long id) {
 		Compra compra= compraRepository.findById(id).orElse(null);
 		return compra;
+	}
+	
+	public List<Compra> buscarComprasByGranjaId(Long granjaId){
+		return compraRepository.findByGranjaId(granjaId);
 	}
 
 	public void agregarCompra(Compra compra) {

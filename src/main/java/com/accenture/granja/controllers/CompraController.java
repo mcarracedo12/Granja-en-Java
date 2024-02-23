@@ -21,10 +21,10 @@ public class CompraController {
 	@Autowired
 	private CompraService compraService;
 
-	@GetMapping("/compras")
-	public List<Compra> getCompras() {
+	@GetMapping("/granjas/{granja_id}/compras")
+	public List<Compra> getCompras(@PathVariable Long granja_id) {
 		// Aca se instancia al Servicio donde esta la logica central
-		return compraService.obtenerTodasLasCompras();
+		return compraService.buscarComprasByGranjaId(granja_id);
 	}
 	
 	@GetMapping("/compras/{id}")

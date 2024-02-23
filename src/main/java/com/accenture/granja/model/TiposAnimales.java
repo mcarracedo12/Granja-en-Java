@@ -204,6 +204,7 @@ public class TiposAnimales {
 		}
 	}
 	
+	
 	public long getGranjaId() {
 		long id=(long)-1;
 		if (granja!=null) {

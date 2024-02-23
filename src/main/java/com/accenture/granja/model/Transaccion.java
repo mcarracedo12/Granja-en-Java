@@ -18,9 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
 public abstract class Transaccion {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+
 	private String nombrePersona; // Cliente / comprador segun sea la transaccion
 	
 	
@@ -71,13 +69,6 @@ public abstract class Transaccion {
 		return fecha;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 	
 /*
 	public Granja getGranja() {

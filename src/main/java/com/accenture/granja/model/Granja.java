@@ -44,10 +44,10 @@ public class Granja {
 	@JsonIgnore
 	public List<Animal> animales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JsonIgnore
+	@JsonIgnore
 	public List<Compra> compras;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
+	@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
 	public List<Venta> ventas;
 	
 	//Agrego para que no tire error despues nada mas, no deberia hacer falta
