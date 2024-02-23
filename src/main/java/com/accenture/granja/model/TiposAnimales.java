@@ -43,7 +43,7 @@ public class TiposAnimales {
 	private String imagen;
 	
 	@OneToMany(mappedBy = "tiposAnimales", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
+	//@JsonIgnore
 	public List<Animal> animales;
 	
 	@NonNull
