@@ -21,13 +21,19 @@ public class CompraService {
 		return compraRepository.findAll();
 	}
 
-	public Compra buscarCompra(Long id) {
+	public Compra buscarCompraById(Long id) {
 		Compra compra= compraRepository.findById(id).orElse(null);
 		return compra;
 	}
 	
+	public Compra getCompraByIdAndGranjaId(Long id, Long granjaId) {
+        return compraRepository.findByGranjaIdAndId(granjaId, id);
+    }
+	
+	
 	public List<Compra> buscarComprasByGranjaId(Long granjaId){
 		return compraRepository.findByGranjaId(granjaId);
+		
 	}
 
 	public void agregarCompra(Compra compra) {

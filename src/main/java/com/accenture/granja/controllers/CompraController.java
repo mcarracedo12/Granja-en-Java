@@ -3,6 +3,7 @@ package com.accenture.granja.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +21,28 @@ import com.accenture.granja.services.CompraService;
 public class CompraController {
 	@Autowired
 	private CompraService compraService;
+	
+	// Aca se instancia al Servicio donde esta la logica central
+	
+	@GetMapping("/compras")
+	public List<Compra> getCompras() {
+		return compraService.obtenerTodasLasCompras();
+	}
 
 	@GetMapping("/granjas/{granja_id}/compras")
-	public List<Compra> getCompras(@PathVariable Long granja_id) {
-		// Aca se instancia al Servicio donde esta la logica central
+	public List<Compra> getComprasMisCompras(@PathVariable Long granja_id) {
 		return compraService.buscarComprasByGranjaId(granja_id);
 	}
 	
-	@GetMapping("/compras/{id}")
-	public Compra getCompraDetails(@PathVariable Long id) {
-		return compraService.buscarCompra(id);
+	@GetMapping("/granjas/{granja_id}/compras/{id}")
+	public ResponseEntity<Compra> getCompraDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
+		Compra compra = compraService.getCompraByIdAndGranjaId(id, granja_id);
+        if (compra != null) {
+            return ResponseEntity.ok(compra);
+        } else {
+            return ResponseEntity.notFound().build();
+        }	 
 	}
-
 	
 	@PostMapping("/compras")
 	public void createCompra(@RequestBody Compra compra) {
