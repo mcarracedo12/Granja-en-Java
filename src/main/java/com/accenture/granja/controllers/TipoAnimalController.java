@@ -1,7 +1,6 @@
 package com.accenture.granja.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accenture.granja.model.Compra;
 import com.accenture.granja.model.TiposAnimales;
+import com.accenture.granja.model.Venta;
 import com.accenture.granja.services.TipoAnimalService;
 
 @RestController
@@ -33,11 +34,25 @@ public class TipoAnimalController {
 
 	}
 
+
 	@GetMapping("/granjas/{granja_id}/tipos/{id}")
-	public ResponseEntity<TiposAnimales> getTipoAnimalById(@PathVariable Long id, @PathVariable Long granja_id) {
-	  return tipoAnimalService.getByGranjaIdAndId(granja_id, id);
-			    
+	public ResponseEntity<TiposAnimales> getTipoDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
+		TiposAnimales tipo = tipoAnimalService.getByGranjaIdAndId(id, granja_id);
+        if (tipo != null) {
+            return ResponseEntity.ok(tipo);
+        } else {
+            return ResponseEntity.notFound().build();
+        }	 
+  
 	}
+	
+
+	
+	
+	
+	
+	
+	
 	
 	
 

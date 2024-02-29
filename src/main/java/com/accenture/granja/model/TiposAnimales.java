@@ -1,7 +1,6 @@
 package com.accenture.granja.model;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,22 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 
-import com.accenture.granja.repository.TipoAnimalRepository;
-import com.accenture.granja.services.TipoAnimalService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
 public class TiposAnimales {
-	
-//	@Autowired
-//	private TipoAnimalService tipoAnimalService;
-	
-//	@Autowired
-	//private TipoAnimalRepository tiposAnimalesRepository;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -52,9 +42,6 @@ public class TiposAnimales {
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
-
-	
-	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public TiposAnimales() {
 		super();
 	}
@@ -72,7 +59,6 @@ public class TiposAnimales {
 		try {
 			return id;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -205,7 +191,7 @@ public class TiposAnimales {
 	}
 	
 	
-	public long getGranjaId() {
+	public long getGranja_id() {
 		long id=(long)-1;
 		if (granja!=null) {
 			id = granja.getId();
