@@ -1,15 +1,11 @@
 package com.accenture.granja.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import com.accenture.granja.model.TiposAnimales;
-import com.accenture.granja.model.Venta;
 import com.accenture.granja.repository.TipoAnimalRepository;
 
 
@@ -27,7 +23,7 @@ public class TipoAnimalService {
 	}    
 	
 	public List<TiposAnimales> obtenerTodosLosTiposAnimalesByGranja(Long granja_id) {
-		List<TiposAnimales> allTipos = obtenerTodosLosTiposAnimales();
+		//List<TiposAnimales> allTipos = obtenerTodosLosTiposAnimales();
 		/* List<TiposAnimales> tipos = new ArrayList<>();
 		    // Filtrar los tipos de animales para la granja específica
 		    for (TiposAnimales tipo : allTipos) {
@@ -71,6 +67,12 @@ public class TipoAnimalService {
 		TiposAnimales tipo = tiposAnimalesRepository.findByGranjaIdAndId(granja_id, id);
 		return tipo; 
 	}
+	
+/*	public List<Animal> getByGranjaIdAndTipoId(Long tipo_id, Long granja_id) {
+		List<Animal> animales = tiposAnimalesRepository.findAnimalesByGranjaIdAndTipoId(granja_id, tipo_id); 
+		return animales; 
+	}    
+	*/
 	
 	public void agregarTipo(TiposAnimales tipo) {
 		tiposAnimalesRepository.save(tipo);

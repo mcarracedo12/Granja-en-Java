@@ -35,6 +35,11 @@ public class CompraService {
 		return compraRepository.findByGranjaId(granjaId);
 		
 	}
+	
+	public Compra getByGranjaIdAndId(Long id, Long granja_id) {
+		Compra compra = compraRepository.findByGranjaIdAndId(granja_id, id);
+		return compra; 
+	} 
 
 	public void agregarCompra(Compra compra) {
 		compraRepository.save(compra);
@@ -48,7 +53,9 @@ public class CompraService {
 
 	public void eliminarCompra(Long id) {
 		compraRepository.deleteById(id);		
-	}    
+	}
+
+   
 
 
 }

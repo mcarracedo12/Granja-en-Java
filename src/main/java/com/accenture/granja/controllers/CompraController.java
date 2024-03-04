@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Compra;
 import com.accenture.granja.services.CompraService;
 
@@ -43,6 +44,16 @@ public class CompraController {
             return ResponseEntity.notFound().build();
         }	 
 	}
+	
+	 @GetMapping("/granjas/{granja_id}/compras/{id}/productos")
+		public List<Animal> getAnimalDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
+			List<Animal>  productos ;
+			Compra compra = compraService.getByGranjaIdAndId(id, granja_id);
+			productos= ResponseEntity.ok(compra).getBody().productos;
+	            return productos;
+	        
+	}
+	
 	
 	@PostMapping("/compras")
 	public void createCompra(@RequestBody Compra compra) {

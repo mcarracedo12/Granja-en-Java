@@ -36,6 +36,8 @@ public class AnimalController {
 	        return ResponseEntity.ok(animal);
 	    }
 	  
+	  
+	  
 	  @PostMapping("/animales")
 	  public void createAnimal(@RequestBody Animal animal) {
 		  animalService.agregarAnimal(animal);

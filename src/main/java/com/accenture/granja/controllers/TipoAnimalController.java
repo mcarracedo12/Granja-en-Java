@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accenture.granja.model.Compra;
+import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.TiposAnimales;
-import com.accenture.granja.model.Venta;
 import com.accenture.granja.services.TipoAnimalService;
 
 @RestController
@@ -46,13 +45,14 @@ public class TipoAnimalController {
   
 	}
 	
-
-	
-	
-	
-	
-	
-	
+	 @GetMapping("/granjas/{granja_id}/tipos/{tipo_id}/animales")
+		public List<Animal> getAnimalDetails(@PathVariable Long tipo_id, @PathVariable Long granja_id ) {
+			List<Animal>  animales;
+			TiposAnimales tipo = tipoAnimalService.getByGranjaIdAndId(tipo_id, granja_id);
+			animales = ResponseEntity.ok(tipo).getBody().animales;
+	            return animales;
+	        
+	}
 	
 	
 

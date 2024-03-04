@@ -26,15 +26,45 @@ public class VentaService {
 		return ventaRepository.findByGranjaId(granja_id);
 	}  
 	
+
+	
+	
+	public Venta getVentaByIdAndGranjaId(Long id, Long granjaId) {
+        return ventaRepository.findByGranjaIdAndId(granjaId, id);
+    }
+	
+	
+	
+	public List<Venta> buscarVentasByGranjaId(Long granjaId){
+		return ventaRepository.findByGranjaId(granjaId);
+		
+	}
+
 	public Venta buscarVentaById(Long id) {
 		Venta venta= ventaRepository.findById(id).orElse(null);
 		return venta;
 	}
 	
-	public Venta getVentaByIdAndGranjaId(Long id, Long granjaId) {
-        return ventaRepository.findByGranjaIdAndId(granjaId, id);
-    }
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void agregarVenta(Venta venta) {
 		ventaRepository.save(venta);
 		

@@ -13,6 +13,6 @@ public interface TipoAnimalRepository extends JpaRepository<TiposAnimales, Long>
 	//   List<Huevo> findAllHuevosVendidosHoy();
 	List<TiposAnimales> findByGranjaId(Long granja_id);
 	TiposAnimales findByGranjaIdAndId(Long granja_id, Long id);
-	
+	//List<Animal> findAnimalesByGranjaIdAndTipoId(Long granja_id, Long id);
 	
 }

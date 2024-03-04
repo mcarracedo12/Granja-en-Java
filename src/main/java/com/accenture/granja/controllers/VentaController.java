@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Compra;
 import com.accenture.granja.model.Venta;
 import com.accenture.granja.services.VentaService;
@@ -34,7 +35,7 @@ public class VentaController {
 	       return ventaService.obtenerTodasMisVentas(granja_id);
 	   }
 	  
-	  @GetMapping("/granjas/{granja_id}/ventas/{id}")
+		@GetMapping("/granjas/{granja_id}/ventas/{id}")
 		public ResponseEntity<Venta> getVentaDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
 			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
 	        if (venta != null) {
@@ -42,9 +43,15 @@ public class VentaController {
 	        } else {
 	            return ResponseEntity.notFound().build();
 	        }	 
-	  
 		}
 	  
+	  @GetMapping("/granjas/{granja_id}/ventas/{id}/productos")
+		public List<Animal> getAnimalDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
+			List<Animal>  productos ;
+			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
+			productos = venta.productos;
+			return productos;	        
+	}
 		
 	
 

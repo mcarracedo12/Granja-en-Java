@@ -12,9 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.accenture.granja.controllers.AnimalController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import io.micrometer.core.lang.NonNull;
