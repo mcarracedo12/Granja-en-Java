@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
+import com.accenture.granja.model.Granja;
 import com.accenture.granja.model.TiposAnimales;
+import com.accenture.granja.repository.GranjaRepository;
 import com.accenture.granja.services.TipoAnimalService;
 
 @RestController
@@ -25,6 +27,12 @@ public class TipoAnimalController {
 
 	@Autowired
 	private TipoAnimalService tipoAnimalService;
+	
+	@GetMapping("/tipos")
+	public List<TiposAnimales> getTiposAnimales() {
+	List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimales();
+		return tipos;
+	}
 
 	@GetMapping("/granjas/{granja_id}/tipos")
 	public List<TiposAnimales> getTiposAnimales(@PathVariable Long granja_id) {
@@ -59,6 +67,7 @@ public class TipoAnimalController {
 	@PostMapping("/tipos")
 	public void createTipoAnimal(@RequestBody TiposAnimales tipo) {
 		tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
+		
 	}
 
 	@PutMapping("/tipos/{id}")

@@ -13,8 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 
+import com.accenture.granja.controllers.GranjaController;
+import com.accenture.granja.controllers.TipoAnimalController;
+import com.accenture.granja.repository.GranjaRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -203,12 +207,6 @@ public class TiposAnimales {
 		this.id = id;
 	}
 
-	public void agregar(TiposAnimales tipo1) {
-		//TipoAnimalService.agregarTipo(tipo1);
-		System.out.println("Quiero hacer el post aca en TiposAnimales.agregar(tipo)");
-		//tiposAnimalesRepository.save(tipo1);
-	}
-	
 
 	/*public void setTiempoDeReproduccion(int tiempoDeReproduccion) {
 		this.tiempoDeReproduccion = tiempoDeReproduccion;

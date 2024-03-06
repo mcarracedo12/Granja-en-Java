@@ -5,6 +5,7 @@ package com.accenture.granja.ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import com.accenture.granja.controllers.TipoAnimalController;
 import com.accenture.granja.model.*;
 
 public class GranjaUI {
@@ -12,10 +13,10 @@ public class GranjaUI {
 
 
 	public void start() {
-		// TODO Auto-generated method stub
+		
 
 		Granja granja = new Granja(6000000);
-		//	LocalDate now = LocalDate.now();
+		
 
 		Scanner scanner = new Scanner(System.in);
 		/*	
@@ -26,15 +27,18 @@ public class GranjaUI {
 		 */
 
 
-		granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-		granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
+		//granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
+	//	TiposAnimales tipo = new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
+	//	granja.addTiposAnimales(tipo);
+		//addTiposAnimales(new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40));
+		//granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
 		//Ganado ganado= new Ganado((long)1, 2, LocalDate.now());
 		//granja.addhuevo(1, 2, LocalDate.now());
 
 
-		TiposAnimales tipo1 = new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-
-		tipo1.agregar(tipo1);// agrega Huevo
+	//	TiposAnimales tipo1 = new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
+	//	Long id= granja.getId();
+		//tipo1.agregar(tipo1, id);// agrega Huevo
 		
 		
 		Animal animal = new Animal();

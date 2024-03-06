@@ -2,7 +2,10 @@ package com.accenture.granja.controllers;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,15 +44,19 @@ public class GranjaController {
 		return granjas;				
 	}
 
-	@GetMapping("/granjas/{id}")
-	public Granja getGranjaDetails(@PathVariable Long id) {
-		Granja granja = granjaService.buscarGranja(id);
-		if(granja== null) {
-			throw new RuntimeException("Granja not found with id: "+ id);
-		}
-		return granja;		
-	}
 
+
+	@GetMapping("/granjas/{id}")
+	public ResponseEntity<Granja> getGranjaDetails(@PathVariable Long id) {
+		Granja granja = granjaService.buscarGranja(id);
+		 if (granja != null) {
+	            return ResponseEntity.ok(granja);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }		
+	}
+	
+	
 
 	@PostMapping("/granjas")
 	public void createGranja(@RequestBody Granja granja) {

@@ -51,7 +51,6 @@ public class CompraController {
 			Compra compra = compraService.getByGranjaIdAndId(id, granja_id);
 			productos= ResponseEntity.ok(compra).getBody().productos;
 	            return productos;
-	        
 	}
 	
 	

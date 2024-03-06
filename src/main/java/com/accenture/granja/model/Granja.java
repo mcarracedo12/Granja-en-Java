@@ -209,11 +209,7 @@ public class Granja {
 		}	
 	}
 
-	public void addTiposAnimales(TiposAnimales tipo) {
-		tipo.agregar(tipo);
-	}
 	
-
 	@Override
 	public String toString() {
 		return String.format("DineroEnCaja %d - Ultima Actualizacion %s",
@@ -343,18 +339,13 @@ public class Granja {
 	
 	
 	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
-		try {
 			TiposAnimales tipo = new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
-			tipo.agregar(tipo);
-			System.out.println("El animal "+ animal +" ha sido agregado");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			System.out.println("El animal "+ tipo.getAnimal() +" ha sido creado granja.addTiposAnimales");
+			System.out.println("Falta poder agregarlo a BBDD");
+			
 	}
-
 	
+
 	public List<TiposAnimales> getTiposAnimales(){
 		return tiposAnimales;
 	}
@@ -365,11 +356,13 @@ public class Granja {
 		return animales;
 	}
 
-	/*
-	public void agregarAnimal(TiposAnimales tipoAnimal_id,  int edad, LocalDate fechaIngreso) {
-			List<Animal>animales=((TiposAnimales)this.tiposAnimales).animales;
+	
+
+	
+	public void agregarAnimal(Long tipoAnimal_id,  int edad, LocalDate fechaIngreso) {
+			List<Animal>animales=this.getAnimales();
 			animales.add(new Animal(tipoAnimal_id, edad, fechaIngreso));
 		
 	}
-	*/
+	
 }
