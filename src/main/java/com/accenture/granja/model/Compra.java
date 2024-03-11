@@ -46,6 +46,7 @@ public class Compra extends Transaccion {
 	}
    
 	public Compra(String nombrePersona, LocalDate fecha) {
+		
 		super(nombrePersona, fecha);
 	}
 

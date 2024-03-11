@@ -25,6 +25,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 	List <Animal> findByGranjaId(Long granja_id);
 	*/
 	Optional<Animal> findById(Long id);
-	
+	void deleteById(Long id);
 
 }

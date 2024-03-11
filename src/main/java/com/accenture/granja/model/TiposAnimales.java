@@ -2,6 +2,7 @@ package com.accenture.granja.model;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -59,18 +60,16 @@ public class TiposAnimales {
 		this.precioVenta = precioVenta;
 	}
 
-	public long getId() {
+	public Long getId() {
 		try {
 			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return (long) 0;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+
 
 	public String getAnimal() {
 		return animal;
@@ -195,7 +194,7 @@ public class TiposAnimales {
 	}
 	
 	
-	public long getGranja_id() {
+	public Long getGranja_id() {
 		long id=(long)-1;
 		if (granja!=null) {
 			id = granja.getId();

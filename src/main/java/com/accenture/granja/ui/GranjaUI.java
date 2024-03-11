@@ -5,7 +5,6 @@ package com.accenture.granja.ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import com.accenture.granja.controllers.TipoAnimalController;
 import com.accenture.granja.model.*;
 
 public class GranjaUI {
@@ -105,6 +104,8 @@ public class GranjaUI {
 			}
 			case 6: {
 				System.out.println("Actualizar Granja");
+				
+
 				granja.actualizar();
 				break;
 

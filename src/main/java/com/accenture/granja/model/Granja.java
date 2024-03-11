@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -31,6 +33,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 */ //Quiero que la lista de animales este ordenada por edad
 @Entity
 public class Granja {
+	
+
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
@@ -299,6 +305,7 @@ public class Granja {
 
 	public void actualizar() {
 		System.out.println("Actualizando granja...\n");
+		
 	//	reproducirGanado(); Este es el que quiero hacer iterando los dias
 		//System.out.println("Reproduciendo pollitos");
 		//reproducirPollitos();
@@ -314,23 +321,7 @@ public class Granja {
 		this.setUltimaActualizacion(LocalDate.now());
 	}
 
-	/*private void reproducirGanado() {
-		System.out.println("Voy a reproducir Ganado");
-		//for(LocalDate i = ultimaActualizacion; i.isBefore(now); i.plusDays(1)) {
-		LocalDate i = ultimaActualizacion;
-		while( i.isBefore(now)) {
-			System.out.println("Fecha de reproduccion: " + i);
-			for (Pollito pollito : pollitos) {
-				pollito.reproducir(i);
-			}
-			for (Huevo huevo: huevos) {
-				huevo.reproducir(i);
-			}
-			eliminarExpirados(i);
-			 i.plusDays(1);
-		}
-		System.out.println("La ultima fecha de Actualizacion es: " + ultimaActualizacion);
-	}*/
+	
 
 	public long getId() {
 		return id;

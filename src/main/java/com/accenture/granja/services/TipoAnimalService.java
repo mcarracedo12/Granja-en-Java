@@ -19,11 +19,11 @@ public class TipoAnimalService {
 	// Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
 
 	@Autowired
-	private TipoAnimalRepository tiposAnimalesRepository;
+	private TipoAnimalRepository tiposRepo;
 	private GranjaRepository granjaRepo;
 
 	public List<TiposAnimales> obtenerTodosLosTiposAnimales() {  
-		return tiposAnimalesRepository.findAll();
+		return tiposRepo.findAll();
 	}    
 	
 	public List<TiposAnimales> obtenerTodosLosTiposAnimalesByGranja(Long granja_id) {
@@ -42,12 +42,12 @@ public class TipoAnimalService {
 		            .filter(tipo -> tipo.getGranjaId()==granja_id)
 		            .collect(Collectors.toList());
 		  */
-		List<TiposAnimales> tipos = tiposAnimalesRepository.findByGranjaId(granja_id);
+		List<TiposAnimales> tipos = tiposRepo.findByGranjaId(granja_id);
 		return tipos;
 	}
 
 	public TiposAnimales getById(long tipoAnimalId) {
-		return tiposAnimalesRepository.findById(tipoAnimalId)
+		return tiposRepo.findById(tipoAnimalId)
 				.orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
 	}
 
@@ -68,7 +68,7 @@ public class TipoAnimalService {
 	*/
 	
 	public  TiposAnimales getByGranjaIdAndId(Long id, Long granja_id) {
-		TiposAnimales tipo = tiposAnimalesRepository.findByGranjaIdAndId(granja_id, id);
+		TiposAnimales tipo = tiposRepo.findByGranjaIdAndId(granja_id, id);
 		return tipo; 
 	}
 	
@@ -79,16 +79,16 @@ public class TipoAnimalService {
 	*/
 	
 	public void agregarTipo(TiposAnimales tipo) {
-		tiposAnimalesRepository.save(tipo);
-		System.out.println("tiposAnimalesRepository.save(tipo); desde tiposAnimalesservice.agregarTipo(tipo);");
+		tiposRepo.save(tipo);
+		//System.out.println("tiposAnimalesRepository.save(tipo); desde tiposAnimalesservice.agregarTipo(tipo);");
 	}
 
 	public void editarTipo(TiposAnimales tipo) {
-		tiposAnimalesRepository.save(tipo);		
+		tiposRepo.save(tipo);		
 	}
 
 	public void eliminarTipo(Long id) {
-		tiposAnimalesRepository.deleteById(id);
+		tiposRepo.deleteById(id);
 	}
 
 	

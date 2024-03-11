@@ -33,6 +33,16 @@ public class TipoAnimalController {
 	List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimales();
 		return tipos;
 	}
+	
+
+	@GetMapping("/tipos/{id}")
+	public TiposAnimales getTipoDetails(@PathVariable Long id) {
+		TiposAnimales tipo = tipoAnimalService.getById(id);
+        return tipo;	 
+  
+	}
+	
+	
 
 	@GetMapping("/granjas/{granja_id}/tipos")
 	public List<TiposAnimales> getTiposAnimales(@PathVariable Long granja_id) {
@@ -63,12 +73,30 @@ public class TipoAnimalController {
 	}
 	
 	
+/*
+	@PostMapping("/granjas/{granja_id}/tipos")
+	public void createTipoAnimal(@RequestBody TiposAnimales tipo, @PathVariable Long granja_id) {
+		try {
+			tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	*/
 
 	@PostMapping("/tipos")
 	public void createTipoAnimal(@RequestBody TiposAnimales tipo) {
-		tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
+		try {
+			tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
+	
 
 	@PutMapping("/tipos/{id}")
 	public void updateTipos(@RequestBody TiposAnimales tipo, @PathVariable Long id) {

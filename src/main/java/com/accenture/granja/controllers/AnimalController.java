@@ -49,8 +49,9 @@ public class AnimalController {
 		}
 
 		@DeleteMapping("/animales/{id}")
-		public void deleteAnimal(@PathVariable Long id) {
-			animalService.eliminarAnimal(id); // 
+		public void deleteAnimal(@PathVariable Long id ) {
+			
+			animalService.eliminarAnimal(id); 
 		}
 
 	}
