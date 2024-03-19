@@ -14,30 +14,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
-import com.accenture.granja.model.Compra;
 import com.accenture.granja.model.Venta;
-import com.accenture.granja.services.VentaService;
+import com.accenture.granja.services.GeneralService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") 
 public class VentaController {
 	@Autowired
-	private VentaService ventaService;
+	private GeneralService service;
 	
 	  @GetMapping("/ventas")
 	   public List<Venta> getVentas() {
 	            // Aca se instancia al Servicio donde esta la logica central
-	       return ventaService.obtenerTodasLasVentas();
+	       return service.obtenerTodasLasVentas();
 	   }
 	
 	  @GetMapping("granjas/{granja_id}/ventas")
 	   public List<Venta> getVentas(@PathVariable Long granja_id) {
-	       return ventaService.obtenerTodasMisVentas(granja_id);
+	       return service.obtenerTodasMisVentas(granja_id);
 	   }
 	  
 		@GetMapping("/granjas/{granja_id}/ventas/{id}")
 		public ResponseEntity<Venta> getVentaDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
-			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
+			Venta venta = service.getVentaByIdAndGranjaId(id, granja_id);
 	        if (venta != null) {
 	            return ResponseEntity.ok(venta);
 	        } else {
@@ -48,7 +47,7 @@ public class VentaController {
 	  @GetMapping("/granjas/{granja_id}/ventas/{id}/productos")
 		public List<Animal> getAnimalDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
 			List<Animal>  productos ;
-			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
+			Venta venta = service.getVentaByIdAndGranjaId(id, granja_id);
 			productos = venta.productos;
 			return productos;	        
 	}
@@ -58,18 +57,18 @@ public class VentaController {
 		
 		@PostMapping("/ventas")
 		public void createVenta(@RequestBody Venta venta) {
-			ventaService.agregarVenta(venta);
+			service.agregarVenta(venta);
 		}
 		
 		
 		@PutMapping("/ventas/{id}")
 		public void updateVenta(@RequestBody Venta venta, @PathVariable Long id) {
-			ventaService.editarVenta(venta);
+			service.editarVenta(venta);
 		}
 		
 		@DeleteMapping("/ventas/{id}")
 		public void deleteVenta(@PathVariable Long id) {
-			ventaService.eliminarVenta(id);
+			service.eliminarVenta(id);
 		}
 		
 

@@ -174,6 +174,8 @@ public class Animal {
 		return tiposAnimales.getId();
 	}
 	
+	
+	
 /*	public int getEdadActual() {
 		return LocalDate.now().compareTo(this.getNacimiento());
 	}

@@ -15,59 +15,87 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Compra;
-import com.accenture.granja.services.CompraService;
+import com.accenture.granja.services.GeneralService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") 
 public class CompraController {
 	@Autowired
-	private CompraService compraService;
+	private GeneralService service;
 	
 	// Aca se instancia al Servicio donde esta la logica central
 	
 	@GetMapping("/compras")
 	public List<Compra> getCompras() {
-		return compraService.obtenerTodasLasCompras();
+		return service.obtenerTodasLasCompras();
 	}
-
+	/*
 	@GetMapping("/granjas/{granja_id}/compras")
 	public List<Compra> getComprasMisCompras(@PathVariable Long granja_id) {
-		return compraService.buscarComprasByGranjaId(granja_id);
+		return service.buscarComprasByGranjaId(granja_id);
 	}
 	
 	@GetMapping("/granjas/{granja_id}/compras/{id}")
 	public ResponseEntity<Compra> getCompraDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
-		Compra compra = compraService.getCompraByIdAndGranjaId(id, granja_id);
+		Compra compra = service.getCompraByIdAndGranjaId(id, granja_id);
         if (compra != null) {
             return ResponseEntity.ok(compra);
         } else {
             return ResponseEntity.notFound().build();
         }	 
 	}
-	
+	*/
+	@GetMapping("/compras/{id}")
+	public ResponseEntity<Compra> getCompraDetails(@PathVariable Long id) {
+		Compra compra = service.getCompraById(id);
+        if (compra != null) {
+            return ResponseEntity.ok(compra);
+        } else {
+            return ResponseEntity.notFound().build();
+        }	 
+	}
+/*	
 	 @GetMapping("/granjas/{granja_id}/compras/{id}/productos")
 		public List<Animal> getAnimalDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
 			List<Animal>  productos ;
-			Compra compra = compraService.getByGranjaIdAndId(id, granja_id);
+			Compra compra = service.getComprasByGranjaIdAndId(id, granja_id);
 			productos= ResponseEntity.ok(compra).getBody().productos;
 	            return productos;
+	}
+	*/
+	
+	@GetMapping("/compras/{id}/productos")
+	public List<Animal> getAnimalDetails(@PathVariable Long id) {
+		Compra compra = service.getCompraById(id);
+		List<Animal>  productos = compra.productos;
+        return productos; 
 	}
 	
 	
 	@PostMapping("/compras")
 	public void createCompra(@RequestBody Compra compra) {
-		compraService.agregarCompra(compra);
+		service.agregarCompra(compra);
+	}
+	
+	@PostMapping("/compras/{id}/productos")
+	public void agregarProducto(@RequestBody List<Animal> productos, @PathVariable Long id) {
+		Compra compra = service.getCompraById(id);
+		for(Animal p : productos) {
+			p.setCompra(compra);
+			//Long tipo_id = p.getTipoId();
+			service.agregarAnimal(p);
+		}
 	}
 	
 	
 	@PutMapping("/compras/{id}")
 	public void updateCompra(@RequestBody Compra compra, @PathVariable Long id) {
-		compraService.editarCompra(compra);
+		service.editarCompra(compra);
 	}
 	
 	@DeleteMapping("/compras/{id}")
 	public void deleteCompra(@PathVariable Long id) {
-		compraService.eliminarCompra(id);
+		service.eliminarCompra(id);
 	}
 	
 

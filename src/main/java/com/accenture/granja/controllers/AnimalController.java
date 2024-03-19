@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
-import com.accenture.granja.services.AnimalService;
+import com.accenture.granja.services.GeneralService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") 
 public class AnimalController {
 
 	@Autowired
-	private AnimalService animalService;
+	private GeneralService service;
 
 	  @GetMapping("/animales")
 	   public List<Animal> getAnimales() {
 	            // Aca se instancia al Servicio donde esta la logica central
-	       return animalService.obtenerTodosLosAnimales();
+	       return service.obtenerTodosLosAnimales();
 
 	   }
 	  
 	  @GetMapping("/animales/{id}")
 	    public ResponseEntity<Animal> getAnimalById(@PathVariable Long id) {
-	        Animal animal = animalService.getById(id);
+	        Animal animal = service.getAnimalById(id);
 	        return ResponseEntity.ok(animal);
 	    }
 	  
@@ -40,18 +40,18 @@ public class AnimalController {
 	  
 	  @PostMapping("/animales")
 	  public void createAnimal(@RequestBody Animal animal) {
-		  animalService.agregarAnimal(animal);
+		  service.agregarAnimal(animal);
 	  }
 	  
 		@PutMapping("/animales/{id}")
 		public void updateAnimal(@RequestBody Animal animal, @PathVariable Long id) {
-			animalService.editarAnimal(animal); //  SI necesita tener el ID para el PUT
+			service.editarAnimal(animal); //  SI necesita tener el ID para el PUT
 		}
 
 		@DeleteMapping("/animales/{id}")
 		public void deleteAnimal(@PathVariable Long id ) {
 			
-			animalService.eliminarAnimal(id); 
+			service.eliminarAnimal(id); 
 		}
 
 	}

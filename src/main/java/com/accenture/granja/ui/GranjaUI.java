@@ -3,62 +3,53 @@ package com.accenture.granja.ui;
 
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.accenture.granja.model.*;
+import com.accenture.granja.services.GeneralService;
+
 
 public class GranjaUI {
+	@Autowired
+	private GeneralService service = new GeneralService();
 	
-
-
+	
+	Granja granja = null;
+	
 	public void start() {
 		
-
-		Granja granja = new Granja(6000000);
+	//	List<TiposAnimales> lista = service.actualizarPreciosVenta(1.20);
+	//	for(TiposAnimales l : lista) {
+	//		System.out.println(l);
+	//	}
 		
-
-		Scanner scanner = new Scanner(System.in);
-		/*	
-		System.out.println("Ingrese dinero que hay en la caja de la granja: ");
-		BigDecimal dineroEnCaja = scanner.nextBigDecimal();
-		granja.setDineroEnCaja(dineroEnCaja);
-
-		 */
-
-
-		//granja.addTiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-	//	TiposAnimales tipo = new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-	//	granja.addTiposAnimales(tipo);
-		//addTiposAnimales(new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40));
-		//granja.addTiposAnimales("POLLITOS", 2000, 600, 1, 200, 400);
-		//Ganado ganado= new Ganado((long)1, 2, LocalDate.now());
-		//granja.addhuevo(1, 2, LocalDate.now());
-
-
-	//	TiposAnimales tipo1 = new TiposAnimales("HUEVOS", 21, 6000, 21, 10.25, 40);
-	//	Long id= granja.getId();
-		//tipo1.agregar(tipo1, id);// agrega Huevo
+		//this.service = service;
+		//Granja g = null;
+		/*try {
+			granja = service.buscarGranja((long)1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		Animal animal = new Animal();
-		animal.agregar((long)2, 15, LocalDate.now());
-		
-		//granja.agregarAnimal(2, 15, LocalDate.now());// agrega Pollo
-
-		//granja.addPollito(new Pollito(2, 26, now));
-		// granja.addPollito(new Pollito(2, 2005, now));// Lo ingreso Expirado
-		// granja.addPollito(new Pollito(2, 5, now));
-
-		// granja.addHuevo(new Huevo(1, 30, now));// Lo ingreso Expirado
-		// granja.addHuevo(new Huevo(1, 10, now));
-		// granja.addHuevo(new Huevo(1, 15, now));
-		// granja.addHuevo(new Huevo(1, 40, now));
-		// granja.addHuevo(new Huevo(1, 25, now));
-		//
-
-		//List<Huevo>huevos=((TiposAnimales)granja.tiposAnimales).huevos; no funciona
-		//System.out.println(huevos);
-
+		if(granja !=null) {
+		System.out.println(granja.toString());
+		}
+		else {
+			System.out.println("No se encontro granja con id 1 ");
+		}
+		*/
+	}
+}
+		/*Granja granja = new Granja();
+		*/
+	//	Scanner scanner = new Scanner(System.in);
+/*
 		int opcion = 0;
 		while (opcion != 8) {
 			ofrecerMenu();
@@ -152,7 +143,7 @@ public class GranjaUI {
 		System.out.println("7. Dar de alta tipos de animales");
 		System.out.println("8. Salir \n");
 
+*/
+//	}
 
-	}
-
-}
+//}

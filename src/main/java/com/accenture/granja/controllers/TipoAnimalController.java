@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
-import com.accenture.granja.model.Granja;
 import com.accenture.granja.model.TiposAnimales;
-import com.accenture.granja.repository.GranjaRepository;
-import com.accenture.granja.services.TipoAnimalService;
+import com.accenture.granja.services.GeneralService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") 
@@ -26,18 +24,18 @@ public class TipoAnimalController {
 	// Aca se instancia al Servicio donde esta la logica central
 
 	@Autowired
-	private TipoAnimalService tipoAnimalService;
+	private GeneralService service;
 	
 	@GetMapping("/tipos")
 	public List<TiposAnimales> getTiposAnimales() {
-	List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimales();
+	List<TiposAnimales> tipos= service.obtenerTodosLosTiposAnimales();
 		return tipos;
 	}
 	
 
 	@GetMapping("/tipos/{id}")
 	public TiposAnimales getTipoDetails(@PathVariable Long id) {
-		TiposAnimales tipo = tipoAnimalService.getById(id);
+		TiposAnimales tipo = service.getTipoById(id);
         return tipo;	 
   
 	}
@@ -46,7 +44,7 @@ public class TipoAnimalController {
 
 	@GetMapping("/granjas/{granja_id}/tipos")
 	public List<TiposAnimales> getTiposAnimales(@PathVariable Long granja_id) {
-	List<TiposAnimales> tipos= tipoAnimalService.obtenerTodosLosTiposAnimalesByGranja(granja_id);
+	List<TiposAnimales> tipos= service.obtenerTodosLosTiposAnimalesByGranja(granja_id);
 		return tipos;
 
 	}
@@ -54,7 +52,7 @@ public class TipoAnimalController {
 
 	@GetMapping("/granjas/{granja_id}/tipos/{id}")
 	public ResponseEntity<TiposAnimales> getTipoDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
-		TiposAnimales tipo = tipoAnimalService.getByGranjaIdAndId(id, granja_id);
+		TiposAnimales tipo = service.getByGranjaIdAndId(id, granja_id);
         if (tipo != null) {
             return ResponseEntity.ok(tipo);
         } else {
@@ -66,7 +64,7 @@ public class TipoAnimalController {
 	 @GetMapping("/granjas/{granja_id}/tipos/{tipo_id}/animales")
 		public List<Animal> getAnimalDetails(@PathVariable Long tipo_id, @PathVariable Long granja_id ) {
 			List<Animal>  animales;
-			TiposAnimales tipo = tipoAnimalService.getByGranjaIdAndId(tipo_id, granja_id);
+			TiposAnimales tipo = service.getByGranjaIdAndId(tipo_id, granja_id);
 			animales = ResponseEntity.ok(tipo).getBody().animales;
 	            return animales;
 	        
@@ -89,7 +87,7 @@ public class TipoAnimalController {
 	@PostMapping("/tipos")
 	public void createTipoAnimal(@RequestBody TiposAnimales tipo) {
 		try {
-			tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
+			service.agregarTipo(tipo); //no necesita tener ID para el POST
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,12 +98,12 @@ public class TipoAnimalController {
 
 	@PutMapping("/tipos/{id}")
 	public void updateTipos(@RequestBody TiposAnimales tipo, @PathVariable Long id) {
-		tipoAnimalService.editarTipo(tipo); //   SI necesita tener el ID para el PUT
+		service.editarTipo(tipo); //   SI necesita tener el ID para el PUT
 	}
 
 	@DeleteMapping("tipos/{id}")
 	public void deleteTipo(@PathVariable Long id) {
-		tipoAnimalService.eliminarTipo(id);
+		service.eliminarTipo(id);
 	}
 
 
