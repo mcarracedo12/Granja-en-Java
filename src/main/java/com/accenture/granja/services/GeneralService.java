@@ -144,6 +144,10 @@ public class GeneralService {
 		// Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
 		return animalRepo.findAll();
 	}
+	
+	public List<Animal> getAnimalByTipoId(Long tipos_animal_id) {
+		return animalRepo.findByTiposAnimales_id(tipos_animal_id);
+	}
 
 	public Animal getAnimalById(Long id) {
 		Animal animal= animalRepo.findById(id).orElse(null);
@@ -152,6 +156,11 @@ public class GeneralService {
 
 	public void agregarAnimal(Animal animal) {
 		animalRepo.save(animal);
+	}
+	
+	public void agregarAnimalByTipo(Long TiposAnimales_id, Animal animal) {
+		List<Animal> animales = getAnimalByTipoId(TiposAnimales_id);
+		animales.add(animal);
 	}
 
 	public void editarAnimal(Animal animal) {

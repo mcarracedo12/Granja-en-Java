@@ -2,11 +2,13 @@ package com.accenture.granja.repository;
 
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.accenture.granja.model.Animal;
+import com.accenture.granja.model.TiposAnimales;
 
 
 
@@ -24,7 +26,9 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 	/*Animal findByGranjaIdAndId(Long granjaId, Long id);
 	List <Animal> findByGranjaId(Long granja_id);
 	*/
+	List<Animal> findByTiposAnimales_id(Long tiposAnimales_id);
 	Optional<Animal> findById(Long id);
 	void deleteById(Long id);
+	
 
 }

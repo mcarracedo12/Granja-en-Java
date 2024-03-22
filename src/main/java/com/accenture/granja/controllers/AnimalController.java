@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
+import com.accenture.granja.model.TiposAnimales;
 import com.accenture.granja.services.GeneralService;
 
 @RestController
@@ -30,6 +31,13 @@ public class AnimalController {
 
 	   }
 	  
+
+	  @GetMapping("/tipos/{tiposAnimales_id}/animales")
+	   public List<Animal> getAnimalesByTipo(@PathVariable Long tiposAnimales_id) {
+	       return service.getAnimalByTipoId(tiposAnimales_id);
+
+	   }
+	  
 	  @GetMapping("/animales/{id}")
 	    public ResponseEntity<Animal> getAnimalById(@PathVariable Long id) {
 	        Animal animal = service.getAnimalById(id);
@@ -38,8 +46,9 @@ public class AnimalController {
 	  
 	  
 	  
-	  @PostMapping("/animales")
-	  public void createAnimal(@RequestBody Animal animal) {
+	  @PostMapping("/tipos/{tiposAnimales_id}/animales")
+	  public void createAnimal(@PathVariable Long tiposAnimales_id,@RequestBody Animal animal) {
+		  animal.setTiposAnimales(tiposAnimales_id);
 		  service.agregarAnimal(animal);
 	  }
 	  

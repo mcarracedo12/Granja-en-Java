@@ -70,9 +70,9 @@ public class Animal {
 		super();
 	}
 
-	public Animal(Long tipo_animal_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
+	public Animal(Long tipos_animal_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		//this.id = id;
-		this.tiposAnimales= getAnimalById(tipo_animal_id);
+		this.tiposAnimales= getAnimalById(tipos_animal_id);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = getNacimiento();
@@ -222,6 +222,11 @@ public class Animal {
 		this.tiposAnimales = tiposAnimales;
 		}
 	}
+	
+	public TiposAnimales setTiposAnimales(Long tiposAnimales_id) {
+		return tiposAnimales;
+	}
+	
 	public TiposAnimales getAnimalById(Long id) {
 		return tiposAnimales;
 	}

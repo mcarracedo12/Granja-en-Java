@@ -195,7 +195,7 @@ public class TiposAnimales {
 	
 	
 	public Long getGranja_id() {
-		long id=(long)-1;
+		long id=(long)1;
 		if (granja!=null) {
 			id = granja.getId();
 		}
