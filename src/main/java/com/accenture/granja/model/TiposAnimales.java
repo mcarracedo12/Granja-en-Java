@@ -2,7 +2,6 @@ package com.accenture.granja.model;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,12 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-
-import com.accenture.granja.controllers.GranjaController;
-import com.accenture.granja.controllers.TipoAnimalController;
-import com.accenture.granja.repository.GranjaRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -175,7 +169,6 @@ public class TiposAnimales {
 	}
 
 	public TiposAnimales getById(Long tipo_animal_id) {
-		// TODO Auto-generated method stub
 		return this;
 	}
 	

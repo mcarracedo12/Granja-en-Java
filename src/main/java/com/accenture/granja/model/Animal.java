@@ -22,7 +22,7 @@ public class Animal {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 
@@ -172,6 +172,20 @@ public class Animal {
 			return 0;
 		}else
 		return tiposAnimales.getId();
+	}
+	
+	public long getCompraId() {
+		if(compra==null) {
+			return 0;
+		}else
+		return compra.getId();
+	}
+	
+	public long getVentaId() {
+		if(venta==null) {
+			return 0;
+		}else
+		return venta.getId();
 	}
 	
 	

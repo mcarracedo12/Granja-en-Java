@@ -77,7 +77,6 @@ public class TipoAnimalController {
 		try {
 			tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -89,7 +88,6 @@ public class TipoAnimalController {
 		try {
 			service.agregarTipo(tipo); //no necesita tener ID para el POST
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

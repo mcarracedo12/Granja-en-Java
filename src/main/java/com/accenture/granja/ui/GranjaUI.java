@@ -1,14 +1,8 @@
 package com.accenture.granja.ui;
 
 
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 
 import com.accenture.granja.model.*;
 import com.accenture.granja.services.GeneralService;
@@ -33,7 +27,6 @@ public class GranjaUI {
 		/*try {
 			granja = service.buscarGranja((long)1);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

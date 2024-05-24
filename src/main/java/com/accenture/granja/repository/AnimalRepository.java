@@ -1,15 +1,12 @@
 package com.accenture.granja.repository;
 
 
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.accenture.granja.model.Animal;
-import com.accenture.granja.model.TiposAnimales;
-
 
 
 public interface AnimalRepository extends JpaRepository<Animal, Long>{

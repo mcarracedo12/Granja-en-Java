@@ -77,16 +77,17 @@ public class CompraController {
 		service.agregarCompra(compra);
 	}
 	
-	@PostMapping("/compras/{id}/productos")
+/*	@PostMapping("/compras/{id}/productos")
 	public void agregarProducto(@RequestBody List<Animal> productos, @PathVariable Long id) {
 		Compra compra = service.getCompraById(id);
 		for(Animal p : productos) {
-			p.setCompra(compra);
+			service.asignarCompra(p, id);
+			
 			//Long tipo_id = p.getTipoId();
 			service.agregarAnimal(p);
 		}
 	}
-	
+	*/
 	
 	@PutMapping("/compras/{id}")
 	public void updateCompra(@RequestBody Compra compra, @PathVariable Long id) {

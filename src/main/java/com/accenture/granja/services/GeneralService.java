@@ -158,11 +158,19 @@ public class GeneralService {
 		animalRepo.save(animal);
 	}
 	
-	public void agregarAnimalByTipo(Long TiposAnimales_id, Animal animal) {
-		List<Animal> animales = getAnimalByTipoId(TiposAnimales_id);
-		animales.add(animal);
+	public void agregarAnimal(Animal animal, Long tipoId) {
+		  Optional<TiposAnimales> ta = tiposRepo.findById(tipoId);
+		  animal.setTiposAnimales(ta.get());
+		  agregarAnimal(animal);
 	}
-
+	
+	public void asignarCompra(Animal animal, Long compraId) {
+		  Optional<Compra> compra = compraRepo.findById(compraId);
+		  animal.setCompra(compra.get());
+		  animal.setPrecioCompra();
+		  //editarAnimal(animal);
+	}
+	
 	public void editarAnimal(Animal animal) {
 		animalRepo.save(animal);
 	}

@@ -96,7 +96,7 @@ public class Granja {
 				
 			try (Scanner scanner = new Scanner(System.in)) {
 				System.out.println("Ingrese cantidad de dias de vida actual de los pollitos");	
-					int dias = scanner.nextInt();
+					//int dias = scanner.nextInt();
 					System.out.println("llega aca 2");
 					
 					
@@ -195,7 +195,6 @@ public class Granja {
 			System.out.println(animal.toString());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -209,7 +208,6 @@ public class Granja {
 			}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
