@@ -10,8 +10,7 @@ public class GranjaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GranjaApplication.class, args);
-		//GranjaUI granjaUi = new GranjaUI();
-		//granjaUi.start();
+		GranjaUI granjaUi = new GranjaUI();
+		granjaUi.start();
 	}
-
 }

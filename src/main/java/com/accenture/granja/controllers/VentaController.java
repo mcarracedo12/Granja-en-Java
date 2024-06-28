@@ -16,27 +16,28 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Venta;
 import com.accenture.granja.services.GeneralService;
+import com.accenture.granja.services.VentaService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") 
 public class VentaController {
 	@Autowired
-	private GeneralService service;
+	private VentaService ventaService;
 	
 	  @GetMapping("/ventas")
 	   public List<Venta> getVentas() {
 	            // Aca se instancia al Servicio donde esta la logica central
-	       return service.obtenerTodasLasVentas();
+	       return ventaService.obtenerTodasLasVentas();
 	   }
 	
 	  @GetMapping("granjas/{granja_id}/ventas")
 	   public List<Venta> getVentas(@PathVariable Long granja_id) {
-	       return service.obtenerTodasMisVentas(granja_id);
+	       return ventaService.obtenerTodasMisVentas(granja_id);
 	   }
 	  
 		@GetMapping("/granjas/{granja_id}/ventas/{id}")
 		public ResponseEntity<Venta> getVentaDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
-			Venta venta = service.getVentaByIdAndGranjaId(id, granja_id);
+			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
 	        if (venta != null) {
 	            return ResponseEntity.ok(venta);
 	        } else {
@@ -47,7 +48,7 @@ public class VentaController {
 	  @GetMapping("/granjas/{granja_id}/ventas/{id}/productos")
 		public List<Animal> getAnimalDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
 			List<Animal>  productos ;
-			Venta venta = service.getVentaByIdAndGranjaId(id, granja_id);
+			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
 			productos = venta.productos;
 			return productos;	        
 	}
@@ -57,18 +58,18 @@ public class VentaController {
 		
 		@PostMapping("/ventas")
 		public void createVenta(@RequestBody Venta venta) {
-			service.agregarVenta(venta);
+			ventaService.agregarVenta(venta);
 		}
 		
 		
 		@PutMapping("/ventas/{id}")
 		public void updateVenta(@RequestBody Venta venta, @PathVariable Long id) {
-			service.editarVenta(venta);
+			ventaService.editarVenta(venta);
 		}
 		
 		@DeleteMapping("/ventas/{id}")
 		public void deleteVenta(@PathVariable Long id) {
-			service.eliminarVenta(id);
+			ventaService.eliminarVenta(id);
 		}
 		
 

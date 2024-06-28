@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
+import com.accenture.granja.services.AnimalService;
 import com.accenture.granja.services.GeneralService;
 
 @RestController
@@ -21,24 +22,24 @@ import com.accenture.granja.services.GeneralService;
 public class AnimalController {
 
 	@Autowired
-	private GeneralService service;
+	private AnimalService animalService;
 
 	@GetMapping("/animales")
 	public List<Animal> getAnimales() {
 		// Aca se instancia al Servicio donde esta la logica central
-		return service.obtenerTodosLosAnimales();
+		return animalService.obtenerTodosLosAnimales();
 
 	}
 
 	@GetMapping("/tipos/{tiposAnimales_id}/animales")
 	public List<Animal> getAnimalesByTipo(@PathVariable Long tiposAnimales_id) {
-		return service.getAnimalByTipoId(tiposAnimales_id);
+		return animalService.getAnimalByTipoId(tiposAnimales_id);
 
 	}
 
 	@GetMapping("/animales/{id}")
 	public ResponseEntity<Animal> getAnimalById(@PathVariable Long id) {
-		Animal animal = service.getAnimalById(id);
+		Animal animal = animalService.getAnimalById(id);
 		return ResponseEntity.ok(animal);
 	}
 
@@ -46,23 +47,23 @@ public class AnimalController {
 	public void createAnimal(@PathVariable Long tiposAnimales_id, @PathVariable Long cantidad,
 			@RequestBody Animal animal) {
 		for (int cant = 0; cant < cantidad; cant++) {
-			service.agregarAnimal(animal, tiposAnimales_id);
+			animalService.agregarAnimal(animal, tiposAnimales_id);
 		}
 	}
 
 	@PostMapping("/tipos/{tiposAnimales_id}/animales")
 	public void createAnimal(@PathVariable Long tiposAnimales_id, @RequestBody Animal animal) {
-		service.agregarAnimal(animal, tiposAnimales_id);
+		animalService.agregarAnimal(animal, tiposAnimales_id);
 	}
 
 	@PutMapping("/animales/{id}")
 	public void updateAnimal(@RequestBody Animal animal, @PathVariable Long id) {
-		service.editarAnimal(animal); // SI necesita tener el ID para el PUT
+		animalService.editarAnimal(animal); // SI necesita tener el ID para el PUT
 	}
 
 	@DeleteMapping("/animales/{id}")
 	public void deleteAnimal(@PathVariable Long id) {
-		service.eliminarAnimal(id);
+		animalService.eliminarAnimal(id);
 	}
 
 }

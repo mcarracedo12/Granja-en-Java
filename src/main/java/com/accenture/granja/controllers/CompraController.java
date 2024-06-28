@@ -15,19 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Compra;
+import com.accenture.granja.services.CompraService;
 import com.accenture.granja.services.GeneralService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") 
 public class CompraController {
 	@Autowired
-	private GeneralService service;
+	private CompraService compraService;
 	
 	// Aca se instancia al Servicio donde esta la logica central
 	
 	@GetMapping("/compras")
 	public List<Compra> getCompras() {
-		return service.obtenerTodasLasCompras();
+		return compraService.obtenerTodasLasCompras();
 	}
 	/*
 	@GetMapping("/granjas/{granja_id}/compras")
@@ -47,7 +48,7 @@ public class CompraController {
 	*/
 	@GetMapping("/compras/{id}")
 	public ResponseEntity<Compra> getCompraDetails(@PathVariable Long id) {
-		Compra compra = service.getCompraById(id);
+		Compra compra = compraService.getCompraById(id);
         if (compra != null) {
             return ResponseEntity.ok(compra);
         } else {
@@ -66,7 +67,7 @@ public class CompraController {
 	
 	@GetMapping("/compras/{id}/productos")
 	public List<Animal> getAnimalDetails(@PathVariable Long id) {
-		Compra compra = service.getCompraById(id);
+		Compra compra = compraService.getCompraById(id);
 		List<Animal>  productos = compra.productos;
         return productos; 
 	}
@@ -74,7 +75,7 @@ public class CompraController {
 	
 	@PostMapping("/compras")
 	public void createCompra(@RequestBody Compra compra) {
-		service.agregarCompra(compra);
+		compraService.agregarCompra(compra);
 	}
 	
 /*	@PostMapping("/compras/{id}/productos")
@@ -91,12 +92,12 @@ public class CompraController {
 	
 	@PutMapping("/compras/{id}")
 	public void updateCompra(@RequestBody Compra compra, @PathVariable Long id) {
-		service.editarCompra(compra);
+		compraService.editarCompra(compra);
 	}
 	
 	@DeleteMapping("/compras/{id}")
 	public void deleteCompra(@PathVariable Long id) {
-		service.eliminarCompra(id);
+		compraService.eliminarCompra(id);
 	}
 	
 
