@@ -13,29 +13,10 @@ import com.accenture.granja.repository.TipoAnimalRepository;
 @Transactional
 public class TiposService {
 
-	@Autowired TipoAnimalRepository tiposRepo;
-
-
-	public List<TiposAnimales> obtenerTodosLosTiposAnimales() {  
-		return tiposRepo.findAll();
-	}    
+	@Autowired TipoAnimalRepository tiposRepo;    
 	
 	public List<TiposAnimales> obtenerTodosLosTiposAnimalesByGranja(Long granja_id) {
-		//List<TiposAnimales> allTipos = obtenerTodosLosTiposAnimales();
-		/* List<TiposAnimales> tipos = new ArrayList<>();
-		    // Filtrar los tipos de animales para la granja específica
-		    for (TiposAnimales tipo : allTipos) {
-		        if (tipo.getGranjaId()==granja_id) {
-		            tipos.add(tipo);
-		        }
-		    }
-		  */  
-		
-		 // Filtrar los tipos de animales para la granja específica usando Stream API
-		/*List<TiposAnimales> tipos = allTipos.stream()
-		            .filter(tipo -> tipo.getGranjaId()==granja_id)
-		            .collect(Collectors.toList());
-		  */
+	
 		List<TiposAnimales> tipos = tiposRepo.findByGranjaId(granja_id);
 		return tipos;
 	}

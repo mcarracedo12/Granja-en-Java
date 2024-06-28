@@ -2,8 +2,8 @@ package com.accenture.granja.controllers;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +21,6 @@ import com.accenture.granja.model.Granja;
 import com.accenture.granja.model.TiposAnimales;
 import com.accenture.granja.services.AnimalService;
 import com.accenture.granja.services.CompraService;
-import com.accenture.granja.services.GeneralService;
 import com.accenture.granja.services.GranjaService;
 import com.accenture.granja.services.TiposService;
 import com.accenture.granja.services.VentaService;
@@ -42,39 +41,35 @@ public class GranjaController {
 	@Autowired
 	private VentaService ventaService;
 
-	
 	// INICIO GRANJAS
-	
 	@GetMapping("/")
 	@ResponseBody
-	public List<Granja> getGranjas() {
+	public ResponseEntity<List<Granja>> getGranjas() {
 		List<Granja> granjas = granjaService.buscarGranjas();
-		return granjas;				
+		return new ResponseEntity<>(granjas, HttpStatus.OK);
 	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<Granja> getGranjaDetails(@PathVariable Long id) {
 		Granja granja = granjaService.buscarGranja(id);
-		 if (granja != null) {
-	            return ResponseEntity.ok(granja);
-	        } else {
-	            return ResponseEntity.notFound().build();
-	        }		
+		return new ResponseEntity<>(granja, HttpStatus.OK);
 	}
 
 	@PostMapping("/")
-	public void createGranja(@RequestBody Granja granja) {
+	public ResponseEntity<Granja> createGranja(@RequestBody Granja granja) {
 		granjaService.agregarGranja(granja); // la granja no necesita tener ID para el POST
+		return new ResponseEntity<Granja>(granja, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")
-	public void updateGranja(@RequestBody Granja granja, @PathVariable Long id) {
-		granjaService.editarGranja(granja); //  la granja SI necesita tener el ID para el PUT
+	public ResponseEntity<Granja> updateGranja(@RequestBody Granja granja, @PathVariable Long id) {
+		Granja updatedGranja = granjaService.editarGranja(granja, id); //  la granja SI necesita tener el ID para el PUT
+		return new ResponseEntity<>(updatedGranja, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteGranja(@PathVariable Long id) {
-		granjaService.eliminarGranja(id); // 
+	public ResponseEntity<Void> deleteGranja(@PathVariable Long id) {
+		granjaService.eliminarGranja(id); 
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	//FIN GRANJA

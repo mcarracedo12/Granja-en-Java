@@ -19,22 +19,11 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
 
-
-
-/*class EdadComparator implements Comparator<Ganado> {
-	@Override
-	public int compare(Ganado value1, Ganado value2) {
-		return 1;
-		// return Integer.compare(value1.getEdadActual(), value2.getEdadActual());
-	}
-}
-*/ //Quiero que la lista de animales este ordenada por edad
+@Data
 @Entity
 public class Granja {
-	
-
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -55,39 +44,8 @@ public class Granja {
 	@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
 	public List<Venta> ventas;
 	
-	//Agrego para que no tire error despues nada mas, no deberia hacer falta
-	public Granja() {
-		super();		
-	}
-	
-	public Granja(double cajita) {
-		super();
-		this.dineroEnCaja = cajita;
-	}
 
-	public double getDineroEnCaja() {
-		return dineroEnCaja;
-	}
 
-	public void setDineroEnCaja(double dineroEnCaja) {
-		this.dineroEnCaja = dineroEnCaja;
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public LocalDate getUltimaActualizacion() {
-		return ultimaActualizacion;
-	}
-
-	public void setUltimaActualizacion(LocalDate ultimaActualizacion) {
-		this.ultimaActualizacion = ultimaActualizacion;
-	}
 	
 	public void comprarPollitos(int cant) {
 		List<Animal>pollitos = this.getAnimalesByTipo(2);
@@ -98,10 +56,7 @@ public class Granja {
 				System.out.println("Ingrese cantidad de dias de vida actual de los pollitos");	
 					//int dias = scanner.nextInt();
 					System.out.println("llega aca 2");
-					
-					
-					
-					
+
 					System.out.println("Cantidad de pollitos actual: " + pollitos.size());
 					
 					//pollitos.add(new Pollito(2,dias,LocalDate.now()) );
@@ -212,14 +167,6 @@ public class Granja {
 		}	
 	}
 
-	
-	@Override
-	public String toString() {
-		return String.format("DineroEnCaja %d - Ultima Actualizacion %s",
-				dineroEnCaja, getUltimaActualizacion());
-	}
-
-
 
 	// Iterator<Ganado> iterator = huevos.iterator();
 /*
@@ -319,13 +266,6 @@ public class Granja {
 	}
 
 	
-
-	public long getId() {
-		return id;
-	}
-
-	
-	
 	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
 			TiposAnimales tipo = new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
 			System.out.println("El animal "+ tipo.getAnimal() +" ha sido creado granja.addTiposAnimales");
@@ -333,24 +273,11 @@ public class Granja {
 			
 	}
 	
-
-	public List<TiposAnimales> getTiposAnimales(){
-		return tiposAnimales;
-	}
-	public List<Animal> getAnimales(){
-		if(animales==null) {
-			return null;
-		}
-		return animales;
-	}
-
-	
-
-	
 	public void agregarAnimal(Long tipoAnimal_id,  int edad, LocalDate fechaIngreso) {
 			List<Animal>animales=this.getAnimales();
 			animales.add(new Animal(tipoAnimal_id, edad, fechaIngreso));
 		
 	}
+
 	
 }
