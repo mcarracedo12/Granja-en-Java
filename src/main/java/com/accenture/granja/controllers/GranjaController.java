@@ -75,81 +75,45 @@ public class GranjaController {
 	//FIN GRANJA
 	
 	//INICIO TIPO
-
+	
 	@GetMapping("/{granja_id}/tipos")
-	public List<TiposAnimales> getTiposAnimales() {
-	List<TiposAnimales> tipos= tiposService.obtenerTodosLosTiposAnimales();
-		return tipos;
-	}
-	
-
-	@GetMapping("/tipos/{id}")
-	public TiposAnimales getTipoDetails(@PathVariable Long id) {
-		TiposAnimales tipo = tiposService.getTipoById(id);
-        return tipo;	 
-	}
-	
-	
-
-	@GetMapping("/granjas/{granja_id}/tipos")
-	public List<TiposAnimales> getTiposAnimales(@PathVariable Long granja_id) {
-	List<TiposAnimales> tipos= tiposService.obtenerTodosLosTiposAnimalesByGranja(granja_id);
-		return tipos;
-
+	public ResponseEntity<List<TiposAnimales>> getTiposAnimales(@PathVariable Long granja_id) {
+		List<TiposAnimales> tipos = tiposService.obtenerTodosLosTiposAnimalesByGranja(granja_id);
+		return new ResponseEntity<>(tipos, HttpStatus.OK);
 	}
 
-
-	@GetMapping("/granjas/{granja_id}/tipos/{id}")
-	public ResponseEntity<TiposAnimales> getTipoDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
+	@GetMapping("/{granja_id}/tipos/{id}")
+	public ResponseEntity<TiposAnimales> getTipoDetails(@PathVariable Long id, @PathVariable Long granja_id) {
 		TiposAnimales tipo = tiposService.getByGranjaIdAndId(id, granja_id);
-        if (tipo != null) {
-            return ResponseEntity.ok(tipo);
-        } else {
-            return ResponseEntity.notFound().build();
-        }	 
-  
+		return ResponseEntity.ok(tipo);
 	}
 	
-	 @GetMapping("/granjas/{granja_id}/tipos/{tipo_id}/animales")
-		public List<Animal> getAnimalDetails(@PathVariable Long tipo_id, @PathVariable Long granja_id ) {
-			List<Animal>  animales;
-			TiposAnimales tipo = tiposService.getByGranjaIdAndId(tipo_id, granja_id);
-			animales = ResponseEntity.ok(tipo).getBody().animales;
-	            return animales;
-	        
+	@GetMapping("/{granja_id}/tipos/{tipo_id}/animales")
+	public ResponseEntity<List<Animal>> getAnimalDetails(@PathVariable Long tipo_id, @PathVariable Long granja_id) {
+		TiposAnimales tipo = tiposService.getByGranjaIdAndId(tipo_id, granja_id);
+		List<Animal> animales = tipo.getAnimales();
+		return new ResponseEntity<>(animales, HttpStatus.OK);
 	}
 	
 	
-/*
-	@PostMapping("/granjas/{granja_id}/tipos")
-	public void createTipoAnimal(@RequestBody TiposAnimales tipo, @PathVariable Long granja_id) {
-		try {
-			tipoAnimalService.agregarTipo(tipo); //no necesita tener ID para el POST
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	*/
-
-	@PostMapping("/tipos")
-	public void createTipoAnimal(@RequestBody TiposAnimales tipo) {
-		try {
-			tiposService.agregarTipo(tipo); //no necesita tener ID para el POST
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+	@PostMapping("/{granja_id}/tipos")
+	public ResponseEntity<TiposAnimales> createTipoAnimal(@PathVariable Long granja_id,  @RequestBody TiposAnimales tipo) {
+		Granja granja = granjaService.buscarGranja(granja_id);
+		tipo.setGranja(granja);
+		TiposAnimales createdTipo = tiposService.agregarTipo(tipo); //no necesita tener ID para el POST
+		return new ResponseEntity<>(createdTipo, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/tipos/{id}")
-	public void updateTipos(@RequestBody TiposAnimales tipo, @PathVariable Long id) {
-		tiposService.editarTipo(tipo); //   SI necesita tener el ID para el PUT
+	@PutMapping("/{granja_id}/tipos/{id}")
+	public ResponseEntity<TiposAnimales> updateTipos(@RequestBody TiposAnimales tipo,@PathVariable Long granja_id, @PathVariable Long id) {
+		TiposAnimales updatedTipo = tiposService.editarTipo(tipo, granja_id, id); // SI necesita tener el ID para el PUT
+	    return new ResponseEntity<>(updatedTipo, HttpStatus.OK);
 	}
 
-	@DeleteMapping("tipos/{id}")
-	public void deleteTipo(@PathVariable Long id) {
-		tiposService.eliminarTipo(id);
+	@DeleteMapping("/{granja_id}/tipos/{id}")
+	public ResponseEntity<Void> deleteTipo(@PathVariable Long granja_id,@PathVariable Long id) {
+		tiposService.eliminarTipo(id, granja_id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	//FIN TIPO

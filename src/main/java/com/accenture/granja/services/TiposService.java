@@ -7,7 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.accenture.granja.exceptions.NoContentException;
 import com.accenture.granja.model.TiposAnimales;
+import com.accenture.granja.repository.GranjaRepository;
 import com.accenture.granja.repository.TipoAnimalRepository;
 @Service
 @Transactional
@@ -25,45 +27,29 @@ public class TiposService {
 		return tiposRepo.findById(tipoAnimalId)
 				.orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
 	}
-
-/*	public ResponseEntity<TiposAnimales> getByGranjaIdAndId(Long id, Long granja_id) {
-		//List<TiposAnimales> tiposAnimales = obtenerTodosLosTiposAnimales();
-		TiposAnimales tipos = tiposAnimalesRepository.findByGranjaIdAndId(granja_id, id);
-/*		TiposAnimales tipos = null;
-		try {
-			tipos = tiposAnimales.stream().filter(t->t.getId()== id && t.getGranja().getId()== granja_id).findFirst().get();
-			return ResponseEntity.ok(tipos);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("No se encontro ese tipo");
-			return ResponseEntity.notFound().build();
-		}	
-		return ResponseEntity.ok(tipos);
-	}
-	*/
 	
 	public  TiposAnimales getByGranjaIdAndId(Long id, Long granja_id) {
 		TiposAnimales tipo = tiposRepo.findByGranjaIdAndId(granja_id, id);
 		return tipo; 
 	}
-	
-/*	public List<Animal> getByGranjaIdAndTipoId(Long id, Long granja_id) {
-		TiposAnimales tipo = tiposAnimalesRepository.findByGranjaIdAndId(granja_id, id);
-		return tipo.animales; 
-	}    
-	*/
-	
-	public void agregarTipo(TiposAnimales tipo) {
+
+	public TiposAnimales agregarTipo(TiposAnimales tipo) {
 		tiposRepo.save(tipo);
-		//System.out.println("tiposAnimalesRepository.save(tipo); desde tiposAnimalesservice.agregarTipo(tipo);");
+		return tipo;
 	}
 
-	public void editarTipo(TiposAnimales tipo) {
-		tiposRepo.save(tipo);		
-	}
+	public TiposAnimales editarTipo(TiposAnimales tipo, Long granjaId, Long id) {
+        if (tiposRepo.findByGranjaIdAndId(granjaId, id)!= null) {
+        	return tiposRepo.save(tipo);           
+        }
+        throw new NoContentException("No hay tipo de animal con ID: " + id + " en la granja con ID: " + granjaId);
+    }
 
-	public void eliminarTipo(Long id) {
-		tiposRepo.deleteById(id);
+	public void eliminarTipo(Long id, Long granjaId) {
+        if (tiposRepo.findByGranjaIdAndId(granjaId, id)!= null) {
+        	tiposRepo.deleteById(id);
+        }
+        throw new NoContentException("No hay tipo de animal con ID: " + id + " en granja " + granjaId);
 	}
 
 }
