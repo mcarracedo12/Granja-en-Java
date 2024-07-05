@@ -18,10 +18,13 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 //@DiscriminatorValue("Venta")
 public class Venta extends Transaccion {
 	@Id
@@ -41,7 +44,9 @@ public class Venta extends Transaccion {
 	//@JsonIgnore
 	private List<Animal> productosVendidos;
 
-	
+	public Venta() {
+		super();
+	}
 	
 	public Venta(Long id, String nombrePersona, LocalDate fecha) {
 		super(nombrePersona, fecha);

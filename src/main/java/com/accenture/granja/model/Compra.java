@@ -14,11 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 
 @Entity
-@Data
+@Getter
+@Setter
 //@DiscriminatorValue("Compra")
 public class Compra extends Transaccion {
 
@@ -41,6 +44,9 @@ public class Compra extends Transaccion {
 	
 	public Compra(Long id, String nombrePersona, LocalDate fecha) {
 		super(nombrePersona, fecha);
+	}
+	public Compra() {
+		super();
 	}
 
 

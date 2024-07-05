@@ -21,5 +21,9 @@ public class Transaccion {
 		this.fecha = fecha;
 	}
 
+	public Transaccion() {
+		// TODO Auto-generated constructor stub
+	}
+
 
 }
