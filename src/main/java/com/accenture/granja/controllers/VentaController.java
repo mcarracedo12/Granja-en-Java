@@ -1,8 +1,10 @@
 package com.accenture.granja.controllers;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accenture.granja.exceptions.NoContentException;
 import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Venta;
 import com.accenture.granja.services.GeneralService;
@@ -25,9 +28,12 @@ public class VentaController {
 	private VentaService ventaService;
 	
 	  @GetMapping("/ventas")
-	   public List<Venta> getVentas() {
-	            // Aca se instancia al Servicio donde esta la logica central
-	       return ventaService.obtenerTodasLasVentas();
+	   public ResponseEntity<List<Venta>> getVentas() {
+		  List<Venta> ventas =ventaService.obtenerTodasLasVentas();
+		  if(ventas.isEmpty()) {
+			  throw new RuntimeException("Lista vacia");
+		  }else
+	       return new ResponseEntity<List<Venta>> (ventas, HttpStatus.OK);
 	   }
 	
 	  @GetMapping("granjas/{granja_id}/ventas")
@@ -47,9 +53,9 @@ public class VentaController {
 	  
 	  @GetMapping("/granjas/{granja_id}/ventas/{id}/productos")
 		public List<Animal> getAnimalDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
-			List<Animal>  productos ;
+			List<Animal>  productos = null;
 			Venta venta = ventaService.getVentaByIdAndGranjaId(id, granja_id);
-			productos = venta.productos;
+			productos = venta.getProductosVendidos();
 			return productos;	        
 	}
 		

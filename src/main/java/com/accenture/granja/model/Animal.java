@@ -9,37 +9,35 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-//import io.micrometer.core.lang.NonNull;
+import lombok.Data;
 @Entity
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Data
 public class Animal {
 
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
-	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnore
     @JoinColumn(name = "tipos_animal_id")
 	public TiposAnimales tiposAnimales;
-	
-	
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "compra_id")
 	public Compra compra;
@@ -48,13 +46,9 @@ public class Animal {
 	@JsonIgnore
 	@JoinColumn(name = "venta_id")
 	public Venta venta;
-	
 
-	
 
-	//@NonNull
 	public LocalDate fechaIngresoAGranja;
-	//@NonNull
 	public int edadEnDiasAlIngresar;
 	public LocalDate nacimiento;// calcula ingreso-edad
 	public LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
@@ -62,96 +56,43 @@ public class Animal {
 	//public int edadActual;
 	public double precioCompra;// Se setean al momento de la transaccion correspondiente
 	public double precioVenta; // Se setean al momento de la transaccion correspondiente
-
-
 	
-	//Agrego para que no tire error despues nada mas, no deberia hacer falta
 	public Animal() {
-		super();
+		
 	}
 
 	public Animal(Long tipos_animal_id,  int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
-		//this.id = id;
 		this.tiposAnimales= getAnimalById(tipos_animal_id);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = getNacimiento();
-		this.fechaExpiracion = getFechaExpiracion();
+		this.fechaExpiracion = this.nacimiento.plusDays(getTiposAnimales().getDiasExpiracion());
 	}
 
-	public long getId() {
-		return id;
-	}
 
-	
 	public LocalDate getNacimiento() {
 		return fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
 	}
 
-	public LocalDate getFechaIngresoAGranja() {
-		return fechaIngresoAGranja;
-	}
-
-	public void setFechaIngresoAGranja(LocalDate fechaIngresoAGranja) {
-		this.fechaIngresoAGranja = fechaIngresoAGranja;
-	}
-	
 	public LocalDate getFechaExpiracion() {
-		return getNacimiento().plusDays(getDiasExpiracionByTipo());
+		return getNacimiento().plusDays(getTiposAnimales().getDiasExpiracion());
 	}
-
-
-
 
 	public int getEdadActual() { 
 		int edad = (int)ChronoUnit.DAYS.between(getNacimiento(), LocalDate.now());
 		return edad;
 	}
 
-
-
-/*	public Venta getVentaById(Long venta_id) {
-		return venta;
-	}
-	*/
-	public void setVenta(Venta venta) {
-		if(venta!= null) {	
-		this.venta = venta;
-		}
-	}
-	
-	public Venta getVenta() {
-		if(venta== null) {
-			return null;
-		}else
-		return venta;
-	}
-	
-	public Compra getCompra() {
-		if(compra== null) {
-			return null;
-		}else
-		return compra;
-	}
-
-	public void setCompra(Compra compra) {
-		if(compra!= null) {	
-		this.compra = compra;
-		}
-	}
-
-
-
 	public void reproducir() {
 		LocalDate i = granja.getUltimaActualizacion();
 		while( i.isBefore(LocalDate.now())) {
 				if( i.isBefore(getFechaExpiracion())) {
 					System.out.println("Fecha de reproduccion: " + i);
-					agregar(getTipoId(), 0, i);
-					 i.plusDays(getTiempoDeReproduccionByTipo());
+					agregar(getTiposAnimales().getId(), 0, i);
+					 i.plusDays(getTiposAnimales().getTiempoDeReproduccion());
 				}
 				else {
-					System.out.println("Hay que eliminar Animal id " + getId());
+					//System.out.println("Hay que eliminar Animal id " + getId());
 					//eliminar(getId());
 				}
 				System.out.println("La ultima fecha de Actualizacion es: " + granja.getUltimaActualizacion());
@@ -159,36 +100,7 @@ public class Animal {
 		System.out.println("Se actualizo Granja exitosamente a la fecha " + granja.getUltimaActualizacion() );
 	}
 	
-	
-	public int getTiempoDeReproduccionByTipo() {
-		if(tiposAnimales==null) {
-			return 0;
-		}else
-		return tiposAnimales.getTiempoDeReproduccion();
-	}
-	
-	public long getTipoId() {
-		if(tiposAnimales==null) {
-			return 0;
-		}else
-		return tiposAnimales.getId();
-	}
-	
-	public long getCompraId() {
-		if(compra==null) {
-			return 0;
-		}else
-		return compra.getId();
-	}
-	
-	public long getVentaId() {
-		if(venta==null) {
-			return 0;
-		}else
-		return venta.getId();
-	}
-	
-	
+
 	
 /*	public int getEdadActual() {
 		return LocalDate.now().compareTo(this.getNacimiento());
@@ -197,19 +109,6 @@ public class Animal {
 
 	
 
-	
-/*	public void comprar(Ganado tipoGanado, int edad) {
-		this.precioCompra = setPrecioCompraByAnimal();
-	}
-	
-	public void vender(Ganado tipoGanado,int edad) {
-		this.precioVenta= tipoGanado.setPrecioVentaByAnimal();
-		
-		//String cant = "10";
-		//BigDecimal totalVenta = precioVenta.multiply(new BigDecimal(cant));
-		//System.out.println("El total de la venta es de "+ totalVenta);
-	}
-*/
 	public double setPrecioVentaByTipo() {
 		if(tiposAnimales== null) {
 			return 0;
@@ -224,47 +123,12 @@ public class Animal {
 		return tiposAnimales.getPrecioCompra();
 	}
 	
-	public TiposAnimales getTiposAnimales() {
-		if(tiposAnimales== null) {
-			return null;
-		}else
-		return tiposAnimales;
-	}
 
-	public void setTiposAnimales(TiposAnimales tiposAnimales) {
-		if(tiposAnimales!= null) {	
-		this.tiposAnimales = tiposAnimales;
-		}
-	}
-	
-	public TiposAnimales setTiposAnimales(Long tiposAnimales_id) {
-		return tiposAnimales;
-	}
-	
 	public TiposAnimales getAnimalById(Long id) {
 		return tiposAnimales;
 	}
-	public String getAnimalByTipo() {
-		if(tiposAnimales== null) {
-			return null;
-		}else
-		return tiposAnimales.getAnimal();
-	}
 
-	public int getDiasExpiracionByTipo() {
-		if(tiposAnimales== null) {
-			return 0;
-		}else
-		return tiposAnimales.getDiasExpiracion();
-	}
-	
-	public int getCantidadMaximaByTipo() {
-		if(tiposAnimales== null) {
-			return 0;
-		}else
-		return tiposAnimales.getCantidadMaxima();
-	}
-	
+
 
 	public double getPrecioCompraByTipo() {
 		if(tiposAnimales== null) {
@@ -296,8 +160,8 @@ public class Animal {
 
 	@Override
 	public String toString() {
-		return String.format("Animal " +" " + getAnimalByTipo()  
-				+ " . Tiempo de Reproduccion: " + getTiempoDeReproduccionByTipo() + ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: " + getCantidadMaximaByTipo() + "\n");
+		return String.format("Animal " +" " + getTiposAnimales().getAnimal()  
+				+ " . Tiempo de Reproduccion: " + getTiposAnimales().getTiempoDeReproduccion() + ". Precios de compra y venta: " + precioCompra + " " + precioVenta + ". CantidadMaxima: " + getTiposAnimales().getCantidadMaxima() + "\n");
 	}
 
 	

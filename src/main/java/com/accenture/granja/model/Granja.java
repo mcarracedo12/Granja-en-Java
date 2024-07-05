@@ -32,20 +32,17 @@ public class Granja {
 	private String nombre;
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	//@JsonIgnore
+	@JsonIgnore
 	public List<TiposAnimales> tiposAnimales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	public List<Animal> animales;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore
+	//@JsonIgnore
 	public List<Compra> compras;
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
+	//@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
 	public List<Venta> ventas;
-	
-
-
 	
 	public void comprarPollitos(int cant) {
 		List<Animal>pollitos = this.getAnimalesByTipo(2);

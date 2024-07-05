@@ -13,90 +13,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 
 
 @Entity
+@Data
+//@DiscriminatorValue("Compra")
 public class Compra extends Transaccion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	private String nombrePersona;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "compra", orphanRemoval = true)
-	//@JsonIgnore
-	public List<Animal> productos;
+	protected String nombrePersona; // Cliente / comprador segun sea la transaccion
 	
-	
+	protected LocalDate fecha;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "compra", orphanRemoval = true)
+	//@JsonIgnore
+	private List<Animal> productosComprados;
 	
-	LocalDate fecha;
-	
-	public Compra() {
-		super();
-	}
-   
-	public Compra(String nombrePersona, LocalDate fecha) {
-		
+	public Compra(Long id, String nombrePersona, LocalDate fecha) {
 		super(nombrePersona, fecha);
 	}
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombrePersona() {
-		return nombrePersona;
-	}
-
-	public void setNombrePersona(String nombrePersona) {
-		this.nombrePersona = nombrePersona;
-	}
-/*
-	public Granja getGranja() {
-		return granja;
-	}
-
-	public void setGranja(Granja granja) {
-		this.granja = granja;
-	}
-*/
-	public LocalDate getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
-	
-
-	public List<Animal> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Animal> productos) {
-		this.productos = productos;
-	}
-
-	public Granja getGranja() {
-		return granja;
-	}
-
-	public void setGranja(Granja granja) {
-		this.granja = granja;
-	}
-
-	
 
 }

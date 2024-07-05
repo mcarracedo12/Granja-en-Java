@@ -29,7 +29,12 @@ public class CompraService {
 		Compra compra= compraRepo.findById(id).orElse(null);
 		return compra;
 	}
-/*	
+	
+	public Compra getCompraById(Long id) {
+		Optional<Compra> compra = compraRepo.findById(id);
+		return compra.get();
+	}
+	
 	public Compra getCompraByIdAndGranjaId(Long id, Long granjaId) {
         return compraRepo.findByGranjaIdAndId(granjaId, id);
     }
@@ -44,11 +49,8 @@ public class CompraService {
 		Compra compra = compraRepo.findByGranjaIdAndId(granja_id, id);
 		return compra; 
 	} 
-	*/
-	public Compra getCompraById(Long id) {
-		Optional<Compra> compra = compraRepo.findById(id);
-		return compra.get();
-	} 
+	
+	 
 
 	public void agregarCompra(Compra compra) {
 		compraRepo.save(compra);

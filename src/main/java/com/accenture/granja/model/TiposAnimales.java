@@ -16,8 +16,11 @@ import javax.persistence.OneToMany;
 import org.springframework.lang.NonNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 
 @Entity
+@Data
 public class TiposAnimales {
 	
 	@Id

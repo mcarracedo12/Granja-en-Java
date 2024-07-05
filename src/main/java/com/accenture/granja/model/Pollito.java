@@ -3,32 +3,26 @@ package com.accenture.granja.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-//@Entity
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 
 public class Pollito extends Animal {
-	//@Id
-	//@GeneratedValue
-	protected Long id;
-	
-	protected LocalDate fechaIngresoAGranja;
-	protected int edadEnDiasAlIngresar;
-	protected LocalDate nacimiento;// calcula ingreso-edad
-	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
-	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
-	//protected int edadActual;// hoy - nacimiento
-	//protected int cantidadMaxima; // Lo busca por tipo de animal 
-	//public double precioCompra;// Se setean al momento de la transaccion correspondiente
-	//public double precioVenta; // Se setean al momento de la transaccion correspondiente
-	
 
 	public Pollito(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(tipo_animal_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
-		this.tiposAnimales= getAnimalById(tipo_animal_id);
+		this.tiposAnimales= getAnimalById(2L);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracionByTipo());
+		this.fechaExpiracion = this.nacimiento.plusDays(getTiposAnimales().getDiasExpiracion());
 		//this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
 		//this.precioCompra= getPrecioCompraByTipo();
 		//this.precioVenta= 0;
@@ -44,7 +38,7 @@ public class Pollito extends Animal {
 			agregar((long)1, 0, i);
 			huevo.reproducir();
 			System.out.println("Huevo creado con fecha de nacimiento " + i);
-			i = i.plusDays( getTiempoDeReproduccionByTipo());
+			i = i.plusDays( getTiposAnimales().getTiempoDeReproduccion());
 		}
 	
 	}

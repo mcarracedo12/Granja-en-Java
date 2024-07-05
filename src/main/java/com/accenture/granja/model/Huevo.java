@@ -3,37 +3,27 @@ package com.accenture.granja.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-//@Entity
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+
 public class Huevo extends Animal {
-	//@Id
-	//@GeneratedValue
-	protected Long id;
-
-	//@ManyToOne
-	//@JoinColumn(name = "tiposAnimales_id")
-	//public TiposAnimales tiposAnimales;
-	
-	//protected String animal;// Lo busca por tipo de animal 
-	protected LocalDate fechaIngresoAGranja;
-	protected int edadEnDiasAlIngresar;
-	protected LocalDate nacimiento;// calcula ingreso-edad
-	protected LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
-	//protected int tiempoDeReproduccion; // lo busca por tipo de animal
-	//protected int edadActual;// hoy - nacimiento
-	//protected int cantidadMaxima; // Lo busca por tipo de animal 
-	//public double precioCompra;// Se setean al momento de la transaccion correspondiente
-	//public double precioVenta; // Se setean al momento de la transaccion correspondiente
-
 
 	public Huevo(Long tipo_animal_id, int edadEnDiasAlIngresar, LocalDate fechaIngresoAGranja) {
 		super(tipo_animal_id, edadEnDiasAlIngresar, fechaIngresoAGranja);
-		this.tiposAnimales= getAnimalById(tipo_animal_id);
+		this.tiposAnimales= getAnimalById(1L);
 
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
 		this.nacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
-		this.fechaExpiracion = this.nacimiento.plusDays(getDiasExpiracionByTipo());
+		this.fechaExpiracion = this.nacimiento.plusDays(getTiposAnimales().getDiasExpiracion());
 		//this.edadActual = LocalDate.now().compareTo(this.getNacimiento());
 		//this.precioCompra= getPrecioCompraByTipo();
 		//this.precioVenta= 0;
@@ -42,7 +32,7 @@ public class Huevo extends Animal {
 
 	@Override
 	public void reproducir() {
-		LocalDate i = nacimiento.plusDays(getTiempoDeReproduccionByTipo());
+		LocalDate i = nacimiento.plusDays(getTiposAnimales().getTiempoDeReproduccion());
 		if (i.isBefore(LocalDate.now())) {
 
 			if (i.equals(fechaExpiracion)) {
@@ -55,7 +45,7 @@ public class Huevo extends Animal {
 				//this.eliminar(getId());
 				System.out.println("Hay que eliminar Animal id " + getId());
 				//eliminar(getId());
-				i = i.plusDays(getTiempoDeReproduccionByTipo());
+				i = i.plusDays(getTiposAnimales().getTiempoDeReproduccion());
 			}
 			
 			
