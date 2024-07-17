@@ -1,11 +1,9 @@
 package com.accenture.granja.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,22 +19,20 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
-//@DiscriminatorValue("Venta")
 public class Venta extends Transaccion {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	protected String nombrePersona; // Cliente / comprador segun sea la transaccion
+	protected String nombrePersona; 
 	
 	protected LocalDate fecha;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	//@JsonIgnore
+	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;
 	

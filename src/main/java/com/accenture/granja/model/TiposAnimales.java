@@ -24,7 +24,7 @@ import lombok.Data;
 public class TiposAnimales {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String animal;
 	private int diasExpiracion;// Expectativa de vida del animal: 21 dias huevos - 2000 dias pollos 
@@ -39,7 +39,7 @@ public class TiposAnimales {
 	public List<Animal> animales;
 	
 	@NonNull
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@JoinColumn(name = "granja_id")
 	public Granja granja;

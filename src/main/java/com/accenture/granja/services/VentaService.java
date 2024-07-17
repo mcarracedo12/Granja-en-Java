@@ -43,8 +43,8 @@ public class VentaService {
 		}
 		
 		
-		public void agregarVenta(Venta venta) {
-			ventaRepo.save(venta);
+		public Venta agregarVenta(Venta venta) {
+			return ventaRepo.save(venta);
 			
 		}
 

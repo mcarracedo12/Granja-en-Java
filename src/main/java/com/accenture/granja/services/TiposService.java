@@ -28,14 +28,16 @@ public class TiposService {
 				.orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado con ID: " + tipoAnimalId));
 	}
 	
-	public  TiposAnimales getByGranjaIdAndId(Long id, Long granja_id) {
+	public TiposAnimales getByGranjaIdAndId(Long id, Long granja_id) {
 		TiposAnimales tipo = tiposRepo.findByGranjaIdAndId(granja_id, id);
+		if(tipo==null) {
+			throw new NoContentException("No existe el tipo " + id + " en la granja " + granja_id);
+		}
 		return tipo; 
 	}
 
 	public TiposAnimales agregarTipo(TiposAnimales tipo) {
-		tiposRepo.save(tipo);
-		return tipo;
+		return tiposRepo.save(tipo);
 	}
 
 	public TiposAnimales editarTipo(TiposAnimales tipo, Long granjaId, Long id) {
@@ -46,10 +48,11 @@ public class TiposService {
     }
 
 	public void eliminarTipo(Long id, Long granjaId) {
-        if (tiposRepo.findByGranjaIdAndId(granjaId, id)!= null) {
-        	tiposRepo.deleteById(id);
-        }
-        throw new NoContentException("No hay tipo de animal con ID: " + id + " en granja " + granjaId);
+	    if (tiposRepo.findByGranjaIdAndId(granjaId, id) == null) {
+	        throw new NoContentException("No hay tipo de animal con ID: " + id + " en granja " + granjaId);
+	    }
+	    tiposRepo.deleteById(id);
 	}
+
 
 }

@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.accenture.granja.model.Animal;
 
-
+@Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long>{
 
 	//List<Animal> findByGranjaIdAndTipoId(Long granja_id, Long tipo_id);
@@ -23,7 +24,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 	/*Animal findByGranjaIdAndId(Long granjaId, Long id);
 	List <Animal> findByGranjaId(Long granja_id);
 	*/
-	List<Animal> findByTiposAnimales_id(Long tiposAnimales_id);
+	List<Animal> findByTiposAnimales(Long tiposAnimalesId);
 	Optional<Animal> findById(Long id);
 	void deleteById(Long id);
 	

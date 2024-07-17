@@ -33,8 +33,8 @@ public class AnimalService {
 		return animalRepo.findAll();
 	}
 	
-	public List<Animal> getAnimalByTipoId(Long tipos_animal_id) {
-		return animalRepo.findByTiposAnimales_id(tipos_animal_id);
+	public List<Animal> getAnimalByTipoId(Long granjaId, Long tipos_animal_id) {
+		return animalRepo.findByTiposAnimales(tipos_animal_id);
 	}
 
 	public Animal getAnimalById(Long id) {

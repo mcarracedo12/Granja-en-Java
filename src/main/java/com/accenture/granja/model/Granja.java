@@ -15,8 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -26,10 +25,11 @@ import lombok.Data;
 public class Granja {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private double dineroEnCaja;
 	private String nombre;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate ultimaActualizacion = LocalDate.now().minusDays(20);
 	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
 	//@JsonIgnore
@@ -262,19 +262,7 @@ public class Granja {
 		this.setUltimaActualizacion(LocalDate.now());
 	}
 
-	
-	public void addTiposAnimales(String animal, int diasExpiracion, int cantidadMaxima, int tiempoDeReproduccion, double precioCompra, double precioVenta) {
-			TiposAnimales tipo = new TiposAnimales(animal, diasExpiracion, cantidadMaxima, tiempoDeReproduccion, precioCompra, precioVenta);
-			System.out.println("El animal "+ tipo.getAnimal() +" ha sido creado granja.addTiposAnimales");
-			System.out.println("Falta poder agregarlo a BBDD");
-			
-	}
-	
-	public void agregarAnimal(Long tipoAnimal_id,  int edad, LocalDate fechaIngreso) {
-			List<Animal>animales=this.getAnimales();
-			animales.add(new Animal(tipoAnimal_id, edad, fechaIngreso));
-		
-	}
+
 
 	
 }
