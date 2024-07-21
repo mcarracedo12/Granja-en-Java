@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.accenture.granja.model.Animal;
@@ -25,6 +27,11 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 	List <Animal> findByGranjaId(Long granja_id);
 	*/
 	List<Animal> findByTiposAnimales(Long tiposAnimalesId);
+	
+	
+	@Query(value = "SELECT * FROM ANIMAL WHERE TIPO_ANIMAL_ID = tiposAnimalesId ORDER BY NACIMIENTO ASC", nativeQuery = true)
+	List<Animal> findByTiposAnimalesOrderedByDate(@Param("tiposAnimalesId")Long tiposAnimalesId);
+	
 	Optional<Animal> findById(Long id);
 	void deleteById(Long id);
 	

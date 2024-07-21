@@ -1,5 +1,6 @@
 package com.accenture.granja.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class AnimalService {
 	}
 	
 	public List<Animal> getAnimalByTipoId(Long granjaId, Long tipos_animal_id) {
-		return animalRepo.findByTiposAnimales(tipos_animal_id);
+		return animalRepo.findByTiposAnimalesOrderedByDate(tipos_animal_id);
 	}
 
 	public Animal getAnimalById(Long id) {
@@ -49,7 +50,11 @@ public class AnimalService {
 	public void agregarAnimal(Animal animal, Long tipoId) {
 		  Optional<TiposAnimales> ta = tiposRepo.findById(tipoId);
 		  animal.setTiposAnimales(ta.get());
-		  agregarAnimal(animal);
+		  
+		  
+		  
+		  animalRepo.save(animal);
+	
 	}
 	
 	public void asignarCompra(Animal animal, Long compraId) {

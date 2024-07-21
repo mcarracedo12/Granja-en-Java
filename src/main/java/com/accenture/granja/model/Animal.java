@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
+import com.accenture.granja.exceptions.NoContentException;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -47,9 +49,12 @@ public class Animal {
 	public Venta venta;
 
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	public LocalDate fechaIngresoAGranja;
 	public int edadEnDiasAlIngresar;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	public LocalDate nacimiento;// calcula ingreso-edad
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	public LocalDate fechaExpiracion; //nacimiento + expiracion por tipoAnimal
 
 	//public int edadActual;
@@ -64,10 +69,17 @@ public class Animal {
 		this.tiposAnimales= getAnimalById(tipos_animal_id);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
-		this.nacimiento = getNacimiento();
-		this.fechaExpiracion = this.nacimiento.plusDays(getTiposAnimales().getDiasExpiracion());
+		LocalDate fechaNacimiento = fechaIngresoAGranja.plusDays(edadEnDiasAlIngresar); 
+		this.setNacimiento(fechaNacimiento);
+		LocalDate fechaExpiracion = fechaNacimiento.plusDays(getDiasExpiracionByTipo());
+		this.setFechaExpiracion(fechaExpiracion);
+		System.out.println(fechaExpiracion);
 	}
 
+	public int getEdadActual() { 
+		int edad = (int)ChronoUnit.DAYS.between(getNacimiento(), LocalDate.now());
+		return edad;
+	}
 
 	public LocalDate getNacimiento() {
 		return fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar);
@@ -77,10 +89,7 @@ public class Animal {
 		return getNacimiento().plusDays(getTiposAnimales().getDiasExpiracion());
 	}
 
-	public int getEdadActual() { 
-		int edad = (int)ChronoUnit.DAYS.between(getNacimiento(), LocalDate.now());
-		return edad;
-	}
+	
 
 	public void reproducir() {
 		LocalDate i = granja.getUltimaActualizacion();
@@ -140,6 +149,13 @@ public class Animal {
 		if(tiposAnimales!= null) {
 			this.precioCompra = tiposAnimales.getPrecioCompra(); // no funciona
 		}		
+	}
+	
+	public int getDiasExpiracionByTipo() {
+		if(tiposAnimales== null) {
+			throw new NoContentException("El tipo no existe");
+		}else
+		return tiposAnimales.getDiasExpiracion();
 	}
 
 	public double getPrecioVentaByTipo() {

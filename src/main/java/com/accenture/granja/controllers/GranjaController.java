@@ -1,5 +1,6 @@
 package com.accenture.granja.controllers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -149,6 +150,8 @@ public class GranjaController {
 		List<Animal> animales = new ArrayList<Animal>();
 		for (int cant = 0; cant < cantidad; cant++) {
 			animal.setGranja(granja);
+			animal.setFechaIngresoAGranja(LocalDate.now());
+			animal.setNacimiento(animal.getFechaIngresoAGranja().plusDays(animal.getEdadEnDiasAlIngresar()));
 			animalService.agregarAnimal(animal, tiposAnimales_id);
 			animales.add(animal);
 		}
