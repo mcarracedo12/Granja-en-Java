@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 	    @ExceptionHandler(NoContentException.class)
 	    public ResponseEntity<String> handleNoContentException(NoContentException ex) {
-	        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NO_CONTENT);
 	    }
 	}
