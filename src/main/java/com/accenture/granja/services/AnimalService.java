@@ -35,7 +35,7 @@ public class AnimalService {
 	}
 	
 	public List<Animal> getAnimalByTipoId(Long granjaId, Long tipos_animal_id) {
-		return animalRepo.findByTiposAnimalesOrderedByDate(tipos_animal_id);
+		return animalRepo.findByTiposAnimalesId(tipos_animal_id);
 	}
 
 	public Animal getAnimalById(Long id) {
