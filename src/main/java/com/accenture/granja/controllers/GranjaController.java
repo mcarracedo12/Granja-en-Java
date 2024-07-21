@@ -24,11 +24,13 @@ import com.accenture.granja.model.Animal;
 import com.accenture.granja.model.Compra;
 import com.accenture.granja.model.Granja;
 import com.accenture.granja.model.TiposAnimales;
+import com.accenture.granja.model.Usuario;
 import com.accenture.granja.model.Venta;
 import com.accenture.granja.services.AnimalService;
 import com.accenture.granja.services.CompraService;
 import com.accenture.granja.services.GranjaService;
 import com.accenture.granja.services.TiposService;
+import com.accenture.granja.services.UsuarioService;
 import com.accenture.granja.services.VentaService;
 
 @RestController
@@ -46,6 +48,8 @@ public class GranjaController {
 	private CompraService compraService;
 	@Autowired
 	private VentaService ventaService;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	// INICIO GRANJAS
 	@GetMapping("/")
@@ -207,7 +211,7 @@ public class GranjaController {
 	                         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
-	 @GetMapping("/granjas/{granja_id}/compras/{id}/productos")
+	 @GetMapping("/{granja_id}/compras/{id}/productos")
 		public ResponseEntity<List<Animal>> getProductosCompradosDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
 			List<Animal>  productos ;
 			Optional <Compra> compra = Optional.of(compraService.getComprasByGranjaIdAndId(id, granja_id));
@@ -286,7 +290,7 @@ public class GranjaController {
 	                         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
-	 @GetMapping("/granjas/{granja_id}/ventas/{id}/productos")
+	 @GetMapping("/{granja_id}/ventas/{id}/productos")
 		public ResponseEntity<List<Animal>> getProductosVendidosDetails(@PathVariable Long id, @PathVariable Long granja_id ) {
 			List<Animal> productos ;
 			Optional <Venta> venta = Optional.of(ventaService.getVentaByIdAndGranjaId(id, granja_id));
@@ -342,5 +346,31 @@ public class GranjaController {
 		    }
 		ventaService.eliminarVenta(id);
 	}
+	
+	// USUARIOS
+	
+	@GetMapping("/{granja_id}/usuarios")
+	public ResponseEntity<List<Usuario>> getUsuarios(@PathVariable Long granja_id) {
+		List<Usuario> usuarios = usuarioService.buscarUsuariosByGranja(granja_id);
+		return new ResponseEntity<>(usuarios, HttpStatus.OK);
+	}
+/*
+	@PostMapping("/")
+	public ResponseEntity<Granja> createGranja(@RequestBody Granja granja) {
+		granjaService.agregarGranja(granja); // la granja no necesita tener ID para el POST
+		return new ResponseEntity<Granja>(granja, HttpStatus.CREATED);
+	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<Granja> updateGranja(@RequestBody Granja granja, @PathVariable Long id) {
+		Granja updatedGranja = granjaService.editarGranja(granja, id); //  la granja SI necesita tener el ID para el PUT
+		return new ResponseEntity<>(updatedGranja, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteGranja(@PathVariable Long id) {
+		granjaService.eliminarGranja(id); 
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+*/
 }

@@ -41,7 +41,9 @@ public class Granja {
 	@JsonIgnore  //Me muestra las transacciones en el get de la granja si lo comento
 	public List<Venta> ventas;
 	
-	
+	@OneToMany(mappedBy = "granja", cascade = CascadeType.ALL, orphanRemoval = true)
+	//@JsonIgnore
+	public List<Usuario> usuarios;
 
 
 
