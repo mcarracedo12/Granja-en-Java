@@ -181,7 +181,7 @@ public class GranjaController {
 	    return new ResponseEntity<>(animal, HttpStatus.OK);
 	}
 	@DeleteMapping("/{granja_id}/animales/{id}")
-	public ResponseEntity<Animal> deleteAnimal(@PathVariable Long granja_id, @PathVariable Long id) {
+	public ResponseEntity<Void> deleteAnimal(@PathVariable Long granja_id, @PathVariable Long id) {
 		 Animal animal = animalService.getAnimalById(id);
 		    if (animal == null) {
 		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -192,6 +192,7 @@ public class GranjaController {
 		animalService.eliminarAnimal(id);
 		 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
 	// COMPRAS
 	
 	@GetMapping("/{granja_id}/compras")
