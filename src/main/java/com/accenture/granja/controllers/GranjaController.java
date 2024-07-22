@@ -237,11 +237,13 @@ public class GranjaController {
 		Compra compra = compraService.getComprasByGranjaIdAndId(granja_id, id);
 		 if (compra == null) {
 		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		    }else {
+		    	for(Animal p : productos) {
+					p.setCompra(compra);
+				}
+				return new ResponseEntity<>(compra, HttpStatus.OK);
 		    }
-		for(Animal p : productos) {
-			p.setCompra(compra);
-		}
-		return new ResponseEntity<>(compra, HttpStatus.OK);
+		
 	}
 	
 	

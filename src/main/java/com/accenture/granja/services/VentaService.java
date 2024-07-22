@@ -15,7 +15,6 @@ public class VentaService {
 	
 	@Autowired
 	private VentaRepository ventaRepo;
-	// VENTAS
 	
 		public List<Venta> obtenerTodasLasVentas() {
 			// Aca se instancia al repositorio, es la capa final ya que se consulta a la base de datos
@@ -30,11 +29,8 @@ public class VentaService {
 	        return ventaRepo.findByGranjaIdAndId(granjaId, id);
 	    }
 		
-		
-		
 		public List<Venta> buscarVentasByGranjaId(Long granjaId){
 			return ventaRepo.findByGranjaId(granjaId);
-			
 		}
 
 		public Venta buscarVentaById(Long id) {
@@ -42,15 +38,12 @@ public class VentaService {
 			return venta;
 		}
 		
-		
 		public Venta agregarVenta(Venta venta) {
 			return ventaRepo.save(venta);
-			
 		}
 
 		public void editarVenta(Venta venta) {
-			ventaRepo.save(venta);
-			
+			ventaRepo.save(venta);	
 		}
 
 		public void eliminarVenta(Long id) {
