@@ -257,6 +257,8 @@ public class GranjaController {
 	    }
 	    existingCompra.setFecha(compra.getFecha());
 	    existingCompra.setNombrePersona(compra.getNombrePersona());
+	    existingCompra.setProductosComprados(compra.getProductosComprados());
+	    existingCompra.setGranja(granjaService.buscarGranja(granja_id));
 	    compraService.editarCompra(existingCompra);
 	    return new ResponseEntity<>(existingCompra, HttpStatus.OK);
 	}
