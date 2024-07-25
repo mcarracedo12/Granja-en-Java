@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.accenture.granja.exceptions.NoContentException;
 import com.accenture.granja.model.TiposAnimales;
-import com.accenture.granja.repository.GranjaRepository;
 import com.accenture.granja.repository.TipoAnimalRepository;
 @Service
 @Transactional
@@ -18,9 +17,8 @@ public class TiposService {
 	@Autowired TipoAnimalRepository tiposRepo;    
 	
 	public List<TiposAnimales> obtenerTodosLosTiposAnimalesByGranja(Long granja_id) {
-	
-		List<TiposAnimales> tipos = tiposRepo.findByGranjaId(granja_id);
-		return tipos;
+		return tiposRepo.findByGranjaId(granja_id).orElseThrow(() -> new RuntimeException("Tipo de animal no encontrado en la granja: " + granja_id));
+		//return tipos;
 	}
 
 	public TiposAnimales getTipoById(long tipoAnimalId) {

@@ -147,26 +147,33 @@ public class GranjaController {
 	    return ResponseEntity.ok(animal);
 	}
 	
-	@PostMapping("/{granja_id}/tipos/{tiposAnimales_id}/animales/{cantidad}")
-	public ResponseEntity<List<Animal>> createAnimal(@PathVariable Long granja_id, @PathVariable Long tiposAnimales_id, @PathVariable Long cantidad,
+/*	@PostMapping("/{granja_id}/tipos/{tiposAnimales_id}/animales/{cantidad}")
+	public ResponseEntity<List<Animal>> createAnimalByCantidad(@PathVariable Long granja_id, @PathVariable Long tiposAnimales_id, @PathVariable Long cantidad,
 			@RequestBody Animal animal) {
 		Granja granja = granjaService.buscarGranja(granja_id);
 		List<Animal> animales = new ArrayList<Animal>();
 		for (int cant = 0; cant < cantidad; cant++) {
 			animal.setGranja(granja);
-			animal.setFechaIngresoAGranja(LocalDate.now());
-			animal.setNacimiento(animal.getFechaIngresoAGranja().plusDays(animal.getEdadEnDiasAlIngresar()));
+			animal.setNacimiento(animal.getFechaIngresoAGranja().minusDays(animal.getEdadEnDiasAlIngresar()));
 			animalService.agregarAnimal(animal, tiposAnimales_id);
 			animales.add(animal);
 		}
 		return new ResponseEntity<>(animales, HttpStatus.CREATED);
 	}
-	
+*/	
 	@PostMapping("/{granja_id}/tipos/{tiposAnimales_id}/animales")
-	public  ResponseEntity<Animal> createAnimal(@PathVariable Long tiposAnimales_id, @RequestBody Animal animal) {
+	public  ResponseEntity<Animal> createAnimal(@PathVariable Long granja_id, @PathVariable Long tiposAnimales_id, @RequestBody Animal animal) {
+		Granja granja = granjaService.buscarGranja(granja_id);
+		TiposAnimales tipo = this.tiposService.getTipoById(tiposAnimales_id);
+		animal.setGranja(granja);
+		LocalDate nac = animal.getFechaIngresoAGranja().minusDays(animal.getEdadEnDiasAlIngresar());
+		animal.setNacimiento(nac);
+		animal.setTiposAnimales(tipo);
+		animal.setFechaExpiracion(animal.getNacimiento().plusDays(animal.getTiposAnimales().getDiasExpiracion()));
 		animalService.agregarAnimal(animal, tiposAnimales_id);
 		return new ResponseEntity<>(animal, HttpStatus.CREATED);
 	}
+
 	@PutMapping("/{granja_id}/animales/{id}")
 	public ResponseEntity<Animal> updateAnimal(@RequestBody Animal animal, @PathVariable Long id, @PathVariable Long granja_id) {
 	    Animal existingAnimal = animalService.getAnimalById(id);
@@ -180,18 +187,25 @@ public class GranjaController {
 	    animalService.editarAnimal(animal);
 	    return new ResponseEntity<>(animal, HttpStatus.OK);
 	}
+
 	@DeleteMapping("/{granja_id}/animales/{id}")
 	public ResponseEntity<Void> deleteAnimal(@PathVariable Long granja_id, @PathVariable Long id) {
-		 Animal animal = animalService.getAnimalById(id);
-		    if (animal == null) {
-		        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		    }
-		    if (!animal.getGranja().getId().equals(granja_id)) {
-		        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-		    }
-		animalService.eliminarAnimal(id);
-		 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		Animal animal = animalService.getAnimalById(id);
+		if (animal == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			if (!animal.getGranja().getId().equals(granja_id)) {
+				return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+			}
+			else {
+				animalService.eliminarAnimal(id);
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+		}
+
 	}
+
+	
 	
 	// COMPRAS
 	

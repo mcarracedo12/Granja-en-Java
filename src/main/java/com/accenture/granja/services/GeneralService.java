@@ -33,7 +33,7 @@ public class GeneralService {
 	private CompraRepository compraRepo;
 
 	public List<TiposAnimales> actualizarPreciosVenta(double porcentaje) {
-		List<TiposAnimales> listaTipos = tiposRepo.findByGranjaId((long)1);
+		List<TiposAnimales> listaTipos = tiposRepo.findByGranjaId((long)1).get();
 		System.out.println("Nuevos precios: ");
 		for(TiposAnimales tipo : listaTipos) {
 			double precioActual = tipo.getPrecioVenta();
@@ -42,7 +42,7 @@ public class GeneralService {
 			tiposRepo.save(tipo);
 		}
 		
-		listaTipos = tiposRepo.findByGranjaId((long)1);
+		listaTipos = tiposRepo.findByGranjaId((long)1).get();
 		for(TiposAnimales tipo : listaTipos) {
 			System.out.println(tipo.getAnimal()+" : " + tipo.getPrecioVenta());	
 		}

@@ -30,8 +30,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 	List<Animal> findByTiposAnimalesId(Long tiposAnimalesId);
 	
 	
-	@Query(value = "SELECT * FROM ANIMAL WHERE TIPOS_ANIMAL_ID = tiposAnimalesId ORDER BY FECHA_EXPIRACION ASC", nativeQuery = true)
-	List<Animal> findByTiposAnimalesOrderedByDate(@Param("tiposAnimalesId")Long tiposAnimalesId);
+	@Query(value = "SELECT * FROM ANIMAL WHERE TIPOS_ANIMAL_ID = tiposAnimalesId AND GRANJA_ID = granjaId ORDER BY FECHA_EXPIRACION ASC", nativeQuery = true)
+	List<Animal> findByTiposAnimalesOrderedByDate(@Param("granjaId")Long granjaId, @Param("tiposAnimalesId")Long tiposAnimalesId);
 	
 	Optional<Animal> findById(Long id);
 	void deleteById(Long id);

@@ -69,11 +69,11 @@ public class Animal {
 		this.tiposAnimales= getAnimalById(tipos_animal_id);
 		this.fechaIngresoAGranja = fechaIngresoAGranja;
 		this.edadEnDiasAlIngresar = edadEnDiasAlIngresar;
-		LocalDate fechaNacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar); 
-		setNacimiento(fechaNacimiento);
-		LocalDate fechaExpiracion = fechaNacimiento.plusDays(getDiasExpiracionByTipo());
-		setFechaExpiracion(fechaExpiracion);
-		System.out.println(fechaExpiracion);
+		//LocalDate fechaNacimiento = fechaIngresoAGranja.minusDays(edadEnDiasAlIngresar); 
+		//setNacimiento(fechaNacimiento);
+		//LocalDate fechaExpiracion = fechaNacimiento.plusDays(getDiasExpiracionByTipo());
+		//setFechaExpiracion(fechaExpiracion);
+		//System.out.println(fechaExpiracion);
 	}
 
 	public int getEdadActual() { 
